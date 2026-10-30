@@ -1,0 +1,414 @@
+/* ==========================================================================
+   CYNO BOT — PREMIUM LIGHT EDITORIAL DESIGN SYSTEM
+   Clean, modern, high-aesthetic light architecture
+   Inspired by modern Scandinavian robotics & Apple hardware design
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Pure Light Minimalist Palette */
+    --color-bg: #f8fafc;
+    --color-bg-alt: #f1f5f9;
+    --color-surface: #ffffff;
+    --color-surface-hover: #f8fafc;
+    --color-card: #ffffff;
+    
+    --color-border: #e2e8f0;
+    --color-border-hover: #cbd5e1;
+    --color-border-accent: rgba(2, 132, 199, 0.4);
+
+    --color-text-main: #0f172a;
+    --color-text-muted: #475569;
+    --color-text-subtle: #64748b;
+    
+    --color-accent: #0284c7;        /* Refined Cobalt Blue */
+    --color-accent-blue: #2563eb;
+    --color-accent-emerald: #059669;
+
+    /* Easing */
+    --ease-fauna: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: -0.012em;
+    overflow-x: clip;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Subtle Architectural Light Canvas */
+.fauna-canvas {
+    background-color: #f8fafc;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.05) 0%, transparent 60%),
+        radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+        linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 56px 56px, 56px 56px;
+    background-position: 0 0, 0 0, -1px -1px, -1px -1px;
+}
+
+/* Typography Scale */
+.font-display {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.03em;
+}
+
+.font-mono-tech {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.01em;
+}
+
+/* Pill Buttons */
+.fauna-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 26px;
+    border-radius: 9999px;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    border: 1px solid #0f172a;
+    transition: all 0.35s var(--ease-fauna);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.fauna-btn-primary:hover {
+    background: #0284c7;
+    border-color: #0284c7;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 132, 199, 0.28);
+}
+
+.fauna-btn-primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.fauna-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.35s var(--ease-fauna);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.fauna-btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #0284c7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+}
+
+/* Dedicated Clean Nav Studio Button */
+.nav-studio-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 9999px;
+    background: #0f172a;
+    border: 1px solid #0f172a;
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    transition: all 0.3s var(--ease-fauna);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-studio-pill:hover {
+    background: #0284c7;
+    border-color: #0284c7;
+    color: #ffffff;
+    box-shadow: 0 4px 18px rgba(2, 132, 199, 0.28);
+    transform: translateY(-1px);
+}
+
+/* Link Hover Underline Effect */
+.fauna-link {
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.fauna-link::after {
+    content: "";
+    background-color: var(--color-accent);
+    position: absolute;
+    pointer-events: none;
+    height: 1.5px;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--ease-fauna);
+}
+
+.fauna-link:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Clean White Cards & Surface Treatments */
+.fauna-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+    transition: all 0.45s var(--ease-fauna);
+    position: relative;
+    overflow: hidden;
+}
+
+.fauna-card:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
+}
+
+/* Sibling Hover Focus Effect */
+.fauna-sibling-container {
+    display: grid;
+}
+
+.fauna-sibling-item {
+    transition: transform 0.45s var(--ease-fauna), opacity 0.4s ease, border-color 0.4s ease;
+}
+
+.fauna-sibling-container:hover .fauna-sibling-item:not(:hover) {
+    opacity: 0.65;
+    transform: scale(0.99);
+}
+
+/* Technical Badges */
+.fauna-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 13px;
+    border-radius: 9999px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: #475569;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.fauna-pill-tag-cyan {
+    background: #e0f2fe;
+    border-color: #bae6fd;
+    color: #0369a1;
+}
+
+.fauna-pill-tag-emerald {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #047857;
+}
+
+/* Gentle Floating Product Keyframe */
+@keyframes faunaFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0.4deg); }
+}
+
+.fauna-floating-product {
+    animation: faunaFloat 6.5s ease-in-out infinite;
+    will-change: transform;
+}
+
+/* Custom Sliders */
+input[type=range].cyno-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: #e2e8f0;
+    height: 6px;
+    border-radius: 999px;
+    outline: none;
+}
+
+input[type=range].cyno-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0284c7;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+    border: 2px solid #ffffff;
+    transition: transform 0.2s var(--ease-fauna);
+}
+
+input[type=range].cyno-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.25);
+    background: #0f172a;
+}
+
+/* Flow Step Card State */
+.flow-step-card {
+    transition: all 0.35s var(--ease-fauna);
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+.flow-step-card.active-step {
+    border-color: #0284c7 !important;
+    background: #f0f9ff !important;
+    box-shadow: 0 10px 28px -4px rgba(2, 132, 199, 0.16) !important;
+    transform: translateY(-3px);
+}
+
+/* Mindmap Styling */
+.mindmap-node {
+    transition: transform 0.22s var(--ease-fauna), box-shadow 0.22s ease, opacity 0.22s ease, border-color 0.22s ease;
+    user-select: none;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.mindmap-node:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.1);
+}
+
+.mindmap-node.selected {
+    border-color: #0284c7 !important;
+    box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.35), 0 12px 28px -6px rgba(15, 23, 42, 0.12) !important;
+    transform: translateY(-2px) scale(1.03) !important;
+}
+
+.mindmap-node.matched {
+    border-color: #0284c7 !important;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.3), 0 0 16px rgba(2, 132, 199, 0.2) !important;
+    animation: mindmapNodePulse 1.8s infinite;
+}
+
+.mindmap-node.dimmed {
+    opacity: 0.25 !important;
+    filter: grayscale(0.8);
+    pointer-events: none;
+}
+
+@keyframes mindmapNodePulse {
+    0%, 100% { transform: scale(1.02); }
+    50% { transform: scale(1.05); }
+}
+
+.mindmap-connector-line {
+    stroke-dasharray: 4 3;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+}
+
+.mindmap-connector-pulse {
+    stroke-dasharray: 4 3;
+    animation: mindmapDash 2.5s linear infinite;
+}
+
+@keyframes mindmapDash {
+    to { stroke-dashoffset: -28; }
+}
+
+#mindmap-workbench.is-fullscreen {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+#robot-canvas-container canvas,
+#hero-robot-canvas-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+}
+
+/* Minimalist Light Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.hud-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.hud-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.hud-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+}
+
+.hud-scroll::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

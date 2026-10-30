@@ -1,0 +1,321 @@
+<!-- ===================================================================== -->
+<!-- SECTION 4: APPLE SILICON-INSPIRED 4-LAYER SYSTEM ARCHITECTURE       -->
+<!-- ===================================================================== -->
+<section id="architecture" class="scroll-mt-16 sm:scroll-mt-20 py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-black/[0.06]">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#0071e3] font-semibold">Silicon & Engineering</span>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#1d1d1f] mt-2">
+            Four Decoupled Layers. One Unified Core.
+        </h2>
+        <p class="text-[#86868b] text-sm sm:text-base mt-2.5 leading-relaxed font-normal">
+            Driven by an internal <strong class="text-[#1d1d1f] font-medium">Apple Mac mini (M1)</strong> running Whisper STT and Ollama local LLM at only 7W idle power — completely private, 100% offline.
+        </p>
+    </div>
+
+    <!-- 4 Architecture Bento Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        
+        <!-- Layer 1 -->
+        <div class="rounded-3xl p-5 sm:p-6 apple-card flex flex-col justify-between">
+            <div>
+                <div class="text-xs font-mono text-[#0071e3] font-semibold tracking-wider">LAYER 01</div>
+                <h3 class="font-bold text-base sm:text-lg text-[#1d1d1f] mt-1.5 tracking-tight">Sensing Layer</h3>
+                <p class="text-xs text-[#86868b] mt-1">Gathers environment and visitor telemetry in real time.</p>
+                
+                <ul class="mt-4 space-y-2 text-xs text-[#1d1d1f]">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> HD Vision Camera (Head)</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Stereo Mic Array</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Ultrasonic Radar (1.5–3m)</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Air Quality & Flame Sensors</li>
+                </ul>
+            </div>
+            <div class="mt-5 pt-3.5 border-t border-black/[0.06] text-[11px] font-mono text-[#86868b]">
+                OpenCV &bull; MediaPipe
+            </div>
+        </div>
+
+        <!-- Layer 2: Apple M1 Silicon Core (Highlighted Bento Card) -->
+        <div class="rounded-3xl p-5 sm:p-6 bg-[#000000] text-white border border-white/[0.12] shadow-xl flex flex-col justify-between relative overflow-hidden group">
+            <div class="absolute -top-16 -right-16 w-36 h-36 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="flex items-center justify-between">
+                    <div class="text-xs font-mono text-[#29d8ff] font-bold tracking-wider">LAYER 02 &bull; NEURAL BRAIN</div>
+                    <span class="w-2 h-2 rounded-full bg-[#29d8ff] animate-pulse"></span>
+                </div>
+                <h3 class="font-bold text-base sm:text-lg text-white mt-1.5 tracking-tight">Apple Mac mini M1</h3>
+                <p class="text-xs text-[#86868b] mt-1">16-Core Neural Engine handling STT and LLM locally.</p>
+                
+                <ul class="mt-4 space-y-2 text-xs text-slate-200">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#29d8ff]"></span> Whisper Speech-to-Text</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#29d8ff]"></span> Ollama Local LLM</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#29d8ff]"></span> SQLite Knowledge Base</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#29d8ff]"></span> Python &bull; FastAPI &bull; MQTT</li>
+                </ul>
+            </div>
+            <div class="mt-5 pt-3.5 border-t border-white/[0.1] text-[11px] font-mono text-[#29d8ff] font-semibold relative z-10 flex items-center justify-between">
+                <span>7W Idle Consumption</span>
+                <span class="text-white/60">100% Private</span>
+            </div>
+        </div>
+
+        <!-- Layer 3 -->
+        <div class="rounded-3xl p-5 sm:p-6 apple-card flex flex-col justify-between">
+            <div>
+                <div class="text-xs font-mono text-[#0071e3] font-semibold tracking-wider">LAYER 03</div>
+                <h3 class="font-bold text-base sm:text-lg text-[#1d1d1f] mt-1.5 tracking-tight">Hardware Control</h3>
+                <p class="text-xs text-[#86868b] mt-1">High-reliability hardware bridge via USB serial links.</p>
+                
+                <ul class="mt-4 space-y-2 text-xs text-[#1d1d1f]">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Dual ESP32 Controllers</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Sensor Interface Boards</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> OLED Eye Drivers & LED Rings</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Hardware Safety Cut-off</li>
+                </ul>
+            </div>
+            <div class="mt-5 pt-3.5 border-t border-black/[0.06] text-[11px] font-mono text-[#86868b]">
+                Real-Time Firmware
+            </div>
+        </div>
+
+        <!-- Layer 4 -->
+        <div class="rounded-3xl p-5 sm:p-6 apple-card flex flex-col justify-between">
+            <div>
+                <div class="text-xs font-mono text-[#0071e3] font-semibold tracking-wider">LAYER 04</div>
+                <h3 class="font-bold text-base sm:text-lg text-[#1d1d1f] mt-1.5 tracking-tight">Interaction Layer</h3>
+                <p class="text-xs text-[#86868b] mt-1">Audiovisual engagement designed with zero pinch hazards.</p>
+                
+                <ul class="mt-4 space-y-2 text-xs text-[#1d1d1f]">
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Animated OLED Eyes Display</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> 10" Capacitive Chest Kiosk</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> High-Clarity Stereo Audio</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#0071e3]"></span> Ear & Torso Halo Lighting</li>
+                </ul>
+            </div>
+            <div class="mt-5 pt-3.5 border-t border-black/[0.06] text-[11px] font-mono text-[#86868b]">
+                Pinch-Free &bull; Safe
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Architecture & Hardware Engineering Video Showcase -->
+    <div class="mt-12 sm:mt-16 pt-8 border-t border-black/[0.06]">
+        
+        <!-- Video Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#0071e3] text-xs font-mono font-semibold mb-2">
+                    <i class="fa-solid fa-play text-[10px]"></i>
+                    <span>SYSTEM DEMONSTRATION</span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#1d1d1f]">
+                    Hardwired for Intelligence. See it in Action.
+                </h3>
+                <p class="text-[#86868b] text-xs sm:text-sm mt-1 max-w-xl">
+                    Comprehensive video walkthrough detailing CYNO BOT's modular electronics, internal wiring loom, Apple M1 neural brain integration, and live sensory tests.
+                </p>
+            </div>
+            
+            <!-- External Drive Tab Link -->
+            <div class="flex items-center gap-2 self-start md:self-auto shrink-0 font-mono text-xs">
+                <a href="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-[#1d1d1f] border border-black/[0.08] transition flex items-center gap-1.5 text-xs font-medium cursor-pointer" title="Open full video on Google Drive in new tab">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-blue-600"></i>
+                    <span>Drive Tab</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Cinema Video Frame Container with Apple Mac Bezel -->
+        <div class="relative w-full max-w-5xl mx-auto rounded-2xl sm:rounded-3xl p-2 sm:p-3 bg-gradient-to-b from-[#1c1c1e] to-[#0a0a0c] border border-white/[0.14] shadow-2xl overflow-hidden group">
+            
+            <!-- Subtle Ambient Backdrop Glow -->
+            <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 via-cyan-400/15 to-blue-600/20 rounded-3xl blur-2xl opacity-60 pointer-events-none"></div>
+
+            <!-- Top Mac-style Titlebar -->
+            <div class="relative z-10 flex items-center justify-between px-3 py-2 border-b border-white/[0.08] text-[11px] font-mono text-slate-400 mb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block"></span>
+                    <span class="ml-2 text-slate-300 font-medium hidden sm:inline">CYNO_BOT // SYSTEM_ARCHITECTURE_BREAKDOWN.MP4</span>
+                    <span class="ml-2 text-slate-300 font-medium sm:hidden">ARCHITECTURE_DEMO.MP4</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-slate-400 text-xs">09:07</span>
+                </div>
+            </div>
+
+            <!-- Video Player Stage (Aspect 16:9) -->
+            <div class="relative z-10 w-full aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black flex items-center justify-center">
+                <!-- Native HTML5 Video Element -->
+                <video id="arch-video-player"
+                       class="w-full h-full object-contain bg-black"
+                       controls
+                       playsinline
+                       preload="metadata"
+                       poster="assets/images/architecture-video-poster.jpg"
+                       onerror="handleArchVideoError()">
+                    <source src="assets/videos/cynobot-architecture-demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- Embedded Google Drive Player (Shown if switched or on error) -->
+                <iframe id="arch-video-drive-frame"
+                        class="hidden w-full h-full border-0 bg-black"
+                        src=""
+                        data-src="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/preview"
+                        allow="autoplay; encrypted-media; fullscreen"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- GOOGLE NOTEBOOKLM INTERACTIVE ARCHITECTURE MIND MAP                   -->
+    <!-- ===================================================================== -->
+    <div id="architecture-mindmap-section" class="mt-14 sm:mt-20 pt-10 border-t border-black/[0.06]">
+        
+        <!-- Header with NotebookLM Badge and Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border border-blue-500/20 text-[#0071e3] text-xs font-mono font-semibold mb-2">
+                    <i class="fa-solid fa-diagram-project text-[11px]"></i>
+                    <span>GOOGLE NOTEBOOKLM CONCEPT MAP</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#0071e3] animate-pulse"></span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#1d1d1f]">
+                    Interactive Architecture Mind Map
+                </h3>
+                <p class="text-[#86868b] text-xs sm:text-sm mt-1 max-w-2xl">
+                    Explore the complete, multi-layered cybernetic topology generated from the project notebook. Pan, zoom, search, expand branches, or tap any node for deep engineering telemetry.
+                </p>
+            </div>
+
+            <!-- Action Buttons: External Google NotebookLM Link + Fullscreen -->
+            <div class="flex flex-wrap items-center gap-2 shrink-0 font-mono text-xs">
+                <a href="https://notebooklm.link.google/1Jzf2mJ01QRy" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white shadow-sm transition flex items-center gap-2 text-xs font-medium cursor-pointer" title="Open source Mind Map on Google NotebookLM">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    <span>Open in NotebookLM</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mind Map Interactive Workbench Container -->
+        <div id="mindmap-workbench" class="relative w-full rounded-2xl sm:rounded-3xl bg-[#090d16] border border-white/[0.12] shadow-2xl overflow-hidden transition-all duration-300">
+            
+            <!-- Workbench Toolbar Header -->
+            <div class="relative z-20 flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 bg-[#0d1322]/90 backdrop-blur-xl border-b border-white/[0.08] text-xs font-mono text-slate-300">
+                <!-- Left: Search Box -->
+                <div class="relative w-full sm:w-auto sm:max-w-xs flex-1 min-w-[140px]">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="mindmap-search-input" placeholder="Search M1, Whisper, ESP32..." oninput="onMindmapSearch(this.value)" class="w-full pl-8 pr-3 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] focus:bg-white/[0.12] border border-white/[0.12] text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition" />
+                </div>
+
+                <!-- Right: Canvas Navigation Controls -->
+                <div class="flex items-center gap-1 sm:gap-2 shrink-0 ml-auto">
+                    <button onclick="zoomMindmap(0.18)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/[0.1] text-slate-200 transition flex items-center justify-center cursor-pointer active:scale-95" title="Zoom In (+)">
+                        <i class="fa-solid fa-plus text-[11px] sm:text-xs"></i>
+                    </button>
+                    <button onclick="zoomMindmap(-0.18)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/[0.1] text-slate-200 transition flex items-center justify-center cursor-pointer active:scale-95" title="Zoom Out (-)">
+                        <i class="fa-solid fa-minus text-[11px] sm:text-xs"></i>
+                    </button>
+                    <button onclick="resetMindmapView()" class="px-2 sm:px-2.5 py-1 h-7 sm:h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/[0.1] text-slate-200 transition flex items-center gap-1 text-[10px] sm:text-[11px] cursor-pointer active:scale-95" title="Center & Reset View">
+                        <i class="fa-solid fa-arrows-to-dot text-xs text-cyan-400"></i>
+                        <span class="hidden min-[420px]:inline">Center</span>
+                    </button>
+                    <button onclick="toggleAllMindmapBranches()" class="px-2 sm:px-2.5 py-1 h-7 sm:h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/[0.1] text-slate-200 transition flex items-center gap-1 text-[10px] sm:text-[11px] cursor-pointer active:scale-95" title="Expand / Collapse All">
+                        <i class="fa-solid fa-folder-tree text-xs text-blue-400"></i>
+                        <span id="mindmap-toggle-branches-btn" class="hidden min-[420px]:inline">Toggle All</span>
+                    </button>
+                    <button onclick="toggleMindmapFullscreen()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/[0.1] text-slate-200 transition flex items-center justify-center cursor-pointer active:scale-95" title="Fullscreen">
+                        <i id="mindmap-fullscreen-icon" class="fa-solid fa-expand text-[11px] sm:text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pan & Zoom Infinite Canvas Wrapper -->
+            <div id="mindmap-viewport" class="relative w-full h-[420px] sm:h-[540px] lg:h-[680px] overflow-hidden cursor-grab active:cursor-grabbing select-none bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px]">
+                
+                <!-- Background Subtle Ambient Glows -->
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Movable Canvas Surface (Transformed by pan & zoom) -->
+                <div id="mindmap-canvas-surface" class="absolute inset-0 origin-center will-change-transform">
+                    <!-- Absolute Center Anchor Point (0,0) for perfectly synchronized SVG lines & HTML cards -->
+                    <div id="mindmap-stage-center" class="absolute left-1/2 top-1/2 w-0 h-0 pointer-events-none">
+                        <!-- SVG Connecting Bezier Lines Layer (Offset to align (0,0) with center anchor) -->
+                        <svg id="mindmap-svg-layer" class="absolute -left-[2500px] -top-[2000px] w-[5000px] h-[4000px] pointer-events-none overflow-visible">
+                            <defs>
+                                <linearGradient id="grad-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.2"/>
+                                    <stop offset="50%" stop-color="#29d8ff" stop-opacity="1"/>
+                                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.2"/>
+                                </linearGradient>
+                            </defs>
+                            <g id="mindmap-lines-group" transform="translate(2500, 2000)"></g>
+                        </svg>
+
+                        <!-- HTML Nodes Layer sharing exact same (0,0) center space -->
+                        <div id="mindmap-nodes-container" class="absolute left-0 top-0 w-0 h-0 pointer-events-none"></div>
+                    </div>
+                </div>
+
+                <!-- Canvas Watermark / Hint -->
+                <div class="absolute bottom-3 left-4 pointer-events-none z-10 flex items-center gap-2 text-[11px] font-mono text-slate-400 bg-black/60 px-3 py-1 rounded-full border border-white/10 backdrop-blur-md">
+                    <i class="fa-regular fa-hand-pointer text-cyan-400"></i>
+                    <span>Drag canvas to pan &bull; Scroll to zoom &bull; Click node to inspect</span>
+                </div>
+
+                <!-- Floating Node Inspector Side Drawer -->
+                <div id="mindmap-inspector" class="absolute top-4 right-4 z-30 w-80 sm:w-96 max-w-[calc(100%-32px)] p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-black/90 border border-white/15 backdrop-blur-2xl text-slate-200 shadow-2xl transition-all duration-300 translate-x-[110%] opacity-0 pointer-events-auto">
+                    <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+                        <div class="flex items-center gap-2">
+                            <span id="inspector-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase bg-blue-500/20 text-cyan-400 border border-cyan-400/30">MODULE TELEMETRY</span>
+                        </div>
+                        <button onclick="closeMindmapInspector()" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer text-xs">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-start gap-3 mb-2">
+                        <div id="inspector-icon-box" class="w-10 h-10 rounded-xl bg-blue-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-lg shrink-0">
+                            <i id="inspector-icon" class="fa-solid fa-brain"></i>
+                        </div>
+                        <div>
+                            <h4 id="inspector-title" class="text-base font-bold text-white leading-tight">Apple Mac mini M1</h4>
+                            <p id="inspector-subtitle" class="text-xs text-cyan-400/80 font-mono mt-0.5">16-Core Neural Engine</p>
+                        </div>
+                    </div>
+
+                    <p id="inspector-description" class="text-xs text-slate-300 leading-relaxed mt-2.5 mb-3.5">
+                        High-level AI processing host executing local offline LLM and speech recognition.
+                    </p>
+
+                    <!-- Technical Specifications Table -->
+                    <div class="space-y-1.5 pt-2 border-t border-white/10 text-[11px] font-mono">
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Engineering Telemetry:</div>
+                        <div id="inspector-specs" class="space-y-1.5 max-h-48 overflow-y-auto pr-1"></div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
+                        <span class="text-slate-400">Source: NotebookLM Artifact</span>
+                        <a href="https://notebooklm.link.google/1Jzf2mJ01QRy" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline flex items-center gap-1">
+                            <span>Open Link</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>

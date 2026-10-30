@@ -1,0 +1,111 @@
+<!-- ===================================================================== -->
+<!-- SECTION 2: APPLE-INSPIRED CHEST TOUCHSCREEN KIOSK & VOICE AI SIMULATOR -->
+<!-- ===================================================================== -->
+<section id="kiosk-simulator" class="scroll-mt-16 sm:scroll-mt-20 py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-black/[0.06]">
+    
+    <!-- Section Header (Apple Style) -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#0071e3] font-semibold">Touch & Voice Interaction</span>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#1d1d1f] mt-2">
+            10-inch Chest Kiosk Simulator.
+        </h2>
+        <p class="text-[#86868b] text-sm sm:text-base mt-2.5 leading-relaxed font-normal">
+            An intuitive iPadOS-inspired interface mounted directly into the humanoid chest. Touch interactions and voice queries synchronize live with the 3D twin above.
+        </p>
+    </div>
+
+    <!-- Simulator Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+        
+        <!-- Left 7 Cols: iPad Pro Chassis Kiosk Frame -->
+        <div class="lg:col-span-7 rounded-[32px] p-5 sm:p-7 bg-[#161820] border border-white/[0.12] shadow-2xl shadow-black/30 flex flex-col justify-between relative overflow-hidden">
+            
+            <!-- iPad Top Ambient Sensor Notch & Status Bar -->
+            <div class="flex items-center justify-between border-b border-white/[0.1] pb-3 mb-4 text-xs font-mono text-white/80">
+                <div class="flex items-center gap-2.5">
+                    <img src="assets/images/cynocor-logo.png" alt="CYNOCOR" class="w-4 h-4 object-contain drop-shadow-[0_0_6px_rgba(41,216,255,0.6)]" />
+                    <span class="font-semibold text-white tracking-wide">CYNO-OS 1.0</span>
+                    <span id="kiosk-mode-pill" class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-[#29d8ff] border border-blue-400/30 text-[10px] font-medium tracking-wide">
+                        ENTRANCE ASSISTANT
+                    </span>
+                </div>
+                <div class="flex items-center gap-3 text-[11px] text-[#86868b]">
+                    <span class="hidden sm:inline">Apple M1 Core</span>
+                    <span id="kiosk-clock" class="text-white font-medium">12:00 PM</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Screen Container (10" Liquid Retina Display Simulator) -->
+            <div id="kiosk-dynamic-screen" class="min-h-[290px] sm:min-h-[320px] flex flex-col justify-between bg-[#080d1a] rounded-2xl p-5 sm:p-6 border border-white/[0.08] shadow-inner text-white relative">
+                <!-- Dynamically populated by JS selectOperatingMode() -->
+            </div>
+
+            <!-- Bottom Controls: Language Pills & SOS Hazard Alert -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-4 mt-4 border-t border-white/[0.1] text-xs">
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="text-[11px] font-mono text-[#86868b] mr-1.5">Audio Language:</span>
+                    <button onclick="triggerQuickGreeting('en')" class="px-3 py-1 rounded-full bg-[#0071e3] text-white text-[11px] font-medium hover:bg-[#0077ed] transition cursor-pointer shadow-sm">
+                        English
+                    </button>
+                </div>
+
+                <button onclick="triggerEmergencySOS()" class="w-full sm:w-auto px-3.5 py-1.5 rounded-full bg-red-500/15 hover:bg-red-500/25 border border-red-500/30 text-red-400 text-[11px] font-mono flex items-center justify-center gap-1.5 transition cursor-pointer active:scale-95 font-medium">
+                    <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                    <span>Trigger SOS Hazard Alert</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right 5 Cols: Siri-Inspired Voice AI Assistant -->
+        <div class="lg:col-span-5 rounded-[32px] p-6 sm:p-7 apple-card flex flex-col justify-between space-y-4">
+            <div>
+                <!-- Header -->
+                <div class="flex items-center justify-between border-b border-black/[0.06] pb-3.5">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-full bg-blue-500/10 flex items-center justify-center text-[#0071e3]">
+                            <i class="fa-solid fa-microphone text-xs"></i>
+                        </div>
+                        <h3 class="font-bold text-base text-[#1d1d1f] tracking-tight">Voice AI Assistant</h3>
+                    </div>
+                    <span class="text-[10px] font-mono text-[#0071e3] bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 font-medium">Local Ollama LLM</span>
+                </div>
+
+                <p class="text-xs text-[#86868b] mt-3">
+                    Click any sample prompt to trigger voice speech and see the kiosk sync:
+                </p>
+
+                <!-- Interactive Question Cards -->
+                <div class="space-y-2.5 mt-3.5">
+                    <button onclick="askCynoBot('Where is the Faculty of Computing?')" class="w-full text-left p-3 rounded-2xl bg-[#f5f5f7] hover:bg-blue-50/70 border border-black/[0.04] hover:border-blue-300 text-xs text-[#1d1d1f] flex items-center justify-between transition cursor-pointer group">
+                        <span class="truncate pr-2 font-medium">"Where is the Computing Faculty?"</span>
+                        <span class="text-[10px] font-mono text-[#0071e3] font-semibold shrink-0 group-hover:translate-x-0.5 transition-transform">Campus &rarr;</span>
+                    </button>
+                    <button onclick="askCynoBot('Welcome home! What are my reminders and turn on living room light.')" class="w-full text-left p-3 rounded-2xl bg-[#f5f5f7] hover:bg-blue-50/70 border border-black/[0.04] hover:border-blue-300 text-xs text-[#1d1d1f] flex items-center justify-between transition cursor-pointer group">
+                        <span class="truncate pr-2 font-medium">"Read reminders & turn on lights"</span>
+                        <span class="text-[10px] font-mono text-[#86868b] shrink-0 group-hover:text-[#0071e3] transition-colors">Home &rarr;</span>
+                    </button>
+                    <button onclick="askCynoBot('Start a 25-minute Pomodoro study session and quiz me on AI.')" class="w-full text-left p-3 rounded-2xl bg-[#f5f5f7] hover:bg-blue-50/70 border border-black/[0.04] hover:border-blue-300 text-xs text-[#1d1d1f] flex items-center justify-between transition cursor-pointer group">
+                        <span class="truncate pr-2 font-medium">"Start a 25-min Pomodoro timer"</span>
+                        <span class="text-[10px] font-mono text-[#86868b] shrink-0 group-hover:text-[#0071e3] transition-colors">Study &rarr;</span>
+                    </button>
+                    <button onclick="askCynoBot('Check home air quality and flame sensors.')" class="w-full text-left p-3 rounded-2xl bg-[#f5f5f7] hover:bg-blue-50/70 border border-black/[0.04] hover:border-blue-300 text-xs text-[#1d1d1f] flex items-center justify-between transition cursor-pointer group">
+                        <span class="truncate pr-2 font-medium">"Check air quality & flame sensors"</span>
+                        <span class="text-[10px] font-mono text-[#86868b] shrink-0 group-hover:text-[#0071e3] transition-colors">Safety &rarr;</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Conversation Feedback -->
+            <div class="p-3.5 rounded-2xl bg-[#f5f5f7] border border-black/[0.04] text-xs space-y-1.5">
+                <div class="flex items-center justify-between text-[11px] font-mono text-[#86868b]">
+                    <span>Real-Time Neural Response</span>
+                    <span id="qa-status-pill" class="text-[#0071e3] font-medium">Ready</span>
+                </div>
+                <p id="qa-response-text" class="text-xs text-[#1d1d1f] leading-relaxed">
+                    "Tap any question above to test local inference on Apple Mac mini M1 with Whisper STT."
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
