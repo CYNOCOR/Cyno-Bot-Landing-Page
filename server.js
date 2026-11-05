@@ -19,9 +19,9 @@ const MIME = {
 };
 
 const server = http.createServer((req, res) => {
-    let reqPath = req.url === '/' ? '/index.html' : req.url;
-    // Strip query string
-    reqPath = reqPath.split('?')[0];
+    // Strip the query string first so "/?v=2" still serves index.html
+    let reqPath = decodeURIComponent(req.url.split('?')[0]);
+    if (reqPath === '/') reqPath = '/index.html';
     const safePath = path.normalize(path.join(__dirname, reqPath));
 
     if (!safePath.startsWith(__dirname)) {

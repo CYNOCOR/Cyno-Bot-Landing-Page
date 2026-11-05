@@ -3,7 +3,7 @@
          ***********************************************************************/
         const state = {
             profile: 'university',       // 'university' | 'home'
-            mode: 'entrance',            // 'entrance' | 'ai' | 'companion' | 'study' | 'smarthome' | 'guardian' | 'entertainment' | 'sleep'
+            mode: 'entrance',            // reception only
             expression: 'happy',         // 'happy' | 'listening' | 'thinking' | 'wink' | 'guardian' | 'sleep'
             explodeAmount: 0,            // 0.0 to 1.0
             targetExplode: 0,
@@ -41,7 +41,7 @@
             torso: {
                 tag: 'MODULE 02 • CHEST & TORSO',
                 title: 'Armored Torso & 10" Chest Touchscreen Kiosk',
-                desc: 'Shaped white PVC + 3D-printed shell with a tilted 7"–10" capacitive touchscreen for campus maps, schedules, QR codes, study flashcards, and smart-home controls.',
+                desc: 'Shaped white PVC + 3D-printed shell with a tilted 7"–10" capacitive touchscreen for campus maps, schedules and QR codes.',
                 spec1: 'Display: 10" Touch Kiosk',
                 spec2: 'Shell: PVC + 3D Printed'
             },
@@ -267,7 +267,7 @@
             ctx.save();
             ctx.textAlign = 'center';
 
-            if (state.mode === 'ai' || state.mode === 'companion') {
+            if (state.mode === 'ai') {
                 // Iconic glowing "AI" emblem from the CYNO BOT photo!
                 ctx.shadowColor = '#00d2ff';
                 ctx.shadowBlur = 30;
@@ -285,7 +285,7 @@
                 ctx.shadowBlur = 0;
                 ctx.fillStyle = '#e2e8f0';
                 ctx.font = 'bold 22px "Orbitron", sans-serif';
-                ctx.fillText(state.mode === 'companion' ? 'COMPANION MODE ACTIVE' : 'MAC MINI M1 NEURAL AI', w / 2, 395);
+                ctx.fillText('MAC MINI M1 NEURAL AI', w / 2, 395);
                 ctx.fillStyle = '#38bdf8';
                 ctx.font = '17px "JetBrains Mono", monospace';
                 ctx.fillText('English Voice Ready', w / 2, 430);
@@ -347,48 +347,6 @@
                     ctx.font = 'bold 16px "JetBrains Mono", monospace';
                     ctx.fillText(lbl, bx + 62, 437);
                 });
-            } else if (state.mode === 'study') {
-                ctx.fillStyle = '#fbbf24';
-                ctx.font = 'bold 26px "Orbitron", sans-serif';
-                ctx.fillText('POMODORO STUDY TUTOR', w / 2, 120);
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 78px "JetBrains Mono", monospace';
-                const mins = String(Math.floor(state.pomodoroSeconds / 60)).padStart(2, '0');
-                const secs = String(state.pomodoroSeconds % 60).padStart(2, '0');
-                ctx.fillText(`${mins}:${secs}`, w / 2, 235);
-                ctx.fillStyle = '#38bdf8';
-                ctx.font = '20px "Inter", sans-serif';
-                ctx.fillText('Flashcard: Neural Engine = 16 Cores', w / 2, 320);
-                ctx.fillStyle = '#10b981';
-                ctx.fillText('English Speaking Practice: Active', w / 2, 365);
-            } else if (state.mode === 'smarthome') {
-                ctx.fillStyle = '#10b981';
-                ctx.font = 'bold 26px "Orbitron", sans-serif';
-                ctx.fillText('SMART HOME CONTROL', w / 2, 120);
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 24px "JetBrains Mono", monospace';
-                ctx.fillText(`Living Room Light: ${state.smartLightsOn ? 'ON (100%)' : 'OFF'}`, w / 2, 210);
-                ctx.fillText(`AC Thermostat: ${state.smartAcTemp}°C`, w / 2, 270);
-                ctx.fillStyle = '#38bdf8';
-                ctx.fillText('Evening Reminders: 2 Pending', w / 2, 330);
-            } else if (state.mode === 'guardian') {
-                ctx.fillStyle = '#ff3b5c';
-                ctx.font = 'bold 28px "Orbitron", sans-serif';
-                ctx.fillText('GUARDIAN SAFETY MONITOR', w / 2, 120);
-                ctx.fillStyle = '#10b981';
-                ctx.font = 'bold 24px "JetBrains Mono", monospace';
-                ctx.fillText('AIR QUALITY: 38 PPM (SAFE)', w / 2, 210);
-                ctx.fillText('FLAME SENSOR: CLEAR', w / 2, 265);
-                ctx.fillStyle = '#fbbf24';
-                ctx.fillText('SOS PHONE ALERT: ARMED', w / 2, 325);
-            } else {
-                // Entertainment or Sleep
-                ctx.fillStyle = '#a855f7';
-                ctx.font = 'bold 30px "Orbitron", sans-serif';
-                ctx.fillText(state.mode === 'sleep' ? 'NIGHT STANDBY (7W)' : 'ENTERTAINMENT HUB', w / 2, 230);
-                ctx.fillStyle = '#94a3b8';
-                ctx.font = '20px "JetBrains Mono", monospace';
-                ctx.fillText(state.mode === 'sleep' ? 'Display Dimmed • Quiet Mode' : 'Music • Stories • Campus Trivia', w / 2, 280);
             }
 
             ctx.restore();
@@ -1305,25 +1263,11 @@
         /***********************************************************************
          * 6. PROFILES, EXPRESSIONS, 8 MODES & KIOSK SIMULATOR
          ***********************************************************************/
-        function switchProfile(profile) {
-            state.profile = profile;
-            const uniBtn = document.getElementById('prof-uni-btn');
-            const homeBtn = document.getElementById('prof-home-btn');
+        function switchProfile() {
+            state.profile = 'university';
             const badge = document.getElementById('active-profile-badge');
-
-            if (profile === 'university') {
-                if (uniBtn) uniBtn.className = 'p-2.5 rounded-2xl bg-[#0071e3] text-white font-semibold text-left transition cursor-pointer shadow-xs';
-                if (homeBtn) homeBtn.className = 'p-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-semibold text-left transition cursor-pointer';
-                if (badge) badge.textContent = 'UNIVERSITY';
-                selectOperatingMode('entrance');
-                speakRobotText('Switched to University Entrance Assistant profile. Welcome to IIT Campus!');
-            } else {
-                if (homeBtn) homeBtn.className = 'p-2.5 rounded-2xl bg-[#0071e3] text-white font-semibold text-left transition cursor-pointer shadow-xs';
-                if (uniBtn) uniBtn.className = 'p-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-semibold text-left transition cursor-pointer';
-                if (badge) badge.textContent = 'HOME ROBOT';
-                selectOperatingMode('companion');
-                speakRobotText('Switched to Personalized Home Robot profile. Welcome home! I have loaded your personal reminders and smart home controls.');
-            }
+            if (badge) badge.textContent = 'UNIVERSITY';
+            selectOperatingMode('entrance');
         }
 
         function setFaceExpression(exp) {
@@ -1363,154 +1307,27 @@
             renderKioskDOM(mode);
         }
 
-        function renderKioskDOM(mode) {
+        // Reception is the only mode the robot ships with.
+        function renderKioskDOM() {
             const pill = document.getElementById('kiosk-mode-pill');
             const screen = document.getElementById('kiosk-dynamic-screen');
-            if (pill) pill.textContent = mode.toUpperCase() + ' MODE';
-            if (!screen) return;
-
-            if (mode === 'entrance') {
-                screen.innerHTML = `
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                        <div class="sm:col-span-7 space-y-3">
-                            <div class="inline-block px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-[11px] font-mono font-semibold">UNIVERSITY RECEPTION • 1.5m–3m ZONE</div>
-                            <h4 class="font-display font-bold text-xl text-slate-900">HOW CAN I HELP YOU TODAY?</h4>
-                            <p class="text-xs text-slate-600">Select a campus destination or scan the QR code for the interactive student brochure:</p>
-                            <div class="grid grid-cols-2 gap-2 pt-1 font-mono text-xs">
-                                <button onclick="askCynoBot('Where is the Faculty of Computing?')" class="p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-left text-sky-900 transition font-medium shadow-2xs">
-                                    <i class="fa-solid fa-route text-sky-600 mr-1"></i> Faculty of Computing
-                                </button>
-                                <button onclick="askCynoBot('What events are happening on campus today?')" class="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-left text-slate-800 transition font-medium shadow-2xs">
-                                    <i class="fa-solid fa-calendar-day text-blue-600 mr-1"></i> Today's Events
-                                </button>
-                                <button onclick="askCynoBot('I would like to check in as a visitor.')" class="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-left text-slate-800 transition font-medium shadow-2xs">
-                                    <i class="fa-solid fa-id-badge text-emerald-600 mr-1"></i> Visitor Check-In
-                                </button>
-                                <button onclick="askCynoBot('Please alert reception staff for human help.')" class="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-left text-slate-800 transition font-medium shadow-2xs">
-                                    <i class="fa-solid fa-bell-concierge text-amber-600 mr-1"></i> Alert Staff
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sm:col-span-5 bg-slate-50 rounded-2xl p-4 border border-slate-200 text-center space-y-2 shadow-xs">
-                            <div class="text-xs font-mono text-slate-900 font-bold">2ND FLOOR ROUTE MAP</div>
-                            <div class="p-3 bg-white rounded-xl border border-slate-200 text-left font-mono text-[11px] text-slate-800 space-y-1">
-                                <div class="font-bold text-sky-700">● [YOU ARE HERE: MAIN ENTRANCE]</div>
-                                <div class="pl-3 text-slate-600">│ Walk straight 20m</div>
-                                <div class="pl-3 text-slate-600">└──► Take Lift to 2nd Floor</div>
-                                <div class="font-bold text-emerald-700">★ [MAIN HALL & COMPUTING]</div>
-                            </div>
-                            <div class="text-[11px] font-mono text-slate-500">QR Code synced on 3D Chest Display</div>
-                        </div>
-                    </div>
-                `;
-            } else if (mode === 'smarthome') {
-                screen.innerHTML = `
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="text-xs font-mono text-emerald-700 font-semibold">PERSONALIZED HOME PROFILE • IOT CONTROL</div>
-                                <h4 class="font-display font-bold text-lg text-slate-900">SMART HOME & FAMILY REMINDERS</h4>
-                            </div>
-                            <span class="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-semibold">Wi-Fi & BLE Connected</span>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <button onclick="toggleSmartLight()" class="p-4 rounded-2xl border ${state.smartLightsOn ? 'bg-amber-50 border-amber-300 text-slate-900 shadow-xs' : 'bg-slate-50 border-slate-200 text-slate-500'} text-left transition">
-                                <i class="fa-solid fa-lightbulb text-xl ${state.smartLightsOn ? 'text-amber-500' : 'text-slate-400'}"></i>
-                                <div class="font-display font-bold text-sm mt-2 text-slate-900">Living Room Light</div>
-                                <div class="text-xs font-mono mt-0.5 text-slate-600">${state.smartLightsOn ? 'STATUS: ON (Click to toggle)' : 'STATUS: OFF'}</div>
-                            </button>
-                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
-                                <div class="flex justify-between items-center">
-                                    <i class="fa-solid fa-temperature-half text-xl text-sky-600"></i>
-                                    <div class="flex gap-1">
-                                        <button onclick="adjustAcTemp(-1)" class="w-6 h-6 rounded bg-white hover:bg-slate-200 border border-slate-200 text-slate-800 font-bold">-</button>
-                                        <button onclick="adjustAcTemp(1)" class="w-6 h-6 rounded bg-white hover:bg-slate-200 border border-slate-200 text-slate-800 font-bold">+</button>
-                                    </div>
-                                </div>
-                                <div class="font-display font-bold text-sm text-slate-900 mt-2">Smart AC: ${state.smartAcTemp}°C</div>
-                                <div class="text-xs font-mono text-sky-700 font-semibold">Eco Cooling Active</div>
-                            </div>
-                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                                <i class="fa-solid fa-list-check text-xl text-purple-600"></i>
-                                <div class="font-display font-bold text-sm text-slate-900 mt-2">Evening Reminders</div>
-                                <div class="text-[11px] text-slate-600 mt-1">• 7:00 PM: ATP Study Group<br>• Submit CS Assignment</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else if (mode === 'study') {
-                screen.innerHTML = `
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-                        <div class="space-y-3">
-                            <div class="text-xs font-mono text-amber-700 font-semibold">EDUCATION & TUTOR MODE</div>
-                            <h4 class="font-display font-bold text-xl text-slate-900">POMODORO & AI FLASHCARDS</h4>
-                            <div class="font-mono text-4xl font-bold text-sky-700">25:00 <span class="text-xs text-slate-500 font-normal">FOCUS TIMER</span></div>
-                            <div class="flex gap-2">
-                                <button onclick="askCynoBot('Quiz me on Computer Science and AI concepts.')" class="px-3 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 text-xs font-mono font-medium shadow-2xs">Next Flashcard</button>
-                                <button onclick="askCynoBot('Let us practice spoken English conversation.')" class="px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-900 text-xs font-mono font-medium shadow-2xs">English Practice</button>
-                            </div>
-                        </div>
-                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-                            <div class="text-xs font-mono text-amber-700 font-bold">ACTIVE FLASHCARD #04</div>
-                            <p class="text-sm font-semibold text-slate-900">Q: Why does CYNO BOT use an Apple Mac mini (M1) instead of a standard SBC?</p>
-                            <p class="text-xs text-slate-600 border-t border-slate-200 pt-2">A: Its 16-core Neural Engine runs Whisper STT & quantized local LLMs on-device while drawing only ~7W at idle.</p>
-                        </div>
-                    </div>
-                `;
-            } else if (mode === 'guardian') {
-                screen.innerHTML = `
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="text-xs font-mono text-rose-700 font-semibold">SAFETY & SECURITY GUARDIAN</div>
-                                <h4 class="font-display font-bold text-lg text-slate-900">REAL-TIME ENVIRONMENTAL TELEMETRY</h4>
-                            </div>
-                            <span class="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold">ALL SENSORS NOMINAL</span>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-                            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                                <div class="text-slate-500">AIR QUALITY / GAS</div>
-                                <div class="text-lg font-bold text-emerald-700 mt-1">38 PPM (SAFE)</div>
-                            </div>
-                            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                                <div class="text-slate-500">IR FLAME SENSOR</div>
-                                <div class="text-lg font-bold text-emerald-700 mt-1">NO FLAME</div>
-                            </div>
-                            <div class="p-3.5 rounded-xl bg-slate-50 border border-rose-200">
-                                <div class="text-slate-500">EMERGENCY DISPATCH</div>
-                                <button onclick="triggerEmergencySOS()" class="mt-1 px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold transition">TRIGGER SOS DRILL</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                screen.innerHTML = `
-                    <div class="flex flex-col items-center justify-center text-center py-6 space-y-3">
-                        <div class="w-14 h-14 rounded-2xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-700 text-2xl font-display font-black">AI</div>
-                        <h4 class="font-display font-bold text-xl text-slate-900">${mode.toUpperCase()} ACTIVE ON MAC MINI M1</h4>
-                        <p class="text-xs text-slate-600 max-w-md">Only the services required for ${mode.toUpperCase()} mode are currently loaded by the central Mode Manager to guarantee zero-lag response under 3 seconds.</p>
-                    </div>
-                `;
-            }
+            if (pill) pill.textContent = 'RECEPTION';
+            if (!screen || screen.dataset.rendered) return;
+            screen.dataset.rendered = '1';
+            const tile = (q, title, sub) =>
+                `<button class="kiosk-tile" onclick="simulateVoiceQuery('${q}')"><span>${title}</span><small>${sub}</small></button>`;
+            screen.innerHTML = `
+                <p class="kiosk-kicker">Reception</p>
+                <h4 class="kiosk-title">How can I help you today?</h4>
+                <div class="kiosk-tiles">
+                    ${tile('How do I find a room?', 'Directions', 'Find a room or office')}
+                    ${tile('What events are on today?', 'Events', 'What is on today')}
+                    ${tile('Tell me about yourself', 'About me', 'Who built CYNO BOT')}
+                    ${tile('How do I use you?', 'How to use', 'Talk or tap')}
+                </div>`;
         }
 
 
-        function toggleSmartLight() {
-            state.smartLightsOn = !state.smartLightsOn;
-            renderKioskDOM('smarthome');
-            speakRobotText(`I have turned ${state.smartLightsOn ? 'on' : 'off'} the living room light.`);
-        }
-
-        function adjustAcTemp(delta) {
-            state.smartAcTemp = Math.max(18, Math.min(30, state.smartAcTemp + delta));
-            renderKioskDOM('smarthome');
-            playCyberBeep(620);
-        }
-
-        /***********************************************************************
-         * 7. VOICE SYNTHESIS, Q&A SCRIPTS & 6-STEP GREETING FLOW
-         ***********************************************************************/
-        let _cynoAudioCtx = null;
         function getCynoAudioCtx() {
             try {
                 if (!_cynoAudioCtx) {
@@ -1603,59 +1420,24 @@
             }
         }
 
-        function triggerEmergencySOS() {
-            selectOperatingMode('guardian');
-            setFaceExpression('guardian');
-            playCyberBeep(280);
-            speakRobotText('Guardian Emergency Alert! Flame or air quality hazard detected. Sending SOS alert to family phones and campus staff immediately.');
+        function escapeChatText(text) {
+            return String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         }
 
         function appendChatLog(speaker, msg, isBot = true) {
             const log = document.getElementById('chat-log');
             if (!log) return;
             const row = document.createElement('div');
-            if (isBot) {
-                row.className = 'flex items-start gap-2 text-[#1d1d1f]';
-                row.innerHTML = `
-                    <span class="w-5 h-5 rounded-full bg-[#0071e3] text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5"><i class="fa-solid fa-robot"></i></span>
-                    <span class="bg-white px-3 py-2 rounded-2xl rounded-tl-xs border border-black/[0.06] shadow-2xs leading-relaxed">${msg}</span>
-                `;
-            } else {
-                row.className = 'flex items-start gap-2 justify-end text-white';
-                row.innerHTML = `
-                    <span class="bg-[#0071e3] text-white px-3 py-1.5 rounded-2xl rounded-tr-xs shadow-2xs">${msg}</span>
-                `;
-            }
+            row.className = isBot ? 'chat-row' : 'chat-row me';
+            row.innerHTML = isBot
+                ? `<span class="chat-avatar">CB</span><span class="chat-bubble">${escapeChatText(msg)}</span>`
+                : `<span class="chat-bubble">${escapeChatText(msg)}</span>`;
             log.appendChild(row);
             log.scrollTop = log.scrollHeight;
         }
 
         function askCynoBot(question) {
-            appendChatLog('VISITOR', question, false);
-            const q = question.toLowerCase();
-            let reply = '';
-
-            if (q.includes('computing') || q.includes('where') || q.includes('hall')) {
-                selectOperatingMode('entrance');
-                reply = 'The Faculty of Computing is on the 2nd floor, straight ahead. I am showing the route and QR code on my chest screen!';
-            } else if (q.includes('reminder') || q.includes('light')) {
-                state.smartLightsOn = true;
-                selectOperatingMode('smarthome');
-                reply = 'Welcome home! Your study group is at 7 PM, and you asked me to remind you about your ATP assignment. I have turned on the living room light.';
-            } else if (q.includes('pomodoro') || q.includes('study') || q.includes('quiz')) {
-                selectOperatingMode('study');
-                reply = 'Starting a 25-minute Pomodoro timer. Quick AI Quiz: How many Neural Engine cores are inside my Apple Mac mini M1? Answer: 16 cores!';
-            } else if (q.includes('air') || q.includes('flame') || q.includes('safety')) {
-                selectOperatingMode('guardian');
-                setFaceExpression('happy');
-                reply = 'Guardian sensors checked: Air quality is 38 PPM safe, and flame sensors report zero hazards. Your home is secure.';
-            } else {
-                selectOperatingMode('ai');
-                reply = `Processed locally on my Apple Mac mini M1: CYNO BOT is a 1.67m modular robot built by CYNOCOR (Group G 40) for both University Entrance and Personalized Home assistance.`;
-            }
-
-            appendChatLog('CYNO BOT', reply, true);
-            speakRobotText(reply);
+            simulateVoiceQuery(question);
         }
 
         function handleCustomQuestion(e) {
@@ -1665,7 +1447,7 @@
             const val = input.value.trim();
             if (!val) return;
             input.value = '';
-            askCynoBot(val);
+            simulateVoiceQuery(val);
         }
 
         // 6-Step Greeting Flow Controller
@@ -1677,9 +1459,7 @@
                     card.classList.toggle('active-step', isActive);
                     const iconBadge = card.querySelector('.step-icon');
                     if (iconBadge) {
-                        iconBadge.className = isActive
-                            ? 'step-icon w-9 h-9 rounded-full bg-[#0071e3] text-white flex items-center justify-center shadow-xs transition'
-                            : 'step-icon w-9 h-9 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center transition';
+                        iconBadge.classList.toggle('is-on', isActive);
                     }
                 }
             }
@@ -1701,7 +1481,7 @@
                 speakRobotText('Step 4 Offer Help: How can I help you today? You can touch Map, Events, or Questions on my chest display.');
             } else if (step === 5) {
                 setFaceExpression('listening');
-                speakRobotText('Step 5 Converse: The main hall is on the 2nd floor, straight ahead. Here is the route map on my screen.');
+                speakRobotText('Step 5 Converse: Visitors ask their questions out loud, and I answer by voice with details on my chest screen.');
             } else if (step === 6) {
                 setFaceExpression('happy');
                 speakRobotText('Step 6 Close: Thank you and have a lovely day! Returning to low-power idle.');
@@ -1996,7 +1776,7 @@
             const isMobile = (width < 768) || (width / height < 1.0);
             const initCamZ = isMobile ? 5.8 : 4.8;
             heroCamera = new THREE.PerspectiveCamera(38, width / height, 0.05, 40);
-            heroCamera.position.set(0, 1.72, isMobile ? 3.25 : 2.85); heroCamera.lookAt(0, 1.72, 0);
+            heroCamera.position.set(0, 1.72, isMobile ? 4.6 : 3.2); heroCamera.lookAt(0, 1.72, 0);
             heroCamera.lookAt(0, 1.72, 0);
 
             // Enabled logarithmicDepthBuffer for maximum depth precision without mesh blinking/Z-fighting
@@ -2045,6 +1825,10 @@
 
             // Setup Mouse Cursor Tracking & Drag Orbit
             setupHeroMouseInteractions(container);
+
+            const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            HERO_INTRO.start = reduceMotion ? null : performance.now() + 120;
+            if (reduceMotion) HERO_INTRO.waved = true;
 
             // Responsive Window Resize Handler
             window.addEventListener('resize', () => {
@@ -3131,6 +2915,21 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Hero entrance: time-based spring so it plays the same at 60 Hz and 120 Hz.
+        const HERO_INTRO = { start: null, waved: false };
+        function heroIntroSeconds() {
+            return HERO_INTRO.start === null ? 99 : (performance.now() - HERO_INTRO.start) / 1000;
+        }
+        // Damped spring 0 -> 1 with a small overshoot (about 6%).
+        function heroSpring(t, k = 5.2, w = 6.4) {
+            if (t <= 0) return 0;
+            return 1 - Math.exp(-k * t) * Math.cos(w * t);
+        }
+        function heroEaseInOut(t) {
+            t = Math.min(1, Math.max(0, t));
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
         function renderHeroRobot(elapsed) {
             if (!heroRobotRoot || !heroHead || !heroTorso || !heroCamera) return;
 
@@ -3210,7 +3009,10 @@
             } else {
                 // Settled inside website hero section - perfectly framed full robot view
                 targetExplode = 0;
-                const introZ = elapsed < 2.75 ? (isMobile ? 3.25 : 2.85) : (isMobile ? 2.75 : 2.28); camTargetPos.set(0, 1.72, introZ);
+                const introS = heroIntroSeconds();
+                const zFrom = isMobile ? 4.6 : 3.2, zTo = isMobile ? 3.75 : 2.28;
+                const introZ = zFrom + (zTo - zFrom) * heroEaseInOut((introS - 0.15) / 2.1);
+                camTargetPos.set(0, 1.72, introZ);
                 camTargetLook.set(0, 1.72, 0);
             }
 
@@ -3250,12 +3052,17 @@
             heroMouse.x += (desiredX - heroMouse.x) * 0.07;
             heroMouse.y += (desiredY - heroMouse.y) * 0.07;
 
-            heroHead.rotation.y = heroMouse.x * 0.45;
-            heroHead.rotation.x = heroMouse.y * 0.45;
-            heroHead.rotation.z = -heroMouse.x * 0.05;
+            const introSec = heroIntroSeconds();
+            const rise = heroSpring(introSec);
+            const lookIn = THREE.MathUtils.clamp((introSec - 0.9) / 0.8, 0, 1);
+            const headLift = heroSpring(introSec - 0.45, 6.0, 7.0);
 
-            heroTorso.rotation.y = heroMouse.x * 0.18;
-            heroTorso.rotation.x = heroMouse.y * 0.15;
+            heroHead.rotation.y = heroMouse.x * 0.45 * lookIn;
+            heroHead.rotation.x = heroMouse.y * 0.45 * lookIn + (1 - headLift) * 0.5;
+            heroHead.rotation.z = -heroMouse.x * 0.05 * lookIn;
+
+            heroTorso.rotation.y = heroMouse.x * 0.18 * lookIn;
+            heroTorso.rotation.x = heroMouse.y * 0.15 * lookIn;
 
             // Interactive 3D CAD Eye Ring Gaze Offset, Blinking & Speaking Smile Pulse
             if (heroFaceEyesGroup) {
@@ -3263,7 +3070,9 @@
                 heroFaceEyesGroup.position.y = -heroMouse.y * 0.012;
             }
             if (heroLeftEyeRing && heroRightEyeRing) {
-                const blinkScaleY = (typeof state !== 'undefined' && state.isBlinking) ? 0.12 : 1.0;
+                let blinkScaleY = (typeof state !== 'undefined' && state.isBlinking) ? 0.12 : 1.0;
+                if (introSec < 0.8) blinkScaleY = 0.04;
+                else if (introSec > 1.25 && introSec < 1.37) blinkScaleY = 0.12;
                 heroLeftEyeRing.scale.y += (blinkScaleY - heroLeftEyeRing.scale.y) * 0.35;
                 heroRightEyeRing.scale.y += (blinkScaleY - heroRightEyeRing.scale.y) * 0.35;
             }
@@ -3273,11 +3082,16 @@
             }
 
             // Idle Breathing Motion
-            heroRobotRoot.position.y = Math.sin(elapsed * 2.2) * 0.014;
+            heroRobotRoot.position.y = Math.sin(elapsed * 2.2) * 0.014 - (1 - rise) * 1.35;
+            if (!HERO_INTRO.waved && introSec > 1.55 && introSec < 20) {
+                HERO_INTRO.waved = true;
+                heroWave.active = true;
+                heroWave.time = 0;
+            }
 
             // User Orbit Drag Interpolation
             heroRotationY += (heroTargetRotationY - heroRotationY) * 0.1;
-            heroRobotRoot.rotation.y = heroRotationY;
+            heroRobotRoot.rotation.y = heroRotationY - (1 - rise) * 0.55;
 
             // Interactive Arm Wave Animation
             if (heroWave.active && heroRightArmPivot && heroRightForearmPivot) {
@@ -3457,7 +3271,7 @@
         function triggerHeroVoice() {
             const speechList = [
                 "Greetings! I am CYNO BOT, powered by Apple Mac mini M1 neural brain.",
-                "All systems fully nominal. Hospital hospitality and smart home companionship ready.",
+                "Hello! I'm here to help visitors at reception.",
                 "Group G 40 robotics platform online. Whisper STT and Ollama local LLM active.",
                 "Welcome to IIT Campus! I am equipped with real-time gaze tracking and touchscreen kiosk."
             ];
@@ -3618,51 +3432,43 @@
         };
 
         // Interactive Voice AI Query Simulator
+        // Scripted demo answers. They only use facts stated elsewhere on the page.
+        const DEMO_ANSWERS = [
+            { match: ['about yourself', 'who are you'], text: "I'm CYNO BOT, a 1.67 m receptionist robot built by Cynocor, Group G 40 at IIT Sri Lanka. I greet visitors, answer questions and show information on my chest screen." },
+            { match: ['tall', 'height'], text: "I'm 1.67 m tall, so I can talk to most visitors at eye level. I stand on a 520 × 440 mm anti-tip steel base." },
+            { match: ['brain', 'computer', 'run'], text: "An Apple Mac mini (M1) in my torso. It runs Whisper for speech recognition and a local Ollama language model, and idles at about 7 W." },
+            { match: ['module leader', 'supervis', 'leader'], text: "The ATP module leader supervising this project is Mr. Bhanu Athuraliya at the Informatics Institute of Technology." },
+            { match: ['room', 'direction', 'find', 'where'], text: "On the robot, directions come from the university's own information, shown on this screen with a QR code you can scan. This web demo doesn't include campus data." },
+            { match: ['event', 'today'], text: "On the robot I answer from the university's own information. This web demo doesn't have live event data." },
+            { match: ['use you', 'how do i use', 'how to use'], text: "Just walk up and talk to me, or tap my chest screen. I listen, then answer out loud." },
+            { match: ['module', 'detach', 'transport'], text: "I come apart into six modules: head, torso, two arms, legs and base. It takes under 3 minutes without tools." }
+        ];
+
         function simulateVoiceQuery(query) {
             const chatLog = document.getElementById('chat-log');
             if (!chatLog) return;
-            
-            const userMsg = document.createElement('div');
-            userMsg.className = 'flex items-start gap-2 justify-end';
-            userMsg.innerHTML = `<span class="bg-[#0071e3] text-white px-3.5 py-1.5 rounded-2xl rounded-tr-xs text-right shadow-2xs">${query}</span>`;
-            chatLog.appendChild(userMsg);
-            chatLog.scrollTop = chatLog.scrollHeight;
-            
+
+            appendChatLog('VISITOR', query, false);
             if (typeof playCyberBeep === 'function') playCyberBeep(520, 'sine', 0.1, 0.05);
 
-            let responseText = "I am ready to help with university directions, course modules, or schedule info.";
             const q = query.toLowerCase();
-            if (q.includes('lab 03') || q.includes('lab')) {
-                responseText = "Lab 03 is located on the 2nd Floor, West Wing. Take the central elevator or stairway B, then follow the cyan signage.";
-            } else if (q.includes('module leader') || q.includes('leader')) {
-                responseText = "The module leader for ATP (Advanced Technology Project) is Mr. Bhanu Athuraliya at Informatics Institute of Technology.";
-            } else if (q.includes('wifi')) {
-                responseText = "Campus WiFi SSID is 'IIT-Student-5G'. Authenticate using your student ID and portal credentials via 802.1X.";
-            } else if (q.includes('about yourself') || q.includes('who are you')) {
-                responseText = "I am CYNO BOT, an autonomous 1.67m humanoid robot developed by Group G 40 at IIT, engineered for campus hospitality, guidance, and environmental monitoring.";
-            }
+            const hit = DEMO_ANSWERS.find(a => a.match.some(m => q.includes(m)));
+            const responseText = hit ? hit.text
+                : "This web demo only knows a few things about me. On the real robot, questions go to the speech and language models running on the Mac mini.";
 
             const thinkingEl = document.createElement('div');
-            thinkingEl.className = 'text-[#0071e3] flex items-center gap-2 text-xs font-medium';
-            thinkingEl.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin text-xs"></i><span>Processing on Apple M1 Neural Engine...</span>`;
+            thinkingEl.className = 'chat-row';
+            thinkingEl.innerHTML = '<span class="chat-avatar">CB</span><span class="chat-thinking" aria-label="Thinking"><i></i><i></i><i></i></span>';
             chatLog.appendChild(thinkingEl);
             chatLog.scrollTop = chatLog.scrollHeight;
 
             setTimeout(() => {
                 thinkingEl.remove();
-                const botMsg = document.createElement('div');
-                botMsg.className = 'flex items-start gap-2 text-[#1d1d1f]';
-                botMsg.innerHTML = `
-                    <span class="w-5 h-5 rounded-full bg-[#0071e3] text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5"><i class="fa-solid fa-robot"></i></span>
-                    <span class="bg-white px-3.5 py-2 rounded-2xl rounded-tl-xs border border-black/[0.06] shadow-2xs leading-relaxed">${responseText}</span>
-                `;
-                chatLog.appendChild(botMsg);
-                chatLog.scrollTop = chatLog.scrollHeight;
-
-                if (typeof playCyberBeep === 'function') playCyberBeep(880, 'sine', 0.15, 0.08);
-                speakRobotText(responseText);
-            }, 550);
+                appendChatLog('CYNO BOT', responseText, true);
+                if (typeof speakRobotText === 'function') speakRobotText(responseText);
+            }, 700);
         }
+
         window.simulateVoiceQuery = simulateVoiceQuery;
 
         function toggleMobileMenu() {
@@ -3839,7 +3645,6 @@
 
         window.playArchVideo = playArchVideo;
         window.switchArchVideoSource = switchArchVideoSource;
-        window.handleArchVideoError = handleArchVideoError;
 
         /***********************************************************************
          * 7. GOOGLE NOTEBOOKLM INTERACTIVE ARCHITECTURE MIND MAP

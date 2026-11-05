@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Three.js r128 -->
@@ -23,9 +23,9 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        display: ['Outfit', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['"IBM Plex Sans"', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        display: ['Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
                     }
                 }
             }
@@ -181,14 +181,10 @@
                             <span id="active-profile-badge" class="font-mono text-[9px] text-[#0071e3] font-semibold">UNIVERSITY</span>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+                        <div class="grid grid-cols-1 gap-1.5 text-[11px]">
                             <button id="prof-uni-btn" onclick="switchProfile('university')" class="p-2 rounded-xl bg-[#0071e3] text-white font-semibold text-left transition cursor-pointer shadow-xs">
                                 <div class="text-[9px] opacity-80 font-mono">MODE 01</div>
                                 <div class="mt-0.5">Campus Entrance</div>
-                            </button>
-                            <button id="prof-home-btn" onclick="switchProfile('home')" class="p-2 rounded-xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-semibold text-left transition cursor-pointer">
-                                <div class="text-[9px] text-[#86868b] font-mono">MODE 02</div>
-                                <div class="mt-0.5">Home Companion</div>
                             </button>
                         </div>
                     </div>

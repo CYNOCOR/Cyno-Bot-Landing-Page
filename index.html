@@ -1,1254 +1,613 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYNO BOT — Autonomous Humanoid Intelligence | CYNOCOR</title>
-    
-    <!-- Cynocor Favicon -->
+    <title>CYNO BOT · Cynocor</title>
+    <meta name="description" content="CYNO BOT is a 1.67 m receptionist robot that greets visitors, answers questions and shows campus information on its chest screen. Built by Cynocor (Group G 40) at IIT Sri Lanka.">
+    <meta name="theme-color" content="#07090c">
+
     <link rel="icon" type="image/png" href="assets/images/cynocor-logo.png">
     <link rel="apple-touch-icon" href="assets/images/cynocor-logo.png">
 
-    <!-- Tailwind CSS -->
+    <script>document.documentElement.classList.add('js');</script>
+
+    <!-- Tailwind is still used by the kiosk screens that js/app.js renders -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Outfit (Display), Inter (Body) & JetBrains Mono (Telemetry) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Three.js r128 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- GSAP 3.12 + ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
+            corePlugins: { preflight: false },
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        display: ['Outfit', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                    },
-                    colors: {
-                        apple: {
-                            bg: '#fbfbfd',
-                            alt: '#f5f5f7',
-                            dark: '#000000',
-                            cardDark: '#141417',
-                            text: '#1d1d1f',
-                            muted: '#6e6e73',
-                            subtle: '#86868b',
-                            blue: '#0071e3',
-                            proBlue: '#2997ff',
-                        }
+                        sans: ['"IBM Plex Sans"', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        display: ['Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- Apple Flagship Design System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="bg-[#fbfbfd] text-[#1d1d1f] antialiased selection:bg-[#0071e3] selection:text-white">
 
-    <!-- ===================================================================== -->
-    <!-- FLOATING GLASSMORPHIC NAVBAR (Hidden at Top, Reveals on Scroll)       -->
-    <!-- ===================================================================== -->
-    <header id="main-nav-wrapper" class="cyno-floating-header nav-hidden-top fixed top-0 left-0 right-0 z-50 w-full px-3 sm:px-6 pt-2.5 sm:pt-3.5">
-        <div id="main-nav-pill" class="cyno-nav-capsule max-w-[1160px] mx-auto px-4 sm:px-6 h-13 sm:h-14 flex items-center justify-between gap-3">
-            
-            <!-- Left: Brand & Logo -->
-            <a href="#cynobot" class="flex items-center gap-2.5 group shrink-0 select-none">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00d2ff]/25 to-[#0071e3]/15 border border-[#00d2ff]/35 flex items-center justify-center shadow-[0_0_14px_rgba(0,210,255,0.2)] group-hover:scale-105 transition-transform">
-                    <img src="assets/images/cynocor-logo.png" alt="CYNOCOR" class="w-4 h-4 object-contain brightness-0 invert" />
-                </div>
-                <span class="font-display font-bold tracking-[0.22em] text-xs sm:text-[13px] text-white group-hover:text-[#64d2ff] transition-colors uppercase">C Y N O C O R</span>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+    <!-- ============================== NAV ============================== -->
+    <header id="main-nav-wrapper" class="site-nav nav-hidden-top">
+        <div class="nav-bar">
+            <a href="#cynobot" class="brand" aria-label="Cynocor, back to top">
+                <img src="assets/images/cynocor-logo.png" alt="">
+                <span>CYNOCOR</span>
             </a>
 
-            <!-- Center: Recessed Glass Track Navigation Links -->
-            <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[11px] uppercase tracking-[0.11em] font-medium text-white/75">
-                <a href="#cynobot" data-nav-id="cynobot" class="nav-spy-link is-active px-3.5 py-1.5 rounded-full transition-all duration-200">Home</a>
-                <a href="#pillars" data-nav-id="pillars" class="nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200">Philosophy</a>
-                <a href="#specs" data-nav-id="specs" class="nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200">Tech Specs</a>
-                <a href="#greeting-flow" data-nav-id="greeting-flow" class="nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200">Protocol</a>
-                <a href="#kiosk-simulator" data-nav-id="kiosk-simulator" class="nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200">Kiosk OS</a>
-                <a href="#architecture" data-nav-id="architecture" class="nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200">M1 Core</a>
-                <a href="#fabrication" data-nav-id="fabrication" class="nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200">Design</a>
-                <a href="#team" data-nav-id="team" class="nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200">Team</a>
+            <nav class="nav-links" aria-label="Sections">
+                <a href="#pillars" data-nav-id="pillars" class="nav-spy-link">Principles</a>
+                <a href="#specs" data-nav-id="specs" class="nav-spy-link">Specs</a>
+                <a href="#greeting-flow" data-nav-id="greeting-flow" class="nav-spy-link">Greeting</a>
+                <a href="#kiosk-simulator" data-nav-id="kiosk-simulator" class="nav-spy-link">Chest screen</a>
+                <a href="#architecture" data-nav-id="architecture" class="nav-spy-link">Architecture</a>
+                <a href="#fabrication" data-nav-id="fabrication" class="nav-spy-link">Build</a>
+                <a href="#team" data-nav-id="team" class="nav-spy-link">Team</a>
+                <span class="nav-indicator" aria-hidden="true"></span>
             </nav>
 
-            <!-- Right: Luminous 3D Studio CTA + Mobile Hamburger -->
-            <div class="flex items-center gap-2.5">
-                <a href="studio.html" class="cyno-nav-cta px-4 py-1.5 text-[11px] font-semibold tracking-wide" title="Launch Interactive 3D CAD Studio">
-                    <i class="fa-solid fa-cube text-[10px]"></i>
-                    <span>3D Studio</span>
-                </a>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="lg:hidden w-8 h-8 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/15 text-white flex items-center justify-center transition cursor-pointer">
-                    <i class="fa-solid fa-bars text-xs"></i>
+            <div style="display:flex;align-items:center;gap:8px">
+                <a href="studio.html" class="btn btn-signal btn-sm">3D Studio <i class="fa-solid fa-arrow-right arrow" style="font-size:11px"></i></a>
+                <button id="mobile-menu-toggle" class="nav-burger" onclick="toggleMobileMenu()" aria-label="Open menu" aria-controls="mobile-menu-drawer" aria-expanded="false">
+                    <i class="fa-solid fa-bars" style="font-size:13px"></i>
                 </button>
             </div>
-
         </div>
 
-        <!-- Mobile Pull-Down Sheet -->
-        <div id="mobile-menu-drawer" class="hidden lg:hidden max-w-[1160px] mx-auto mt-2 rounded-3xl bg-[#080b14]/95 backdrop-blur-2xl border border-white/15 px-5 py-4 space-y-1.5 text-sm text-white shadow-2xl">
-            <a href="#cynobot" onclick="toggleMobileMenu()" class="block py-2 border-b border-white/10 text-[#64d2ff] font-semibold">Home</a>
-            <a href="#pillars" onclick="toggleMobileMenu()" class="block py-2 border-b border-white/10 text-white/80 hover:text-white">Design Philosophy</a>
-            <a href="#specs" onclick="toggleMobileMenu()" class="block py-2 border-b border-white/10 text-white/80 hover:text-white">Technical Specifications</a>
-            <a href="#greeting-flow" onclick="toggleMobileMenu()" class="block py-2 border-b border-white/10 text-white/80 hover:text-white">6-Step Greeting Protocol</a>
-            <a href="#kiosk-simulator" onclick="toggleMobileMenu()" class="block py-2 border-b border-white/10 text-white/80 hover:text-white">10" Chest Kiosk Simulator</a>
-            <a href="#architecture" onclick="toggleMobileMenu()" class="block py-2 border-b border-white/10 text-white/80 hover:text-white">Apple M1 Architecture</a>
-            <a href="#fabrication" onclick="toggleMobileMenu()" class="block py-2 border-b border-white/10 text-white/80 hover:text-white">Craftsmanship &amp; Roadmap</a>
-            <a href="#team" onclick="toggleMobileMenu()" class="block py-2 text-white/80 hover:text-white">Engineering Team (G 40)</a>
-            <div class="pt-2">
-                <a href="studio.html" class="block w-full cyno-nav-cta justify-center text-center py-2.5 text-xs">
-                    <i class="fa-solid fa-cube mr-1"></i>
-                    <span>Launch 3D CAD Studio</span>
-                </a>
-            </div>
+        <div id="mobile-menu-drawer" class="nav-drawer hidden">
+            <a href="#pillars" onclick="toggleMobileMenu()">Principles <span>01</span></a>
+            <a href="#specs" onclick="toggleMobileMenu()">Specs <span>02</span></a>
+            <a href="#greeting-flow" onclick="toggleMobileMenu()">Greeting <span>03</span></a>
+            <a href="#kiosk-simulator" onclick="toggleMobileMenu()">Chest screen <span>04</span></a>
+            <a href="#architecture" onclick="toggleMobileMenu()">Architecture <span>05</span></a>
+            <a href="#fabrication" onclick="toggleMobileMenu()">Build <span>06</span></a>
+            <a href="#team" onclick="toggleMobileMenu()">Team <span>07</span></a>
         </div>
     </header>
 
-    <!-- ===================================================================== -->
-    <!-- SPERA LABS INSPIRED HERO SECTION + ENLARGED INTERACTIVE UPPER-BODY    -->
-    <!-- ===================================================================== -->
-    <section id="cynobot" class="spera-hero-section relative w-full h-[100svh] min-h-[500px] max-h-[900px] flex items-center justify-center overflow-hidden">
-        
-        <!-- Spera Orbital Circle & Concentric Cyber Aura -->
-        <div class="spera-fingerprint"></div>
-        <div class="spera-circle"></div>
+    <main>
 
-        <!-- Ambient Cyan/Blue Core Glow Behind Robot -->
-        <div id="hero-floor-light" class="pointer-events-none absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[380px] bg-[#00d2ff]/15 blur-[120px] rounded-full z-[1]"></div>
+    <!-- ============================== HERO ============================== -->
+    <section id="cynobot" class="hero" aria-label="CYNO BOT">
+        <div class="hero-grid" aria-hidden="true"></div>
 
-        <!-- Layer 1: Spera Labs Typography Backdrop -->
-        <div class="spera-hero-wrapper">
-            <h1 class="spera-hero-text">C Y N O B O T</h1>
+        <div class="hero-top">
+            <a href="#cynobot" class="brand" aria-label="Cynocor">
+                <img src="assets/images/cynocor-logo.png" alt="">
+                <span>CYNOCOR</span>
+            </a>
+            <span class="meta">Group G 40 · IIT Sri Lanka</span>
         </div>
 
-        <!-- Layer 2: Enlarged Interactive Upper-Body 3D Robot (Looks Around & Tracks Cursor) -->
-        <div id="hero-robot-canvas-container"
-             class="spera-robot-stage absolute inset-0 z-10 w-full h-full cursor-grab active:cursor-grabbing"
-             title="Move cursor to guide CYNO BOT's gaze, or drag to rotate">
+        <div class="hero-wordmark" aria-hidden="true">
+            <h1 id="hero-wordmark"><span class="ch" style="--i:0">C</span><span class="ch" style="--i:1">Y</span><span class="ch" style="--i:2">N</span><span class="ch" style="--i:3">O</span><span class="ch" style="--i:4">B</span><span class="ch" style="--i:5">O</span><span class="ch" style="--i:6">T</span></h1>
         </div>
+        <h1 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">CYNO BOT, a receptionist robot by Cynocor</h1>
 
-        <!-- Layer 3: Spera Bottom Gradient Fade -->
-        <div class="spera-hero-overlay"></div>
+        <div id="hero-robot-canvas-container" class="hero-robot" role="img" aria-label="3D model of CYNO BOT. Move the pointer and it follows you; click to make it wave; drag to turn it."></div>
 
-    </section>
+        <div class="hero-fade" aria-hidden="true"></div>
 
-    <!-- ===================================================================== -->
-    <!-- SECTION 01: DESIGN PHILOSOPHY & 3 CORE PILLARS (Laptop & Mobile Fit)  -->
-    <!-- ===================================================================== -->
-    <section id="pillars" class="scroll-mt-14 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 max-w-[1160px] mx-auto">
-        
-        <div class="max-w-3xl mb-8 sm:mb-10">
-            <span class="apple-eyebrow">Design Philosophy</span>
-            <h2 class="apple-section-title text-3xl sm:text-4xl lg:text-[42px] text-[#1d1d1f] mt-2">
-                Designed to stand eye-to-eye with humanity.
-            </h2>
-            <p class="text-[#424245] text-sm sm:text-base lg:text-lg mt-2.5 leading-relaxed font-normal">
-                Robots operating in shared human spaces must be genuinely capable, fundamentally safe, and effortlessly intuitive from the very first hello.
+        <div class="hero-bottom">
+            <p class="hero-claim">
+                <b>A 1.67 m receptionist robot</b> <span>that greets visitors, answers their questions and shows campus information on its chest screen.</span>
             </p>
-        </div>
-
-        <!-- 3 Apple Bento Pillar Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            
-            <!-- Pillar 01 -->
-            <div class="p-6 sm:p-7 apple-bento-card flex flex-col justify-between">
-                <div>
-                    <div class="w-10 h-10 rounded-xl bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center text-base mb-4">
-                        <i class="fa-solid fa-microchip"></i>
-                    </div>
-                    <span class="text-[11px] font-mono-tech text-[#0071e3] font-semibold uppercase tracking-wider">Pillar 01 &bull; Capable</span>
-                    <h3 class="font-display font-bold text-xl sm:text-2xl text-[#1d1d1f] mt-1.5 tracking-tight">Full-Scale Presence.</h3>
-                    <p class="text-xs sm:text-sm text-[#424245] mt-2 leading-relaxed">
-                        A 1.67m life-size stance creates natural eye-level conversation. Inside the torso, an Apple Mac mini (M1) executes 11 TOPS of neural compute while drawing only 7W at idle.
-                    </p>
-                </div>
-                <div class="mt-5 pt-3.5 border-t border-black/[0.06] flex items-center justify-between text-xs font-mono-tech text-[#6e6e73]">
-                    <span>6 Detachable Modules</span>
-                    <span class="text-[#1d1d1f] font-semibold">M1 Silicon</span>
-                </div>
-            </div>
-
-            <!-- Pillar 02 -->
-            <div class="p-6 sm:p-7 apple-bento-card flex flex-col justify-between">
-                <div>
-                    <div class="w-10 h-10 rounded-xl bg-[#30d158]/12 text-[#1d8338] flex items-center justify-center text-base mb-4">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <span class="text-[11px] font-mono-tech text-[#1d8338] font-semibold uppercase tracking-wider">Pillar 02 &bull; Safe</span>
-                    <h3 class="font-display font-bold text-xl sm:text-2xl text-[#1d1d1f] mt-1.5 tracking-tight">Zero Pinch Hazards.</h3>
-                    <p class="text-xs sm:text-sm text-[#424245] mt-2 leading-relaxed">
-                        Thermoformed PVC armor over a welded 25&times;25mm steel skeleton anchored to a heavy anti-tip baseplate. Hardware E-Stop cut-offs protect visitors in busy university foyers.
-                    </p>
-                </div>
-                <div class="mt-5 pt-3.5 border-t border-black/[0.06] flex items-center justify-between text-xs font-mono-tech text-[#6e6e73]">
-                    <span>520&times;440mm Base</span>
-                    <span class="text-[#1d8338] font-semibold">Compliant Safe</span>
-                </div>
-            </div>
-
-            <!-- Pillar 03 -->
-            <div class="p-6 sm:p-7 apple-bento-card flex flex-col justify-between">
-                <div>
-                    <div class="w-10 h-10 rounded-xl bg-[#5e5ce6]/10 text-[#5e5ce6] flex items-center justify-center text-base mb-4">
-                        <i class="fa-solid fa-wave-square"></i>
-                    </div>
-                    <span class="text-[11px] font-mono-tech text-[#5e5ce6] font-semibold uppercase tracking-wider">Pillar 03 &bull; Intuitive</span>
-                    <h3 class="font-display font-bold text-xl sm:text-2xl text-[#1d1d1f] mt-1.5 tracking-tight">Conversational AI.</h3>
-                    <p class="text-xs sm:text-sm text-[#424245] mt-2 leading-relaxed">
-                        Offline Whisper speech-to-text paired with a local Ollama LLM knowledge store. Animated OLED eyes and a 10" capacitive chest kiosk make every query instant and 100% private.
-                    </p>
-                </div>
-                <div class="mt-5 pt-3.5 border-t border-black/[0.06] flex items-center justify-between text-xs font-mono-tech text-[#6e6e73]">
-                    <span>PDPA '22 Compliant</span>
-                    <span class="text-[#5e5ce6] font-semibold">100% Air-Gapped</span>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 02: TECHNICAL SPECIFICATIONS MATRIX (Interactive Filter)      -->
-    <!-- ===================================================================== -->
-    <section id="specs" class="scroll-mt-14 py-12 sm:py-16 lg:py-20 bg-[#f5f5f7] border-y border-black/[0.06]">
-        <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
-                <div>
-                    <span class="apple-eyebrow">Pro Hardware Specifications</span>
-                    <h2 class="apple-section-title text-3xl sm:text-4xl lg:text-[42px] text-[#1d1d1f] mt-1.5">
-                        Engineered down to the millimeter.
-                    </h2>
-                    <p class="text-[#424245] text-sm sm:text-base mt-2 max-w-2xl">
-                        Every subsystem is purpose-built for continuous 8-hour autonomous operation across university reception and personalized home environments.
-                    </p>
-                </div>
-
-                <!-- Interactive Apple Segmented Spec Filter -->
-                <div class="apple-segmented-bar self-start md:self-auto max-w-full overflow-x-auto" role="tablist" aria-label="Filter Specifications">
-                    <button onclick="filterSpecs('all', this)" class="apple-segment-btn is-active">All</button>
-                    <button onclick="filterSpecs('compute', this)" class="apple-segment-btn">Silicon</button>
-                    <button onclick="filterSpecs('physical', this)" class="apple-segment-btn">Chassis</button>
-                    <button onclick="filterSpecs('sensing', this)" class="apple-segment-btn">Sensing</button>
-                    <button onclick="filterSpecs('interaction', this)" class="apple-segment-btn">Display</button>
-                </div>
-            </div>
-
-            <!-- 4 Specification Cards Grid -->
-            <div id="specs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                
-                <!-- Spec 01: Compute -->
-                <div data-spec-cat="compute" class="spec-category-card p-5 sm:p-6 apple-bento-card flex flex-col justify-between bg-white">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-mono-tech text-[#0071e3] font-bold uppercase tracking-wider">01 // Compute</span>
-                            <span class="w-8 h-8 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                                <i class="fa-brands fa-apple text-sm"></i>
-                            </span>
-                        </div>
-                        <h3 class="font-display font-bold text-xl text-[#1d1d1f] mt-2">Silicon Core</h3>
-                        <div class="w-full h-[1px] bg-black/[0.1] my-3"></div>
-                        
-                        <ul class="space-y-2.5 text-xs sm:text-[13px]">
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Host Brain</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">Mac mini (M1)</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Neural Engine</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">16-Core (11 TOPS)</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Speech-to-Text</span>
-                                <span class="text-[#0071e3] font-bold font-mono-tech">Whisper Base</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Local LLM</span>
-                                <span class="text-[#0071e3] font-bold font-mono-tech">Ollama Qwen 1.5B</span>
-                            </li>
-                            <li class="flex justify-between items-center">
-                                <span class="text-[#424245] font-medium">MCU Bridge</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">Dual ESP32 USB</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-black/[0.08] text-[11px] font-mono-tech text-[#424245] font-medium flex justify-between">
-                        <span>Idle: 7W</span>
-                        <span class="text-[#1d8338] font-bold">Peak: 39W</span>
-                    </div>
-                </div>
-
-                <!-- Spec 02: Physical -->
-                <div data-spec-cat="physical" class="spec-category-card p-5 sm:p-6 apple-bento-card flex flex-col justify-between bg-white">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-mono-tech text-[#0071e3] font-bold uppercase tracking-wider">02 // Physical</span>
-                            <span class="w-8 h-8 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                                <i class="fa-solid fa-cubes-stacked text-xs"></i>
-                            </span>
-                        </div>
-                        <h3 class="font-display font-bold text-xl text-[#1d1d1f] mt-2">Structure &amp; Body</h3>
-                        <div class="w-full h-[1px] bg-black/[0.1] my-3"></div>
-                        
-                        <ul class="space-y-2.5 text-xs sm:text-[13px]">
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Standing Height</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">1,670 mm (1.67m)</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Internal Frame</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">25&times;25mm RHS Steel</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Outer Armor</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">Thermoformed PVC</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Joint Bezels</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">PETG / PLA 3D Print</span>
-                            </li>
-                            <li class="flex justify-between items-center">
-                                <span class="text-[#424245] font-medium">Architecture</span>
-                                <span class="text-[#0071e3] font-bold font-mono-tech">6 Detachable Bays</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-black/[0.08] text-[11px] font-mono-tech text-[#424245] font-medium flex justify-between">
-                        <span>520&times;440mm Base</span>
-                        <span class="text-[#1d1d1f] font-bold">Anti-Tip</span>
-                    </div>
-                </div>
-
-                <!-- Spec 03: Sensing -->
-                <div data-spec-cat="sensing" class="spec-category-card p-5 sm:p-6 apple-bento-card flex flex-col justify-between bg-white">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-mono-tech text-[#0071e3] font-bold uppercase tracking-wider">03 // Sensing</span>
-                            <span class="w-8 h-8 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                                <i class="fa-solid fa-eye text-xs"></i>
-                            </span>
-                        </div>
-                        <h3 class="font-display font-bold text-xl text-[#1d1d1f] mt-2">Sensory Suite</h3>
-                        <div class="w-full h-[1px] bg-black/[0.1] my-3"></div>
-                        
-                        <ul class="space-y-2.5 text-xs sm:text-[13px]">
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Optical Vision</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">HD 1080p 60fps</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Proximity Radar</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">1.5m – 3.0m Zone</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Hazard Sensors</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">IR Flame + MQ2 Gas</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Vision Stack</span>
-                                <span class="text-[#0071e3] font-bold font-mono-tech">OpenCV + MediaPipe</span>
-                            </li>
-                            <li class="flex justify-between items-center">
-                                <span class="text-[#424245] font-medium">Gaze Tracking</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">468 Face Landmarks</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-black/[0.08] text-[11px] font-mono-tech text-[#424245] font-medium flex justify-between">
-                        <span>Dual Mic Array</span>
-                        <span class="text-[#0071e3] font-bold">Beamforming</span>
-                    </div>
-                </div>
-
-                <!-- Spec 04: Interaction -->
-                <div data-spec-cat="interaction" class="spec-category-card p-5 sm:p-6 apple-bento-card flex flex-col justify-between bg-white">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-mono-tech text-[#0071e3] font-bold uppercase tracking-wider">04 // Interaction</span>
-                            <span class="w-8 h-8 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                                <i class="fa-solid fa-tablet-screen-button text-xs"></i>
-                            </span>
-                        </div>
-                        <h3 class="font-display font-bold text-xl text-[#1d1d1f] mt-2">Display &amp; Audio</h3>
-                        <div class="w-full h-[1px] bg-black/[0.1] my-3"></div>
-                        
-                        <ul class="space-y-2.5 text-xs sm:text-[13px]">
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Chest Kiosk</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">10" IPS Capacitive</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Eye Matrix</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">Dual Animated OLED</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Acoustic Output</span>
-                                <span class="text-[#1d1d1f] font-bold font-mono-tech">2&times;5W Stereo Pods</span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-black/[0.07] pb-2">
-                                <span class="text-[#424245] font-medium">Ambient Trim</span>
-                                <span class="text-[#0071e3] font-bold font-mono-tech">Cyan Halo Rings</span>
-                            </li>
-                            <li class="flex justify-between items-center">
-                                <span class="text-[#424245] font-medium">Public Safety</span>
-                                <span class="text-[#1d8338] font-bold font-mono-tech">Pinch-Free Hands</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-black/[0.08] text-[11px] font-mono-tech text-[#424245] font-medium flex justify-between">
-                        <span>Latency &le; 2.4s</span>
-                        <span class="text-[#1d8338] font-bold">Natural TTS</span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 03: 6-STEP AUTONOMOUS GREETING PROTOCOL                       -->
-    <!-- ===================================================================== -->
-    <section id="greeting-flow" class="scroll-mt-14 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 max-w-[1160px] mx-auto">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
             <div>
-                <span class="apple-eyebrow">Hospitality Protocol</span>
-                <h2 class="apple-section-title text-3xl sm:text-4xl lg:text-[42px] text-[#1d1d1f] mt-1.5">
-                    Six seamless steps. From detection to farewell.
-                </h2>
-                <p class="text-[#424245] text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-                    Select any phase below or run the full automated sequence to experience how CYNO BOT senses, greets, and guides visitors within its 1.5m–3.0m radar zone.
-                </p>
-            </div>
-
-            <button onclick="playFullGreetingSequence()" class="apple-btn-primary self-start md:self-auto shadow-md text-xs sm:text-sm px-5 py-2.5">
-                <i class="fa-solid fa-play text-[10px]"></i>
-                <span>Simulate Full Sequence</span>
-            </button>
-        </div>
-
-        <!-- 6 Interactive Storyboard Cards -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
-            
-            <!-- Step 1 -->
-            <div onclick="activateGreetingStep(1)" id="flow-step-1" class="flow-step-card active-step cursor-pointer p-4 sm:p-5 flex flex-col justify-between min-h-[152px]">
-                <div class="flex items-center justify-between text-xs font-mono-tech">
-                    <span class="step-num font-bold text-[#0071e3] text-base sm:text-lg">01</span>
-                    <span class="step-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0071e3] text-white flex items-center justify-center shadow-xs">
-                        <i class="fa-solid fa-satellite-dish text-xs"></i>
-                    </span>
-                </div>
-                <div class="mt-3">
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">Detect</h3>
-                    <p class="text-xs sm:text-[13px] text-[#424245] font-medium mt-1 leading-snug">Ultrasonic radar senses visitor at 1.5m–3.0m.</p>
+                <div class="hero-actions">
+                    <a href="#greeting-flow" class="btn btn-signal">See how it greets <i class="fa-solid fa-arrow-down arrow" style="font-size:11px"></i></a>
+                    <a href="studio.html" class="btn btn-line on-dark">Open the 3D Studio</a>
                 </div>
             </div>
-
-            <!-- Step 2 -->
-            <div onclick="activateGreetingStep(2)" id="flow-step-2" class="flow-step-card cursor-pointer p-4 sm:p-5 flex flex-col justify-between min-h-[152px]">
-                <div class="flex items-center justify-between text-xs font-mono-tech">
-                    <span class="step-num font-bold text-[#0071e3] text-base sm:text-lg">02</span>
-                    <span class="step-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                        <i class="fa-solid fa-eye text-xs"></i>
-                    </span>
-                </div>
-                <div class="mt-3">
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">Attend</h3>
-                    <p class="text-xs sm:text-[13px] text-[#424245] font-medium mt-1 leading-snug">OLED eyes orient toward guest with a friendly wink.</p>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div onclick="activateGreetingStep(3)" id="flow-step-3" class="flow-step-card cursor-pointer p-4 sm:p-5 flex flex-col justify-between min-h-[152px]">
-                <div class="flex items-center justify-between text-xs font-mono-tech">
-                    <span class="step-num font-bold text-[#0071e3] text-base sm:text-lg">03</span>
-                    <span class="step-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                        <i class="fa-solid fa-hand text-xs"></i>
-                    </span>
-                </div>
-                <div class="mt-3">
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">Greet</h3>
-                    <p class="text-xs sm:text-[13px] text-[#424245] font-medium mt-1 leading-snug">Welcomes visitor warmly in natural spoken voice.</p>
-                </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div onclick="activateGreetingStep(4)" id="flow-step-4" class="flow-step-card cursor-pointer p-4 sm:p-5 flex flex-col justify-between min-h-[152px]">
-                <div class="flex items-center justify-between text-xs font-mono-tech">
-                    <span class="step-num font-bold text-[#0071e3] text-base sm:text-lg">04</span>
-                    <span class="step-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                        <i class="fa-solid fa-table-cells-large text-xs"></i>
-                    </span>
-                </div>
-                <div class="mt-3">
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">Offer Help</h3>
-                    <p class="text-xs sm:text-[13px] text-[#424245] font-medium mt-1 leading-snug">10" chest kiosk displays campus maps &amp; events.</p>
-                </div>
-            </div>
-
-            <!-- Step 5 -->
-            <div onclick="activateGreetingStep(5)" id="flow-step-5" class="flow-step-card cursor-pointer p-4 sm:p-5 flex flex-col justify-between min-h-[152px]">
-                <div class="flex items-center justify-between text-xs font-mono-tech">
-                    <span class="step-num font-bold text-[#0071e3] text-base sm:text-lg">05</span>
-                    <span class="step-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                        <i class="fa-solid fa-comments text-xs"></i>
-                    </span>
-                </div>
-                <div class="mt-3">
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">Converse</h3>
-                    <p class="text-xs sm:text-[13px] text-[#424245] font-medium mt-1 leading-snug">Answers questions offline via Whisper &amp; M1 LLM.</p>
-                </div>
-            </div>
-
-            <!-- Step 6 -->
-            <div onclick="activateGreetingStep(6)" id="flow-step-6" class="flow-step-card cursor-pointer p-4 sm:p-5 flex flex-col justify-between min-h-[152px]">
-                <div class="flex items-center justify-between text-xs font-mono-tech">
-                    <span class="step-num font-bold text-[#0071e3] text-base sm:text-lg">06</span>
-                    <span class="step-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center">
-                        <i class="fa-solid fa-circle-check text-xs"></i>
-                    </span>
-                </div>
-                <div class="mt-3">
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">Close</h3>
-                    <p class="text-xs sm:text-[13px] text-[#424245] font-medium mt-1 leading-snug">Bids polite farewell and returns to 7W idle standby.</p>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 04: 10-INCH CHEST KIOSK SIMULATOR (iPad Pro Hardware Bezel)    -->
-    <!-- ===================================================================== -->
-    <section id="kiosk-simulator" class="scroll-mt-14 py-12 sm:py-16 lg:py-20 bg-[#f5f5f7] border-t border-black/[0.06]">
-        <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="text-center max-w-2xl mx-auto mb-7 sm:mb-9">
-                <span class="apple-eyebrow">Interactive Chest Kiosk &bull; CYNO-OS</span>
-                <h2 class="apple-section-title text-3xl sm:text-4xl lg:text-[42px] text-[#1d1d1f] mt-1.5">
-                    Touch. Speak. Instantly assisted.
-                </h2>
-                <p class="text-[#6e6e73] text-sm sm:text-base mt-2 leading-relaxed">
-                    Built directly into CYNO BOT's upper torso, the 10-inch capacitive kiosk adapts dynamically between University Reception and Personalized Home modes.
-                </p>
-            </div>
-
-            <!-- Apple Segmented Operating Mode Bar -->
-            <div class="flex justify-center mb-7 overflow-x-auto pb-1">
-                <div class="apple-segmented-bar">
-                    <button onclick="selectOperatingMode('entrance')" id="mode-btn-entrance" class="mode-btn apple-segment-btn is-active">Entrance Mode</button>
-                    <button onclick="selectOperatingMode('ai')" id="mode-btn-ai" class="mode-btn apple-segment-btn">University AI</button>
-                    <button onclick="selectOperatingMode('companion')" id="mode-btn-companion" class="mode-btn apple-segment-btn">Companion</button>
-                    <button onclick="selectOperatingMode('study')" id="mode-btn-study" class="mode-btn apple-segment-btn">Study Hub</button>
-                    <button onclick="selectOperatingMode('smarthome')" id="mode-btn-smarthome" class="mode-btn apple-segment-btn">Smart Home</button>
-                    <button onclick="selectOperatingMode('guardian')" id="mode-btn-guardian" class="mode-btn apple-segment-btn">Guardian</button>
-                </div>
-            </div>
-
-            <!-- Kiosk Simulator + Voice AI Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
-                
-                <!-- Left 7 Cols: iPad Pro Hardware Bezel -->
-                <div class="lg:col-span-7 apple-ipad-bezel flex flex-col">
-                    <div class="apple-ipad-screen flex-1 flex flex-col justify-between p-4 sm:p-6">
-                        
-                        <!-- iPadOS Top Status Bar -->
-                        <div class="flex items-center justify-between border-b border-black/[0.08] pb-3 mb-4 text-xs font-mono-tech text-[#6e6e73]">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-[#30d158]"></span>
-                                <span class="font-bold text-[#1d1d1f] tracking-tight">CYNO-OS 1.0</span>
-                                <span id="kiosk-mode-pill" class="px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[#0071e3] text-[10px] font-semibold">
-                                    ENTRANCE MODE
-                                </span>
-                            </div>
-                            <div class="flex items-center gap-3 text-[11px]">
-                                <span class="hidden sm:inline text-[#86868b]"><i class="fa-brands fa-apple mr-1"></i>M1 Neural Core</span>
-                                <span id="kiosk-clock" class="text-[#1d1d1f] font-semibold">12:00 PM</span>
-                            </div>
-                        </div>
-
-                        <!-- Dynamic Screen Content Container -->
-                        <div id="kiosk-dynamic-screen" class="min-h-[240px] sm:min-h-[270px] flex flex-col justify-center text-[#1d1d1f]">
-                            <!-- Populated by selectOperatingMode() in js/app.js -->
-                        </div>
-
-                        <!-- Bottom iPadOS Dock & Emergency Bar -->
-                        <div class="flex flex-wrap items-center justify-between gap-2.5 pt-3.5 mt-4 border-t border-black/[0.08] text-xs">
-                            <div class="flex items-center gap-2">
-                                <span class="text-[#86868b] text-[11px] font-mono-tech">Voice Output:</span>
-                                <button onclick="triggerQuickGreeting('en')" class="px-3.5 py-1.5 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium text-xs transition cursor-pointer shadow-xs">
-                                    <i class="fa-solid fa-volume-high text-[10px] mr-1"></i>Speak Welcome
-                                </button>
-                            </div>
-
-                            <button onclick="triggerEmergencySOS()" class="px-3.5 py-1.5 rounded-full bg-[#ff375f]/10 hover:bg-[#ff375f]/20 border border-[#ff375f]/30 text-[#d70015] text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer active:scale-95">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                <span>Trigger SOS Hazard Drill</span>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Right 5 Cols: Apple Intelligence / Siri Style Voice AI Card -->
-                <div class="lg:col-span-5 apple-bento-card p-5 sm:p-6 flex flex-col justify-between space-y-4">
-                    <div>
-                        <div class="flex items-center justify-between border-b border-black/[0.07] pb-3.5">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#0071e3] to-[#00d2ff] text-white flex items-center justify-center shadow-sm">
-                                    <i class="fa-solid fa-waveform-lines text-xs"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">On-Device Voice AI</h3>
-                                    <p class="text-[11px] font-mono-tech text-[#86868b]">Whisper STT &bull; Local Ollama LLM</p>
-                                </div>
-                            </div>
-                            <span class="text-[10px] font-mono-tech px-2.5 py-1 rounded-full bg-[#30d158]/15 text-[#1d8338] font-semibold">Offline Ready</span>
-                        </div>
-
-                        <!-- Live Conversation Transcript -->
-                        <div id="chat-log" class="mt-3.5 p-3.5 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] min-h-[135px] max-h-[165px] overflow-y-auto hud-scroll text-xs space-y-2 font-sans text-[#1d1d1f]">
-                            <div class="flex items-start gap-2 text-[#1d1d1f]">
-                                <span class="w-5 h-5 rounded-full bg-[#0071e3] text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5"><i class="fa-solid fa-robot"></i></span>
-                                <span class="bg-white px-3 py-2 rounded-2xl rounded-tl-xs border border-black/[0.06] shadow-2xs leading-relaxed">
-                                    Hello! Welcome to the Computer Science Department at IIT. How can I assist you today?
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Custom Question Input Form -->
-                        <form onsubmit="handleCustomQuestion(event)" class="mt-3 flex items-center gap-2">
-                            <input id="custom-question-input" type="text" placeholder="Ask CYNO BOT anything..." class="flex-1 px-3.5 py-2 rounded-full bg-[#f5f5f7] border border-black/[0.1] text-xs text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] focus:bg-white transition" />
-                            <button type="submit" class="px-4 py-2 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-medium transition cursor-pointer shrink-0">
-                                Ask
-                            </button>
-                        </form>
-
-                        <!-- Quick Inquiry Chips -->
-                        <div class="mt-3.5 space-y-1.5">
-                            <span class="text-[10px] font-mono-tech text-[#86868b] uppercase tracking-wider block font-semibold">Suggested Voice Prompts</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs">
-                                <button onclick="simulateVoiceQuery('Where is Lab 03?')" class="p-2 rounded-xl bg-[#f5f5f7] hover:bg-[#0071e3]/10 hover:text-[#0071e3] border border-black/[0.05] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">"Where is Lab 03?"</button>
-                                <button onclick="simulateVoiceQuery('Who is the module leader?')" class="p-2 rounded-xl bg-[#f5f5f7] hover:bg-[#0071e3]/10 hover:text-[#0071e3] border border-black/[0.05] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">"Who is module leader?"</button>
-                                <button onclick="simulateVoiceQuery('What is the WiFi password?')" class="p-2 rounded-xl bg-[#f5f5f7] hover:bg-[#0071e3]/10 hover:text-[#0071e3] border border-black/[0.05] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">"What is the WiFi?"</button>
-                                <button onclick="simulateVoiceQuery('Tell me about yourself')" class="p-2 rounded-xl bg-[#f5f5f7] hover:bg-[#0071e3]/10 hover:text-[#0071e3] border border-black/[0.05] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">"Tell me about yourself"</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-3 border-t border-black/[0.06] flex items-center justify-between text-[11px] font-mono-tech text-[#86868b]">
-                        <span>Apple Neural Engine (16-Core)</span>
-                        <span class="text-[#1d8338] font-semibold">Response &le; 2.4s</span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 05: APPLE M1 ARCHITECTURE & CINEMA VIDEO WALKTHROUGH (Dark)   -->
-    <!-- ===================================================================== -->
-    <section id="architecture" class="scroll-mt-14 apple-dark-section py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-[1160px] mx-auto">
-            
-            <!-- Section Header -->
-            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                <span class="apple-eyebrow apple-eyebrow-dark">System Architecture</span>
-                <h2 class="apple-section-title text-3xl sm:text-5xl apple-gradient-text-dark mt-2">
-                    Four decoupled layers.<br />One unified neural core.
-                </h2>
-                <p class="text-[#a1a1a6] text-sm sm:text-base mt-3 leading-relaxed">
-                    Powered by an internal <strong class="text-white font-semibold">Apple Mac mini (M1)</strong> executing Whisper speech recognition and Ollama local LLMs at 7W idle — 100% private and independent of cloud APIs.
-                </p>
-            </div>
-
-            <!-- 4-Layer Architecture Dark Bento Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                
-                <!-- Layer 01 -->
-                <div class="p-5 sm:p-6 apple-bento-card-dark flex flex-col justify-between">
-                    <div>
-                        <div class="text-[11px] font-mono-tech text-[#2997ff] font-bold tracking-wider">LAYER 01 &bull; INPUT</div>
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-white mt-1.5">Sensing Layer</h3>
-                        <p class="text-xs text-[#a1a1a6] mt-1 leading-relaxed">Gathers optical, acoustic, and spatial telemetry in real time.</p>
-                        
-                        <ul class="mt-4 space-y-2 text-xs text-[#f5f5f7] font-mono-tech">
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> HD Vision Camera (Head)</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> Beamforming Mic Array</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> Ultrasonic Radar (1.5–3m)</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> MQ2 Gas &amp; Flame Sensors</li>
-                        </ul>
-                    </div>
-                    <div class="mt-5 pt-3.5 border-t border-white/10 text-[11px] font-mono-tech text-[#86868b]">
-                        OpenCV &bull; MediaPipe Vision
-                    </div>
-                </div>
-
-                <!-- Layer 02: Highlighted Apple M1 Core -->
-                <div class="p-5 sm:p-6 rounded-[24px] bg-gradient-to-b from-[#1d283a] via-[#141824] to-[#121318] border border-[#2997ff]/50 shadow-[0_16px_40px_rgba(0,113,227,0.2)] flex flex-col justify-between relative overflow-hidden">
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-mono-tech text-[#64d2ff] font-bold tracking-wider">LAYER 02 &bull; SILICON BRAIN</span>
-                            <i class="fa-brands fa-apple text-white text-base"></i>
-                        </div>
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-white mt-1.5">Apple Mac mini M1</h3>
-                        <p class="text-xs text-[#d2d2d7] mt-1 leading-relaxed">8-Core CPU &amp; 16-Core Neural Engine executing local AI.</p>
-                        
-                        <ul class="mt-4 space-y-2 text-xs text-white font-mono-tech">
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#64d2ff]"></span> Whisper Speech-to-Text</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#64d2ff]"></span> Ollama Quantized LLM</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#64d2ff]"></span> SQLite Knowledge Store</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#64d2ff]"></span> Python &bull; FastAPI &bull; MQTT</li>
-                        </ul>
-                    </div>
-                    <div class="mt-5 pt-3.5 border-t border-white/15 text-[11px] font-mono-tech flex items-center justify-between">
-                        <span class="text-[#64d2ff] font-semibold">7W Active Idle</span>
-                        <span class="text-[#30d158] font-semibold">100% Private</span>
-                    </div>
-                </div>
-
-                <!-- Layer 03 -->
-                <div class="p-5 sm:p-6 apple-bento-card-dark flex flex-col justify-between">
-                    <div>
-                        <div class="text-[11px] font-mono-tech text-[#2997ff] font-bold tracking-wider">LAYER 03 &bull; BRIDGE</div>
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-white mt-1.5">Hardware Control</h3>
-                        <p class="text-xs text-[#a1a1a6] mt-1 leading-relaxed">Deterministic microcontroller bridge over USB serial.</p>
-                        
-                        <ul class="mt-4 space-y-2 text-xs text-[#f5f5f7] font-mono-tech">
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> Dual ESP32 Controllers</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> Sensor Multiplexer Bus</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> OLED &amp; Halo LED Drivers</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> Watchdog Safety Cut-off</li>
-                        </ul>
-                    </div>
-                    <div class="mt-5 pt-3.5 border-t border-white/10 text-[11px] font-mono-tech text-[#86868b]">
-                        Real-Time C++ Firmware
-                    </div>
-                </div>
-
-                <!-- Layer 04 -->
-                <div class="p-5 sm:p-6 apple-bento-card-dark flex flex-col justify-between">
-                    <div>
-                        <div class="text-[11px] font-mono-tech text-[#2997ff] font-bold tracking-wider">LAYER 04 &bull; OUTPUT</div>
-                        <h3 class="font-display font-bold text-lg sm:text-xl text-white mt-1.5">Interaction Layer</h3>
-                        <p class="text-xs text-[#a1a1a6] mt-1 leading-relaxed">Expressive audiovisual HRI with zero pinch points.</p>
-                        
-                        <ul class="mt-4 space-y-2 text-xs text-[#f5f5f7] font-mono-tech">
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> Animated OLED Eye Matrix</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> 10" Capacitive Touch Kiosk</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> 2&times;5W Stereo Vocal Pods</li>
-                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#2997ff]"></span> Ear &amp; Torso Cyan Lighting</li>
-                        </ul>
-                    </div>
-                    <div class="mt-5 pt-3.5 border-t border-white/10 text-[11px] font-mono-tech text-[#86868b]">
-                        Safe Public Articulation
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Cinema Video Walkthrough Showcase -->
-            <div class="mt-12 sm:mt-14 pt-10 border-t border-white/10">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-                    <div>
-                        <span class="apple-eyebrow apple-eyebrow-dark">Engineering Film</span>
-                        <h3 class="font-display font-bold text-2xl sm:text-3xl text-white mt-1 tracking-tight">
-                            Hardwired for intelligence. Watch the walkthrough.
-                        </h3>
-                        <p class="text-[#a1a1a6] text-xs sm:text-sm mt-1.5 max-w-2xl">
-                            Go inside CYNO BOT's internal wiring loom, Apple Mac mini M1 integration, and live sensory demonstrations.
-                        </p>
-                    </div>
-                    
-                    <a href="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="apple-btn-glass-dark text-xs px-4 py-2 self-start md:self-auto">
-                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-[#2997ff]"></i>
-                        <span>Open Stream in Drive</span>
-                    </a>
-                </div>
-
-                <!-- Pro Display XDR Video Bezel (Sized to fit standard laptop viewport) -->
-                <div class="relative w-full max-w-4xl mx-auto rounded-[26px] p-2.5 sm:p-3.5 bg-[#141417] border border-white/15 shadow-[0_24px_64px_rgba(0,0,0,0.85)] overflow-hidden">
-                    
-                    <div class="flex items-center justify-between px-3 py-1.5 border-b border-white/10 font-mono-tech text-[11px] text-[#86868b] mb-2.5">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
-                            <span class="ml-2 text-[#f5f5f7] font-medium hidden sm:inline">CYNO_BOT // SYSTEM_ARCHITECTURE_WALKTHROUGH.MP4</span>
-                            <span class="ml-2 text-[#f5f5f7] font-medium sm:hidden">ARCHITECTURE_FILM.MP4</span>
-                        </div>
-                        <span class="text-[#a1a1a6]">09:07 &bull; HD 1080p</span>
-                    </div>
-
-                    <!-- 16:9 Video Canvas -->
-                    <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black flex items-center justify-center">
-                        <!-- Interactive Poster Launcher -->
-                        <div id="arch-video-poster-wrapper" class="absolute inset-0 z-10 cursor-pointer group flex items-center justify-center" onclick="playArchVideo()">
-                            <img src="assets/images/architecture-video-poster.jpg" 
-                                 alt="CYNO BOT System Architecture Walkthrough" 
-                                 class="w-full h-full object-cover brightness-[0.82] group-hover:brightness-95 group-hover:scale-[1.02] transition duration-700 select-none" />
-                            
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                            <!-- Apple TV+ Style Glass Play Button -->
-                            <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 backdrop-blur-xl text-black flex items-center justify-center pl-1 shadow-2xl group-hover:scale-110 group-active:scale-95 transition-all duration-300">
-                                <i class="fa-solid fa-play text-xl sm:text-2xl text-[#0071e3]"></i>
-                            </div>
-
-                            <!-- Bottom Caption Pill -->
-                            <div class="absolute bottom-3 left-3 sm:bottom-5 sm:left-5 flex items-center gap-2 text-white font-mono-tech text-[11px] sm:text-xs bg-black/75 px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md">
-                                <span class="w-2 h-2 rounded-full bg-[#30d158] animate-pulse"></span>
-                                <span>Watch System Architecture Breakdown (09:07)</span>
-                            </div>
-                        </div>
-
-                        <!-- Google Drive Stream Iframe -->
-                        <iframe id="arch-video-drive-frame"
-                                class="w-full h-full border-0 bg-black"
-                                src=""
-                                data-src="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/preview"
-                                allow="autoplay; encrypted-media; fullscreen"
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 06: CRAFTSMANSHIP & EVOLUTION ROADMAP (Apple Light)           -->
-    <!-- ===================================================================== -->
-    <section id="fabrication" class="scroll-mt-14 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 max-w-[1160px] mx-auto border-b border-black/[0.06]">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-8 items-stretch">
-            
-            <!-- Left 6 Cols: Hybrid Construction Strategy -->
-            <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
-                <div>
-                    <span class="apple-eyebrow">Materials &amp; Modular Assembly</span>
-                    <h2 class="apple-section-title text-3xl sm:text-4xl lg:text-[42px] text-[#1d1d1f] mt-1.5">
-                        Crafted from the inside out.
-                    </h2>
-                    <p class="text-[#6e6e73] text-sm sm:text-base mt-2 leading-relaxed">
-                        Combining a welded structural steel skeleton, thermoformed PVC armor shells, and precision 3D-printed joint bezels for rapid field deployment.
-                    </p>
-
-                    <div class="flex flex-wrap gap-2 mt-4 text-xs font-mono-tech">
-                        <span class="px-3 py-1 rounded-full bg-[#f5f5f7] border border-black/[0.06] text-[#1d1d1f] font-semibold">1.67m Monolithic Scale</span>
-                        <span class="px-3 py-1 rounded-full bg-[#f5f5f7] border border-black/[0.06] text-[#1d1d1f] font-semibold">6 Detachable Modules</span>
-                        <span class="px-3 py-1 rounded-full bg-[#30d158]/15 text-[#1d8338] font-semibold">3-Min Tool-Free Lock</span>
-                    </div>
-                </div>
-
-                <!-- 3 Fabrication Feature Cards -->
-                <div class="space-y-3.5">
-                    <div class="p-4 sm:p-5 apple-bento-card flex gap-3.5 items-start">
-                        <div class="w-10 h-10 rounded-xl bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center shrink-0 text-sm">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">1. Internal RHS Steel Skeleton</h4>
-                            <p class="text-xs sm:text-sm text-[#6e6e73] mt-0.5 leading-relaxed">
-                                A welded 25&times;25mm structural spine anchored to a heavy anti-tip base provides center-of-gravity stability and shock-isolated housing for the Apple Mac mini M1.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 sm:p-5 apple-bento-card flex gap-3.5 items-start">
-                        <div class="w-10 h-10 rounded-xl bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center shrink-0 text-sm">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">2. Thermoformed PVC + 3D Printing</h4>
-                            <p class="text-xs sm:text-sm text-[#6e6e73] mt-0.5 leading-relaxed">
-                                Heat-formed PVC sheets produce smooth, impact-resistant armor plates, while intricate camera visors and acoustic ear pods are precision 3D-printed in PETG/PLA.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 sm:p-5 apple-bento-card flex gap-3.5 items-start">
-                        <div class="w-10 h-10 rounded-xl bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center shrink-0 text-sm">
-                            <i class="fa-solid fa-boxes-packing"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">3. 6-Part Modular Architecture</h4>
-                            <p class="text-xs sm:text-sm text-[#6e6e73] mt-0.5 leading-relaxed">
-                                Detaches cleanly into Head, Torso, Left/Right Arms, Legs, and Base in under 3 minutes for effortless single-vehicle transport and maintenance.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right 6 Cols: 4-Phase Evolution Roadmap -->
-            <div class="lg:col-span-6 apple-bento-card p-6 sm:p-8 flex flex-col justify-between">
-                <div class="flex items-center justify-between border-b border-black/[0.07] pb-4 mb-5">
-                    <div>
-                        <span class="apple-eyebrow">Long-Term Trajectory</span>
-                        <h3 class="font-display font-bold text-xl sm:text-2xl text-[#1d1d1f] tracking-tight mt-0.5">Humanoid Evolution Roadmap</h3>
-                    </div>
-                    <span class="text-xs font-mono-tech text-[#0071e3] bg-[#0071e3]/10 px-3 py-1 rounded-full font-semibold">4 Phases</span>
-                </div>
-
-                <!-- Timeline Track -->
-                <div class="relative pl-6 border-l-2 border-[#0071e3]/25 space-y-5">
-                    
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#0071e3] ring-4 ring-[#0071e3]/20"></span>
-                        <span class="text-[#0071e3] font-mono-tech font-bold text-[11px] uppercase tracking-wider">Phase 01 &bull; Current Release</span>
-                        <h4 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-0.5">1.67m Stationary Assistant</h4>
-                        <p class="text-xs sm:text-sm text-[#6e6e73] mt-0.5 leading-relaxed">
-                            Weighted anti-tip steel base, animated OLED gaze matrix, 10" capacitive kiosk, internal Apple M1 brain, and dual Entrance/Home profiles.
-                        </p>
-                    </div>
-
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#d2d2d7]"></span>
-                        <span class="text-[#86868b] font-mono-tech font-semibold text-[11px] uppercase tracking-wider">Phase 02 &bull; Wheeled Mobility</span>
-                        <h4 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-0.5">Omnidirectional Campus Escort</h4>
-                        <p class="text-xs sm:text-sm text-[#6e6e73] mt-0.5 leading-relaxed">
-                            LiDAR-guided holonomic wheeled base for autonomous hallway escorting, alongside a compact desktop companion edition.
-                        </p>
-                    </div>
-
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#d2d2d7]"></span>
-                        <span class="text-[#86868b] font-mono-tech font-semibold text-[11px] uppercase tracking-wider">Phase 03 &bull; Bipedal Gait</span>
-                        <h4 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-0.5">Dynamic Humanoid Locomotion</h4>
-                        <p class="text-xs sm:text-sm text-[#6e6e73] mt-0.5 leading-relaxed">
-                            12-DOF bipedal leg actuators with closed-loop IMU balance control for ascending stairs and navigating uneven terrain.
-                        </p>
-                    </div>
-
-                    <div class="relative">
-                        <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#d2d2d7]"></span>
-                        <span class="text-[#86868b] font-mono-tech font-semibold text-[11px] uppercase tracking-wider">Phase 04 &bull; Autonomous Swarm</span>
-                        <h4 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-0.5">Multi-Agent Fleet Coordination</h4>
-                        <p class="text-xs sm:text-sm text-[#6e6e73] mt-0.5 leading-relaxed">
-                            Centralized ROS 2 fleet dispatch synchronizing multiple CYNO BOT units across university campuses, hospitals, and airports.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="mt-6 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs">
-                    <span class="text-[#86868b] font-mono-tech">Explore 6-part exploded geometry</span>
-                    <a href="studio.html" class="apple-link-chevron text-xs">
-                        <span>Open 3D CAD Studio</span>
-                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 07: TEAM CYNOCOR & ACADEMIC LEADERSHIP                        -->
-    <!-- ===================================================================== -->
-    <section id="team" class="scroll-mt-14 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 max-w-[1160px] mx-auto">
-        
-        <div class="text-center max-w-2xl mx-auto mb-10">
-            <span class="apple-eyebrow">Engineering &amp; Leadership</span>
-            <h2 class="apple-section-title text-3xl sm:text-4xl lg:text-[42px] text-[#1d1d1f] mt-1.5">
-                The minds behind CYNOCOR.
-            </h2>
-            <p class="text-[#6e6e73] text-sm sm:text-base mt-2 leading-relaxed">
-                Group G 40, Informatics Institute of Technology (IIT) Sri Lanka. Supervised by <strong class="text-[#1d1d1f] font-semibold">Mr. Bhanu Athuraliya</strong> (Module Leader).
+            <p class="hero-hint">
+                Move your pointer: it looks at you.<br>
+                <kbd>Click</kbd> to wave · <kbd>Drag</kbd> to turn
             </p>
         </div>
-
-        <!-- 5 Engineering Lead Cards -->
-        <div class="grid grid-cols-1 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
-            
-            <!-- Chamupathi -->
-            <div class="p-3.5 sm:p-4 apple-bento-card group text-center flex flex-col justify-between">
-                <div>
-                    <div class="relative w-full aspect-[4/4.3] rounded-2xl overflow-hidden bg-[#ececef] border border-black/[0.06] shadow-xs">
-                        <img src="assets/images/team/chamupathi.jpg?v=2" alt="Chamupathi — Project Lead &amp; Architecture" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                        <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-[10px] font-mono-tech font-bold text-white border border-white/15">CH</span>
-                    </div>
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-3.5 tracking-tight">Chamupathi</h3>
-                    <span class="inline-block text-[11px] font-mono-tech text-[#0071e3] font-semibold mt-0.5">
-                        Project Lead &amp; Architecture
-                    </span>
-                    <p class="text-xs text-[#6e6e73] mt-1.5 leading-relaxed">
-                        System integration, 4-layer architecture design, and sprint delivery orchestration.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Chanul -->
-            <div class="p-3.5 sm:p-4 apple-bento-card group text-center flex flex-col justify-between">
-                <div>
-                    <div class="relative w-full aspect-[4/4.3] rounded-2xl overflow-hidden bg-[#ececef] border border-black/[0.06] shadow-xs">
-                        <img src="assets/images/team/chanul.jpg?v=2" alt="Chanul — AI &amp; Voice Intelligence" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                        <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-[10px] font-mono-tech font-bold text-white border border-white/15">CN</span>
-                    </div>
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-3.5 tracking-tight">Chanul</h3>
-                    <span class="inline-block text-[11px] font-mono-tech text-[#0071e3] font-semibold mt-0.5">
-                        AI &amp; Voice Intelligence
-                    </span>
-                    <p class="text-xs text-[#6e6e73] mt-1.5 leading-relaxed">
-                        Offline Whisper speech pipeline, Ollama local LLM, and SQLite knowledge store.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Ravindu -->
-            <div class="p-3.5 sm:p-4 apple-bento-card group text-center flex flex-col justify-between">
-                <div>
-                    <div class="relative w-full aspect-[4/4.3] rounded-2xl overflow-hidden bg-[#ececef] border border-black/[0.06] shadow-xs">
-                        <img src="assets/images/team/ravindu.jpg?v=2" alt="Ravindu — Vision &amp; Kiosk Experience" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                        <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-[10px] font-mono-tech font-bold text-white border border-white/15">RV</span>
-                    </div>
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-3.5 tracking-tight">Ravindu</h3>
-                    <span class="inline-block text-[11px] font-mono-tech text-[#0071e3] font-semibold mt-0.5">
-                        Vision &amp; Kiosk Experience
-                    </span>
-                    <p class="text-xs text-[#6e6e73] mt-1.5 leading-relaxed">
-                        OpenCV/MediaPipe gaze tracking and 10" capacitive touchscreen kiosk UI.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Ashendra -->
-            <div class="p-3.5 sm:p-4 apple-bento-card group text-center flex flex-col justify-between">
-                <div>
-                    <div class="relative w-full aspect-[4/4.3] rounded-2xl overflow-hidden bg-[#ececef] border border-black/[0.06] shadow-xs">
-                        <img src="assets/images/team/ashendra.jpg?v=2" alt="Ashendra — Mechanical &amp; CAD Design" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                        <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-[10px] font-mono-tech font-bold text-white border border-white/15">AS</span>
-                    </div>
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-3.5 tracking-tight">Ashendra</h3>
-                    <span class="inline-block text-[11px] font-mono-tech text-[#0071e3] font-semibold mt-0.5">
-                        Mechanical &amp; CAD Design
-                    </span>
-                    <p class="text-xs text-[#6e6e73] mt-1.5 leading-relaxed">
-                        RHS steel skeleton, thermoformed PVC armor shells, and 3D-printed joint bezels.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Amanya -->
-            <div class="p-3.5 sm:p-4 apple-bento-card group text-center flex flex-col justify-between min-[420px]:col-span-2 sm:col-span-1 lg:col-span-1">
-                <div>
-                    <div class="relative w-full aspect-[4/4.3] rounded-2xl overflow-hidden bg-[#ececef] border border-black/[0.06] shadow-xs">
-                        <img src="assets/images/team/amanya.jpg?v=2" alt="Amanya — Electronics &amp; Control" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                        <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-[10px] font-mono-tech font-bold text-white border border-white/15">AM</span>
-                    </div>
-                    <h3 class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] mt-3.5 tracking-tight">Amanya</h3>
-                    <span class="inline-block text-[11px] font-mono-tech text-[#0071e3] font-semibold mt-0.5">
-                        Electronics &amp; Control
-                    </span>
-                    <p class="text-xs text-[#6e6e73] mt-1.5 leading-relaxed">
-                        Dual ESP32 firmware, animated OLED eye drivers, and hardware power safety.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Academic Supervision Banner -->
-        <div class="mt-6 p-5 sm:p-6 apple-bento-card-alt flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div class="flex flex-col sm:flex-row items-center gap-3.5">
-                <div class="w-11 h-11 rounded-2xl bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center shrink-0">
-                    <i class="fa-solid fa-graduation-cap text-base"></i>
-                </div>
-                <div>
-                    <div class="text-[11px] font-mono-tech uppercase tracking-wider text-[#86868b] font-semibold">Academic Supervision &bull; ATP 2026</div>
-                    <div class="text-sm sm:text-base font-display font-bold text-[#1d1d1f] mt-0.5">Mr. Bhanu Athuraliya &bull; Module Leader</div>
-                </div>
-            </div>
-            <span class="text-xs font-mono-tech text-[#0071e3] font-semibold bg-white px-4 py-2 rounded-full border border-black/[0.08] shadow-2xs">
-                Informatics Institute of Technology (IIT)
-            </span>
-        </div>
-
     </section>
 
-    <!-- ===================================================================== -->
-    <!-- APPLE FLAGSHIP FOOTER (Fine Print + Multi-Column Directory)           -->
-    <!-- ===================================================================== -->
-    <footer class="bg-[#f5f5f7] border-t border-black/[0.08] text-xs text-[#6e6e73] py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-[1024px] mx-auto space-y-6">
-            
-            <!-- Fine Print Footnotes -->
-            <div class="space-y-2 text-[11px] text-[#86868b] leading-relaxed border-b border-black/[0.08] pb-5">
-                <p>
-                    1. CYNO BOT is an academic digital twin and physical humanoid prototype developed by CYNOCOR (Group G 40) for the Advanced Technology Project (ATP) module at the Informatics Institute of Technology (IIT), Colombo, Sri Lanka.
-                </p>
-                <p>
-                    2. Idle power consumption (~7W) and peak compute metrics refer to the internal Apple Mac mini (M1) host processor executing quantized local models. Apple, Mac mini, and iPadOS are trademarks of Apple Inc.
-                </p>
-            </div>
-
-            <!-- Breadcrumb Trail -->
-            <div class="flex items-center gap-2 text-xs text-[#6e6e73]">
-                <img src="assets/images/cynocor-logo.png" alt="CYNOCOR" class="w-4 h-4 object-contain" />
-                <span class="text-[#1d1d1f] font-semibold">CYNOCOR</span>
-                <i class="fa-solid fa-chevron-right text-[9px] text-[#86868b]"></i>
-                <span>Robotics</span>
-                <i class="fa-solid fa-chevron-right text-[9px] text-[#86868b]"></i>
-                <span class="text-[#1d1d1f] font-medium">CYNO BOT 1.67m Pro</span>
-            </div>
-
-            <!-- Directory Columns -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-xs">
-                <div>
-                    <h4 class="font-semibold text-[#1d1d1f] mb-3">Explore CYNO BOT</h4>
-                    <ul class="space-y-2 text-[#6e6e73]">
-                        <li><a href="#cynobot" class="hover:text-[#1d1d1f] hover:underline transition">Keynote Overview</a></li>
-                        <li><a href="#pillars" class="hover:text-[#1d1d1f] hover:underline transition">Design Philosophy</a></li>
-                        <li><a href="#specs" class="hover:text-[#1d1d1f] hover:underline transition">Pro Specifications</a></li>
-                        <li><a href="studio.html" class="text-[#0071e3] font-medium hover:underline flex items-center gap-1"><span>3D CAD Studio</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></li>
-                    </ul>
+    <!-- ============================== FIGURES ============================== -->
+    <section class="on-ink" aria-label="Key figures">
+        <div class="wrap">
+            <div class="figures">
+                <div class="figure" data-reveal style="--d:0">
+                    <div class="num"><span data-count="1.67" data-decimals="2">1.67</span><small>m</small></div>
+                    <div class="label">Standing height, for eye-level conversation</div>
                 </div>
-                <div>
-                    <h4 class="font-semibold text-[#1d1d1f] mb-3">Interaction &amp; OS</h4>
-                    <ul class="space-y-2 text-[#6e6e73]">
-                        <li><a href="#greeting-flow" class="hover:text-[#1d1d1f] hover:underline transition">6-Step Greeting Flow</a></li>
-                        <li><a href="#kiosk-simulator" class="hover:text-[#1d1d1f] hover:underline transition">10" Kiosk Simulator</a></li>
-                        <li><a href="#kiosk-simulator" class="hover:text-[#1d1d1f] hover:underline transition">Offline Voice AI</a></li>
-                        <li><a href="#kiosk-simulator" class="hover:text-[#1d1d1f] hover:underline transition">Guardian Safety Mode</a></li>
-                    </ul>
+                <div class="figure" data-reveal style="--d:1">
+                    <div class="num"><span data-count="10">10</span><small>in</small></div>
+                    <div class="label">Capacitive touchscreen in the chest</div>
                 </div>
-                <div>
-                    <h4 class="font-semibold text-[#1d1d1f] mb-3">Engineering</h4>
-                    <ul class="space-y-2 text-[#6e6e73]">
-                        <li><a href="#architecture" class="hover:text-[#1d1d1f] hover:underline transition">4-Layer Architecture</a></li>
-                        <li><a href="#architecture" class="hover:text-[#1d1d1f] hover:underline transition">Apple Mac mini M1 Core</a></li>
-                        <li><a href="#fabrication" class="hover:text-[#1d1d1f] hover:underline transition">Steel &amp; PVC Fabrication</a></li>
-                        <li><a href="#fabrication" class="hover:text-[#1d1d1f] hover:underline transition">Evolution Roadmap</a></li>
-                    </ul>
+                <div class="figure" data-reveal style="--d:2">
+                    <div class="num"><span data-count="6">6</span><small>modules</small></div>
+                    <div class="label">Detachable sections for transport and repair</div>
                 </div>
-                <div>
-                    <h4 class="font-semibold text-[#1d1d1f] mb-3">Academic Team</h4>
-                    <ul class="space-y-2 text-[#6e6e73]">
-                        <li><a href="#team" class="hover:text-[#1d1d1f] hover:underline transition">Team CYNOCOR (G 40)</a></li>
-                        <li><a href="https://cynocor.com.lk" target="_blank" rel="noopener noreferrer" class="hover:text-[#0071e3] hover:underline transition flex items-center gap-1"><span>cynocor.com.lk</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></li>
-                        <li><span class="text-[#86868b]">Supervisor: Mr. Bhanu Athuraliya</span></li>
-                        <li><span class="text-[#86868b]">IIT Sri Lanka (2026)</span></li>
-                    </ul>
+                <div class="figure" data-reveal style="--d:3">
+                    <div class="num"><span data-count="7">7</span><small>W</small></div>
+                    <div class="label">Idle draw of the Mac mini (M1) inside the torso</div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Bottom Legal & Status Bar -->
-            <div class="pt-6 border-t border-black/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#86868b]">
+    <!-- ============================== PRINCIPLES ============================== -->
+    <section id="pillars" class="section">
+        <div class="wrap">
+            <div class="section-head split">
                 <div>
-                    Copyright &copy; <span id="copyright-year">2026</span> CYNOCOR (ATP Group G 40). Informatics Institute of Technology. All rights reserved.
+                    <span class="eyebrow" data-reveal>01 · Principles</span>
+                    <h2 class="h-section" style="margin-top:16px;--d:1" data-reveal>Built to stand in a busy foyer. <em>Safely, all day.</em></h2>
                 </div>
+                <p class="lede" data-reveal style="--d:2">A robot that shares space with people has three jobs: be useful, never hurt anyone, and be obvious to use from the first hello.</p>
+            </div>
 
-                <div class="flex items-center gap-4">
-                    <span class="inline-flex items-center gap-1.5 text-[#1d8338] font-medium">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#30d158]"></span>
-                        <span>All Systems Operational</span>
-                    </span>
-                    <a href="#cynobot" class="text-[#1d1d1f] hover:text-[#0071e3] font-medium transition">
-                        Back to top &uarr;
-                    </a>
+            <div class="principles">
+                <article class="principle" data-reveal>
+                    <span class="idx">01 / Capable</span>
+                    <h3>Full-size presence</h3>
+                    <p>At 1.67 m it meets visitors at eye level. Inside the torso, an Apple Mac mini (M1) runs the speech and language models, drawing about 7 W at idle.</p>
+                    <div class="tags"><span class="tag">6 modules</span><span class="tag">Mac mini M1</span></div>
+                </article>
+                <article class="principle" data-reveal>
+                    <span class="idx">02 / Safe</span>
+                    <h3>No pinch points</h3>
+                    <p>Thermoformed PVC panels over a welded 25 × 25 mm steel frame, bolted to a heavy anti-tip base. A hardware E-stop cuts power when needed.</p>
+                    <div class="tags"><span class="tag">520 × 440 mm base</span><span class="tag">E-stop</span></div>
+                </article>
+                <article class="principle" data-reveal>
+                    <span class="idx">03 / Intuitive</span>
+                    <h3>Talk or tap</h3>
+                    <p>Whisper turns speech into text and a local Ollama model answers, so questions stay on the device. Animated eyes and the chest screen show what it's doing.</p>
+                    <div class="tags"><span class="tag">Whisper</span><span class="tag">Ollama</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== SPECS ============================== -->
+    <section id="specs" class="section bg-paper">
+        <div class="wrap">
+            <div class="section-head split">
+                <div>
+                    <span class="eyebrow" data-reveal>02 · Specifications</span>
+                    <h2 class="h-section" style="margin-top:16px" data-reveal>Every part, <em>on one sheet.</em></h2>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start" data-reveal>
+                    <p class="lede">Each subsystem is designed for an 8-hour shift at a university reception desk.</p>
+                    <div class="seg scroll-x" role="tablist" aria-label="Filter specifications" id="spec-filter">
+                        <button role="tab" aria-selected="true" class="is-active" data-filter="all">All</button>
+                        <button role="tab" aria-selected="false" data-filter="compute">Compute</button>
+                        <button role="tab" aria-selected="false" data-filter="physical">Body</button>
+                        <button role="tab" aria-selected="false" data-filter="sensing">Sensing</button>
+                        <button role="tab" aria-selected="false" data-filter="interaction">Display</button>
+                    </div>
                 </div>
             </div>
 
+            <div class="spec-sheet" id="specs-grid">
+                <section class="spec-block" data-spec-cat="compute" data-reveal>
+                    <header><h3>Compute</h3><span>A</span></header>
+                    <dl>
+                        <div class="spec-row"><dt>Host computer</dt><dd>Mac mini (M1)</dd></div>
+                        <div class="spec-row"><dt>Neural Engine</dt><dd>16-core, 11 TOPS</dd></div>
+                        <div class="spec-row"><dt>Speech to text</dt><dd>Whisper base</dd></div>
+                        <div class="spec-row"><dt>Language model</dt><dd>Ollama · Qwen 1.5B</dd></div>
+                        <div class="spec-row"><dt>Microcontrollers</dt><dd>2 × ESP32 over USB</dd></div>
+                    </dl>
+                    <div class="spec-foot"><span>Idle 7 W</span><span>Peak 39 W</span></div>
+                </section>
+
+                <section class="spec-block" data-spec-cat="physical" data-reveal style="--d:1">
+                    <header><h3>Body</h3><span>B</span></header>
+                    <dl>
+                        <div class="spec-row"><dt>Standing height</dt><dd>1,670 mm</dd></div>
+                        <div class="spec-row"><dt>Frame</dt><dd>25 × 25 mm RHS steel</dd></div>
+                        <div class="spec-row"><dt>Outer panels</dt><dd>Thermoformed PVC</dd></div>
+                        <div class="spec-row"><dt>Joint bezels</dt><dd>PETG / PLA, 3D printed</dd></div>
+                        <div class="spec-row"><dt>Layout</dt><dd>6 detachable modules</dd></div>
+                    </dl>
+                    <div class="spec-foot"><span>Base 520 × 440 mm</span><span>Anti-tip</span></div>
+                </section>
+
+                <section class="spec-block" data-spec-cat="sensing" data-reveal>
+                    <header><h3>Sensing</h3><span>C</span></header>
+                    <dl>
+                        <div class="spec-row"><dt>Camera</dt><dd>1080p, 60 fps</dd></div>
+                        <div class="spec-row"><dt>Presence detection</dt><dd>1.5 – 3.0 m zone</dd></div>
+                        <div class="spec-row"><dt>Hazard sensors</dt><dd>IR flame + MQ2 gas</dd></div>
+                        <div class="spec-row"><dt>Vision software</dt><dd>OpenCV + MediaPipe</dd></div>
+                        <div class="spec-row"><dt>Face tracking</dt><dd>468 landmarks</dd></div>
+                    </dl>
+                    <div class="spec-foot"><span>Dual microphone array</span><span>Beamforming</span></div>
+                </section>
+
+                <section class="spec-block" data-spec-cat="interaction" data-reveal style="--d:1">
+                    <header><h3>Display &amp; audio</h3><span>D</span></header>
+                    <dl>
+                        <div class="spec-row"><dt>Chest screen</dt><dd>10" IPS, capacitive</dd></div>
+                        <div class="spec-row"><dt>Eyes</dt><dd>2 animated OLEDs</dd></div>
+                        <div class="spec-row"><dt>Speakers</dt><dd>2 × 5 W stereo</dd></div>
+                        <div class="spec-row"><dt>Accent lighting</dt><dd>Cyan halo rings</dd></div>
+                        <div class="spec-row"><dt>Hands</dt><dd>Fixed, no pinch points</dd></div>
+                    </dl>
+                    <div class="spec-foot"><span>Reply target ≤ 2.4 s</span><span>Spoken replies</span></div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== GREETING FLOW ============================== -->
+    <section id="greeting-flow" class="section">
+        <div class="wrap">
+            <div class="section-head split">
+                <div>
+                    <span class="eyebrow" data-reveal>03 · Greeting</span>
+                    <h2 class="h-section" style="margin-top:16px" data-reveal>From “someone's here” <em>to “goodbye” in six steps.</em></h2>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start" data-reveal>
+                    <p class="lede">Pick a step, or play the whole sequence. Your browser will read each step aloud.</p>
+                    <button onclick="playFullGreetingSequence()" class="btn btn-ink" id="flow-play">
+                        <i class="fa-solid fa-play" style="font-size:11px"></i><span>Play all six</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flow-track" aria-hidden="true"><div class="fill" id="flow-fill"></div></div>
+            <div class="flow-steps" role="list">
+                <button role="listitem" onclick="activateGreetingStep(1)" id="flow-step-1" class="flow-step-card active-step" data-reveal>
+                    <span class="top"><span class="step-num">01</span><span class="step-icon is-on"><i class="fa-solid fa-satellite-dish"></i></span></span>
+                    <span><h3>Detect</h3><p>Ultrasonic sensing notices a visitor 1.5–3.0 m away.</p></span>
+                </button>
+                <button role="listitem" onclick="activateGreetingStep(2)" id="flow-step-2" class="flow-step-card" data-reveal style="--d:1">
+                    <span class="top"><span class="step-num">02</span><span class="step-icon"><i class="fa-solid fa-eye"></i></span></span>
+                    <span><h3>Attend</h3><p>The OLED eyes turn toward the guest and wink.</p></span>
+                </button>
+                <button role="listitem" onclick="activateGreetingStep(3)" id="flow-step-3" class="flow-step-card" data-reveal style="--d:2">
+                    <span class="top"><span class="step-num">03</span><span class="step-icon"><i class="fa-solid fa-hand"></i></span></span>
+                    <span><h3>Greet</h3><p>Says hello in a natural speaking voice.</p></span>
+                </button>
+                <button role="listitem" onclick="activateGreetingStep(4)" id="flow-step-4" class="flow-step-card" data-reveal style="--d:3">
+                    <span class="top"><span class="step-num">04</span><span class="step-icon"><i class="fa-solid fa-table-cells-large"></i></span></span>
+                    <span><h3>Offer help</h3><p>The chest screen shows campus maps and events.</p></span>
+                </button>
+                <button role="listitem" onclick="activateGreetingStep(5)" id="flow-step-5" class="flow-step-card" data-reveal style="--d:4">
+                    <span class="top"><span class="step-num">05</span><span class="step-icon"><i class="fa-solid fa-comments"></i></span></span>
+                    <span><h3>Converse</h3><p>Answers questions on-device with Whisper and a local LLM.</p></span>
+                </button>
+                <button role="listitem" onclick="activateGreetingStep(6)" id="flow-step-6" class="flow-step-card" data-reveal style="--d:5">
+                    <span class="top"><span class="step-num">06</span><span class="step-icon"><i class="fa-solid fa-circle-check"></i></span></span>
+                    <span><h3>Close</h3><p>Says goodbye and drops back to 7 W idle.</p></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== KIOSK ============================== -->
+    <section id="kiosk-simulator" class="section bg-paper">
+        <div class="wrap">
+            <div class="section-head split">
+                <div>
+                    <span class="eyebrow" data-reveal>04 · Chest screen</span>
+                    <h2 class="h-section" style="margin-top:16px" data-reveal>Touch it, <em>or just ask.</em></h2>
+                </div>
+                <p class="lede" data-reveal>The 10-inch screen in CYNO BOT's torso is where visitors at reception tap for help. Try it below.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                <div class="lg:col-span-7 device" data-reveal>
+                    <div class="device-screen" style="height:100%;display:flex;flex-direction:column;padding:18px 20px">
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:12px;color:var(--muted)">
+                            <div style="display:flex;align-items:center;gap:10px">
+                                <span style="width:7px;height:7px;border-radius:50%;background:var(--ok)"></span>
+                                <span style="color:var(--text);font-weight:600">CYNO-OS</span>
+                                <span id="kiosk-mode-pill" style="padding:2px 8px;border-radius:6px;background:var(--signal-ink-soft);color:var(--signal-ink);font-size:11px">RECEPTION</span>
+                            </div>
+                            <span id="kiosk-clock" style="color:var(--text)">12:00</span>
+                        </div>
+
+                        <div id="kiosk-dynamic-screen" style="flex:1;min-height:260px;display:flex;flex-direction:column;justify-content:center;padding:18px 0"></div>
+
+                        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid var(--line)">
+                            <button onclick="triggerQuickGreeting('en')" class="btn btn-ink btn-sm"><i class="fa-solid fa-volume-high" style="font-size:11px"></i>Speak welcome</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 panel" style="padding:20px;display:flex;flex-direction:column;gap:14px;--d:1" data-reveal>
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+                        <div>
+                            <h3 class="font-display" style="font-weight:650;font-size:1.2rem">Ask CYNO BOT</h3>
+                            <p class="mono" style="font-size:12px;color:var(--faint);margin-top:2px">Scripted demo of the voice assistant</p>
+                        </div>
+                        <span class="tag">Whisper · Ollama</span>
+                    </div>
+
+                    <div id="chat-log" class="chat-log hud-scroll" style="padding:12px;min-height:150px;max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:10px" aria-live="polite">
+                        <div class="chat-row"><span class="chat-avatar">CB</span><span class="chat-bubble">Hello! I'm CYNO BOT. Ask me about myself, or tap a suggestion below.</span></div>
+                    </div>
+
+                    <form onsubmit="handleCustomQuestion(event)" style="display:flex;gap:8px">
+                        <label for="custom-question-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your question</label>
+                        <input id="custom-question-input" class="field" type="text" placeholder="Type a question…" autocomplete="off">
+                        <button type="submit" class="btn btn-ink">Ask</button>
+                    </form>
+
+                    <div>
+                        <span class="mono" style="font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em">Try asking</span>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+                            <button class="chip" onclick="simulateVoiceQuery('Tell me about yourself')">Tell me about yourself</button>
+                            <button class="chip" onclick="simulateVoiceQuery('How tall are you?')">How tall are you?</button>
+                            <button class="chip" onclick="simulateVoiceQuery('What runs your brain?')">What runs your brain?</button>
+                            <button class="chip" onclick="simulateVoiceQuery('Who is the module leader?')">Who is the module leader?</button>
+                        </div>
+                    </div>
+
+                    <p class="note" style="margin-top:auto"><i class="fa-solid fa-circle-info"></i><span>This page is a mock-up. Answers and screen content are sample data, not live campus information.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== ARCHITECTURE ============================== -->
+    <section id="architecture" class="section on-ink">
+        <div class="wrap">
+            <div class="section-head split">
+                <div>
+                    <span class="eyebrow" data-reveal>05 · Architecture</span>
+                    <h2 class="h-section" style="margin-top:16px" data-reveal>Four layers. <em>One computer in the middle.</em></h2>
+                </div>
+                <p class="lede" data-reveal>Sensors feed a Mac mini (M1) that runs Whisper and a local Ollama model. Two ESP32 boards handle the hardware, and the results come back out as speech, eye animations and the chest screen.</p>
+            </div>
+
+            <div class="pipe-labels" aria-hidden="true"><span>in</span><span>think</span><span>control</span><span>out</span></div>
+            <div class="pipe-signal" aria-hidden="true"></div>
+
+            <div class="pipeline">
+                <article class="layer" data-reveal>
+                    <div class="ln"><span>L1</span><span>Input</span></div>
+                    <h3>Sensing</h3>
+                    <p>Camera, sound and distance data, in real time.</p>
+                    <ul>
+                        <li>HD camera in the head</li>
+                        <li>Beamforming mic array</li>
+                        <li>Ultrasonic sensing, 1.5–3 m</li>
+                        <li>MQ2 gas and flame sensors</li>
+                    </ul>
+                    <div class="foot"><span>OpenCV · MediaPipe</span></div>
+                </article>
+                <article class="layer is-core" data-reveal style="--d:1">
+                    <div class="ln"><span>L2</span><span>Compute</span></div>
+                    <h3>Mac mini (M1)</h3>
+                    <p>8-core CPU and 16-core Neural Engine running the AI locally.</p>
+                    <ul>
+                        <li>Whisper speech to text</li>
+                        <li>Ollama quantized LLM</li>
+                        <li>SQLite knowledge store</li>
+                        <li>Python · FastAPI · MQTT</li>
+                    </ul>
+                    <div class="foot"><span>7 W idle</span><span>On-device</span></div>
+                </article>
+                <article class="layer" data-reveal style="--d:2">
+                    <div class="ln"><span>L3</span><span>Bridge</span></div>
+                    <h3>Hardware control</h3>
+                    <p>Microcontrollers over USB serial.</p>
+                    <ul>
+                        <li>2 × ESP32 controllers</li>
+                        <li>Sensor multiplexer bus</li>
+                        <li>OLED and halo LED drivers</li>
+                        <li>Watchdog safety cut-off</li>
+                    </ul>
+                    <div class="foot"><span>C++ firmware</span></div>
+                </article>
+                <article class="layer" data-reveal style="--d:3">
+                    <div class="ln"><span>L4</span><span>Output</span></div>
+                    <h3>Interaction</h3>
+                    <p>What visitors see and hear.</p>
+                    <ul>
+                        <li>Animated OLED eyes</li>
+                        <li>10" touch screen</li>
+                        <li>2 × 5 W stereo speakers</li>
+                        <li>Cyan ear and torso lights</li>
+                    </ul>
+                    <div class="foot"><span>No moving pinch points</span></div>
+                </article>
+            </div>
+
+            <div style="margin-top:clamp(64px,8vw,112px)">
+                <div class="section-head split" style="margin-bottom:28px">
+                    <div>
+                        <span class="eyebrow" data-reveal>Walkthrough film</span>
+                        <h3 class="h-section" style="margin-top:14px;font-size:clamp(1.6rem,1rem + 2vw,2.4rem)" data-reveal>Inside the build, <em>9 minutes.</em></h3>
+                    </div>
+                    <div data-reveal>
+                        <p class="lede">The wiring, the Mac mini integration and live sensor demos, filmed by the team.</p>
+                        <a href="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm" style="margin-top:16px">Open in Google Drive <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i></a>
+                    </div>
+                </div>
+
+                <div class="film" data-reveal>
+                    <div class="film-bar"><span>system-architecture-walkthrough.mp4</span><span>09:07 · 1080p</span></div>
+                    <div style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000">
+                        <button id="arch-video-poster-wrapper" class="group" onclick="playArchVideo()" aria-label="Play the 9-minute walkthrough film" style="position:absolute;inset:0;z-index:10;border:0;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:none">
+                            <img src="assets/images/architecture-video-poster.jpg" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.7);transition:transform 1.2s var(--ease-out)" class="group-hover:scale-[1.03]">
+                            <span class="play-btn" style="position:relative"><i class="fa-solid fa-play"></i></span>
+                        </button>
+                        <iframe id="arch-video-drive-frame" title="CYNO BOT walkthrough film" style="width:100%;height:100%;border:0;background:#000" src="" data-src="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/preview" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== BUILD + ROADMAP ============================== -->
+    <section id="fabrication" class="section">
+        <div class="wrap">
+            <div class="section-head split">
+                <div>
+                    <span class="eyebrow" data-reveal>06 · Build</span>
+                    <h2 class="h-section" style="margin-top:16px" data-reveal>Steel inside. <em>PVC outside.</em></h2>
+                </div>
+                <div data-reveal>
+                    <p class="lede">A welded steel skeleton, thermoformed PVC panels and 3D-printed details. It comes apart into six modules without tools.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                <div class="lg:col-span-7">
+                    <div class="build-list">
+                        <div class="build-item" data-reveal>
+                            <span class="n">01</span><h4>RHS steel skeleton</h4>
+                            <p>A welded 25 × 25 mm spine on a heavy anti-tip base keeps the centre of gravity low and holds the Mac mini in a shock-isolated bay.</p>
+                        </div>
+                        <div class="build-item" data-reveal>
+                            <span class="n">02</span><h4>Thermoformed PVC and 3D printing</h4>
+                            <p>Heat-formed PVC sheets make smooth, impact-resistant panels. The camera visor and ear pods are printed in PETG and PLA.</p>
+                        </div>
+                        <div class="build-item" data-reveal>
+                            <span class="n">03</span><h4>Six detachable modules</h4>
+                            <p>Head, torso, left arm, right arm, legs and base separate in under 3 minutes, so one car can carry it and repairs stay simple.</p>
+                        </div>
+                    </div>
+                    <a href="studio.html" class="btn btn-line" style="margin-top:28px" data-reveal>Explode the model in the 3D Studio <i class="fa-solid fa-arrow-right arrow" style="font-size:11px"></i></a>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="panel" style="padding:28px" data-reveal>
+                        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px">
+                            <h3 class="font-display" style="font-weight:650;font-size:1.25rem">Roadmap</h3>
+                            <span class="mono" style="font-size:12px;color:var(--faint)">Phase 1 now · 2–4 planned</span>
+                        </div>
+                        <div class="roadmap" id="roadmap">
+                            <span class="rail-fill" aria-hidden="true"></span>
+                            <div class="phase is-now">
+                                <span class="when">Phase 1 · Current</span>
+                                <h4>Stationary receptionist, 1.67 m</h4>
+                                <p>Weighted steel base, animated eyes, 10" touch screen and the Mac mini (M1).</p>
+                            </div>
+                            <div class="phase">
+                                <span class="when">Phase 2 · Planned</span>
+                                <h4>Wheeled campus escort</h4>
+                                <p>A LiDAR-guided omnidirectional base to walk visitors down hallways.</p>
+                            </div>
+                            <div class="phase">
+                                <span class="when">Phase 3 · Planned</span>
+                                <h4>Walking on two legs</h4>
+                                <p>12-DOF legs with IMU balance control for stairs and uneven ground.</p>
+                            </div>
+                            <div class="phase">
+                                <span class="when">Phase 4 · Planned</span>
+                                <h4>Fleet coordination</h4>
+                                <p>ROS 2 dispatch to run several units across campuses, hospitals and airports.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== TEAM ============================== -->
+    <section id="team" class="section bg-paper">
+        <div class="wrap">
+            <div class="section-head split">
+                <div>
+                    <span class="eyebrow" data-reveal>07 · Team</span>
+                    <h2 class="h-section" style="margin-top:16px" data-reveal>Five students, <em>one robot.</em></h2>
+                </div>
+                <p class="lede" data-reveal>Cynocor is Group G 40 at the Informatics Institute of Technology (IIT), Sri Lanka, supervised by Mr. Bhanu Athuraliya, module leader.</p>
+            </div>
+
+            <div class="team-grid">
+                <article class="member" data-reveal style="--d:0">
+                    <div class="photo"><img src="assets/images/team/chamupathi.jpg?v=2" alt="Chamupathi" loading="lazy"></div>
+                    <h3>Chamupathi</h3>
+                    <div class="role">Project lead · Architecture</div>
+                    <p>System integration, the 4-layer architecture and sprint planning.</p>
+                </article>
+                <article class="member" data-reveal style="--d:1">
+                    <div class="photo"><img src="assets/images/team/chanul.jpg?v=2" alt="Chanul" loading="lazy"></div>
+                    <h3>Chanul</h3>
+                    <div class="role">AI · Voice</div>
+                    <p>Whisper speech pipeline, local Ollama LLM and the SQLite knowledge store.</p>
+                </article>
+                <article class="member" data-reveal style="--d:2">
+                    <div class="photo"><img src="assets/images/team/ravindu.jpg?v=2" alt="Ravindu" loading="lazy"></div>
+                    <h3>Ravindu</h3>
+                    <div class="role">Vision · Kiosk</div>
+                    <p>OpenCV and MediaPipe gaze tracking, and the 10" touch screen UI.</p>
+                </article>
+                <article class="member" data-reveal style="--d:3">
+                    <div class="photo"><img src="assets/images/team/ashendra.jpg?v=2" alt="Ashendra" loading="lazy"></div>
+                    <h3>Ashendra</h3>
+                    <div class="role">Mechanical · CAD</div>
+                    <p>Steel skeleton, thermoformed PVC panels and 3D-printed bezels.</p>
+                </article>
+                <article class="member" data-reveal style="--d:4">
+                    <div class="photo"><img src="assets/images/team/amanya.jpg?v=2" alt="Amanya" loading="lazy"></div>
+                    <h3>Amanya</h3>
+                    <div class="role">Electronics · Control</div>
+                    <p>ESP32 firmware, OLED eye drivers and power safety.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ============================== FOOTER ============================== -->
+    <footer class="site-footer">
+        <div class="wrap" style="padding-top:72px;padding-bottom:28px">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10" style="font-size:14px">
+                <div class="col-span-2">
+                    <a href="#cynobot" class="brand" style="color:var(--on-ink)"><img src="assets/images/cynocor-logo.png" alt=""><span>CYNOCOR</span></a>
+                    <p style="margin-top:16px;max-width:40ch">CYNO BOT is a prototype built for the Advanced Technology Project (ATP) module at the Informatics Institute of Technology, Colombo.</p>
+                </div>
+                <div>
+                    <h4>On this page</h4>
+                    <ul style="list-style:none;display:grid;gap:8px">
+                        <li><a href="#specs">Specifications</a></li>
+                        <li><a href="#greeting-flow">Greeting</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
+                        <li><a href="#team">Team</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Elsewhere</h4>
+                    <ul style="list-style:none;display:grid;gap:8px">
+                        <li><a href="studio.html">3D Studio</a></li>
+                        <li><a href="https://cynocor.com.lk" target="_blank" rel="noopener noreferrer">cynocor.com.lk ↗</a></li>
+                        <li><a href="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/view?usp=sharing" target="_blank" rel="noopener noreferrer">Walkthrough film ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-mark" aria-hidden="true" style="margin-top:64px">CYNOBOT</div>
+
+            <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--ink-line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px" class="mono">
+                <span>© <span id="copyright-year">2026</span> Cynocor · ATP Group G 40 · IIT Sri Lanka</span>
+                <span>Apple and Mac mini are trademarks of Apple Inc.</span>
+                <a href="#cynobot">Back to top ↑</a>
+            </div>
         </div>
     </footer>
 
-    <!-- Main Application & Interactive Engine -->
+    <!-- Progressive blur along the bottom edge of the screen; content sharpens as it scrolls up into view -->
+    <div class="edge-blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
     <script src="js/app.js"></script>
-
-    <!-- Apple Motion & Spec Filtering Controller -->
-    <script>
-        function filterSpecs(category, btnEl) {
-            // Update active segmented button
-            if (btnEl && btnEl.parentElement) {
-                btnEl.parentElement.querySelectorAll('.apple-segment-btn').forEach(b => b.classList.remove('is-active'));
-                btnEl.classList.add('is-active');
-            }
-            const cards = document.querySelectorAll('#specs-grid .spec-category-card');
-            cards.forEach(card => {
-                const cat = card.getAttribute('data-spec-cat');
-                if (category === 'all' || cat === category) {
-                    card.classList.remove('is-hidden');
-                    card.style.opacity = '1';
-                    card.style.visibility = 'visible';
-                    card.style.transform = 'none';
-                } else {
-                    card.classList.add('is-hidden');
-                }
-            });
-            const grid = document.getElementById('specs-grid');
-            if (grid) {
-                grid.className = category === 'all'
-                    ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'
-                    : 'grid grid-cols-1 max-w-xl mx-auto gap-6';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof startApp === 'function') {
-                startApp();
-            }
-
-            const yearEl = document.getElementById('copyright-year');
-            if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-            // Respect prefers-reduced-motion
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-
-                // 1. Keynote Hero Entrance
-                gsap.from('.hero-text-col > *', {
-                    y: 24,
-                    opacity: 0,
-                    stagger: 0.08,
-                    duration: 0.9,
-                    ease: "power3.out",
-                    clearProps: "all"
-                });
-
-                // 2. Subtle Y-translation entrance on scroll (without hiding opacity)
-                gsap.utils.toArray('section h2').forEach(heading => {
-                    gsap.from(heading, {
-                        scrollTrigger: {
-                            trigger: heading,
-                            start: "top 92%",
-                            toggleActions: "play none none none"
-                        },
-                        y: 18,
-                        duration: 0.7,
-                        immediateRender: false,
-                        ease: "power2.out",
-                        clearProps: "transform"
-                    });
-                });
-            }
-        });
-    </script>
+    <script src="js/site.js"></script>
 </body>
 </html>
