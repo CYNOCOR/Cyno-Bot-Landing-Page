@@ -91,6 +91,9 @@
         chestCanvas.height = 512;
         const chestCtx = chestCanvas.getContext('2d');
         let chestTexture = null;
+        const _cynoWolfLogoDataUri = 'data:image/png;base64,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';
+        const _cynoWolfLogoImg = new Image();
+        _cynoWolfLogoImg.src = _cynoWolfLogoDataUri;
 
         function renderFaceScreenTexture(time) {
             const ctx = faceCtx;
@@ -270,7 +273,7 @@
                 ctx.shadowBlur = 30;
                 ctx.fillStyle = '#00d2ff';
                 ctx.font = 'bold 135px "Inter", sans-serif';
-                ctx.fillText('AI', w / 2, 265);
+                if (_cynoWolfLogoImg && _cynoWolfLogoImg.complete) { ctx.drawImage(_cynoWolfLogoImg, w / 2 - 90, 125, 180, 180); } else { ctx.fillText('CYNOCOR', w / 2, 245); }
 
                 // Pulsing ring around AI
                 ctx.strokeStyle = 'rgba(0, 210, 255, 0.45)';
@@ -1142,11 +1145,16 @@
         function setExplodeAmount(val) {
             const pct = Number(val);
             state.targetExplode = pct / 100;
-            document.getElementById('explode-slider').value = pct;
-            document.getElementById('explode-pct-badge').textContent = pct === 0 ? '0% ASSEMBLED' : `${pct}% EXPLODED`;
-            document.getElementById('explode-btn').innerHTML = pct > 50
-                ? '<i class="fa-solid fa-compress mr-1"></i>Assemble 0%'
-                : '<i class="fa-solid fa-maximize mr-1"></i>Explode 100%';
+            const slider = document.getElementById('explode-slider');
+            if (slider) slider.value = pct;
+            const badge = document.getElementById('explode-pct-badge');
+            if (badge) badge.textContent = pct === 0 ? '0% ASSEMBLED' : `${pct}% EXPLODED`;
+            const btn = document.getElementById('explode-btn');
+            if (btn) {
+                btn.innerHTML = pct > 50
+                    ? '<i class="fa-solid fa-compress mr-1"></i>Assemble 0%'
+                    : '<i class="fa-solid fa-maximize mr-1"></i>Explode 100%';
+            }
 
             if (pct > 35) {
                 inspectPart('brain', false);
@@ -1168,9 +1176,11 @@
                 mat.needsUpdate = true;
             });
             const btn = document.getElementById('xray-btn');
-            btn.className = state.xrayMode
-                ? 'px-3 py-2 rounded-xl bg-cyan-500/25 border border-cyan-400 text-xs font-medium text-cyan-200 flex items-center justify-center gap-1.5 transition'
-                : 'px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-xs font-medium text-slate-200 flex items-center justify-center gap-1.5 transition';
+            if (btn) {
+                btn.className = state.xrayMode
+                    ? 'px-3 py-2.5 rounded-2xl bg-[#0071e3] text-white font-medium flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer'
+                    : 'px-3 py-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-medium flex items-center justify-center gap-1.5 transition shadow-2xs cursor-pointer';
+            }
             if (state.xrayMode) inspectPart('brain', false);
             playCyberBeep(520);
         }
@@ -1178,10 +1188,12 @@
         function toggleCalloutLabels() {
             state.showLabels = !state.showLabels;
             const btn = document.getElementById('labels-btn');
-            btn.innerHTML = `<i class="fa-solid fa-tags text-cyan-400"></i><span>3D Labels: ${state.showLabels ? 'ON' : 'OFF'}</span>`;
-            btn.className = state.showLabels
-                ? 'px-3 py-2 rounded-xl bg-cyan-500/20 border border-cyan-400/50 text-xs font-medium text-cyan-200 flex items-center justify-center gap-1.5 transition'
-                : 'px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-xs font-medium text-slate-300 flex items-center justify-center gap-1.5 transition';
+            if (btn) {
+                btn.innerHTML = `<i class="fa-solid fa-tag"></i><span>3D Pins: ${state.showLabels ? 'ON' : 'OFF'}</span>`;
+                btn.className = state.showLabels
+                    ? 'px-3 py-2.5 rounded-2xl bg-[#0071e3] text-white font-medium flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer'
+                    : 'px-3 py-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-medium flex items-center justify-center gap-1.5 transition shadow-2xs cursor-pointer';
+            }
         }
 
         function toggleAutoRotate() {
@@ -1193,8 +1205,8 @@
             const btn = document.getElementById('autorotate-btn');
             if (!btn) return;
             btn.className = state.autoRotate
-                ? 'px-3 py-2 rounded-xl bg-cyan-500/25 border border-cyan-400 text-xs font-medium text-cyan-200 flex items-center justify-center gap-1.5 transition'
-                : 'px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-xs font-medium text-slate-200 flex items-center justify-center gap-1.5 transition';
+                ? 'px-3 py-2.5 rounded-2xl bg-[#0071e3] text-white font-medium flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer'
+                : 'px-3 py-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-medium flex items-center justify-center gap-1.5 transition shadow-2xs cursor-pointer';
         }
 
         function toggleGreetingRadar() {
@@ -1202,9 +1214,12 @@
             if (radarRing1) radarRing1.visible = state.showRadar;
             if (radarRing2) radarRing2.visible = state.showRadar;
             const btn = document.getElementById('radar-btn');
-            btn.className = state.showRadar
-                ? 'px-3 py-2 rounded-xl bg-cyan-500/20 border border-cyan-400/50 text-xs font-medium text-cyan-200 flex items-center justify-center gap-1.5 transition'
-                : 'px-3 py-2 rounded-xl bg-slate-900/90 border border-slate-700 text-xs font-medium text-slate-300 flex items-center justify-center gap-1.5 transition';
+            if (btn) {
+                btn.innerHTML = `<i class="fa-solid fa-satellite-dish"></i><span>Radar: ${state.showRadar ? 'ON' : 'OFF'}</span>`;
+                btn.className = state.showRadar
+                    ? 'px-3 py-2.5 rounded-2xl bg-[#0071e3] text-white font-medium flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer'
+                    : 'px-3 py-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-medium flex items-center justify-center gap-1.5 transition shadow-2xs cursor-pointer';
+            }
         }
 
         function setCameraPreset(preset) {
@@ -1213,18 +1228,30 @@
 
             // Update active preset button styles
             document.querySelectorAll('.cam-preset-btn').forEach(btn => {
-                btn.className = 'cam-preset-btn px-2.5 py-1.5 rounded-xl bg-white/[0.06] border border-white/[0.08] text-[10px] text-slate-300 font-medium text-left flex items-center gap-1.5 hover:border-white/[0.2] transition cursor-pointer';
+                btn.className = 'cam-preset-btn px-3.5 py-1 rounded-full text-[#6e6e73] hover:text-[#1d1d1f] transition cursor-pointer';
             });
             const activeBtn = document.querySelector(`.cam-preset-btn[onclick*="${preset}"]`);
             if (activeBtn) {
-                activeBtn.className = 'cam-preset-btn px-2.5 py-1.5 rounded-xl bg-blue-500/20 border border-blue-400/40 text-[10px] text-[#29d8ff] font-medium text-left flex items-center gap-1.5 hover:bg-blue-500/30 transition cursor-pointer';
+                activeBtn.className = 'cam-preset-btn px-3.5 py-1 rounded-full bg-white text-[#1d1d1f] shadow-2xs font-semibold transition cursor-pointer';
             }
 
-            if (preset === 'full') {
-                camState.targetTheta = 0.0; // Straight facing front!
-                camState.targetPhi = 1.50;   // Eye level
+            if (preset === 'full' || preset === 'front') {
+                camState.targetTheta = 0.0;
+                camState.targetPhi = 1.50;
                 camState.targetRadius = 4.2;
-                camState.targetLookY = 1.35; // Centered 1.67m height
+                camState.targetLookY = 1.35;
+                inspectPart('full', false);
+            } else if (preset === 'side') {
+                camState.targetTheta = 1.35;
+                camState.targetPhi = 1.48;
+                camState.targetRadius = 4.2;
+                camState.targetLookY = 1.35;
+                inspectPart('leftArm', false);
+            } else if (preset === 'iso') {
+                camState.targetTheta = 0.62;
+                camState.targetPhi = 1.32;
+                camState.targetRadius = 4.3;
+                camState.targetLookY = 1.35;
                 inspectPart('full', false);
             } else if (preset === 'head') {
                 camState.targetTheta = 0.0;
@@ -1232,13 +1259,13 @@
                 camState.targetRadius = 1.95;
                 camState.targetLookY = 2.66;
                 inspectPart('head', false);
-            } else if (preset === 'chest') {
+            } else if (preset === 'chest' || preset === 'torso') {
                 camState.targetTheta = 0.0;
                 camState.targetPhi = 1.50;
                 camState.targetRadius = 2.20;
                 camState.targetLookY = 1.92;
                 inspectPart('torso', false);
-            } else if (preset === 'base') {
+            } else if (preset === 'base' || preset === 'legs') {
                 camState.targetTheta = 0.0;
                 camState.targetPhi = 1.35;
                 camState.targetRadius = 2.80;
@@ -1251,17 +1278,27 @@
         function inspectPart(partKey, moveCam = true) {
             const info = PART_SPECS[partKey];
             if (!info) return;
-            document.getElementById('part-tag').textContent = info.tag;
-            document.getElementById('inspector-title').textContent = info.title;
-            document.getElementById('inspector-desc').textContent = info.desc;
-            document.getElementById('inspector-specs').innerHTML = `
-                <div class="text-cyan-300">${info.spec1}</div>
-                <div class="text-sky-300">${info.spec2}</div>
-            `;
+            const tagEl = document.getElementById('part-tag');
+            if (tagEl) tagEl.textContent = info.tag;
+
+            const titleEl = document.getElementById('part-title') || document.getElementById('inspector-title');
+            if (titleEl) titleEl.textContent = info.title;
+
+            const descEl = document.getElementById('part-desc') || document.getElementById('inspector-desc');
+            if (descEl) descEl.textContent = info.desc;
+
+            const specsEl = document.getElementById('inspector-specs');
+            if (specsEl) {
+                specsEl.innerHTML = `
+                    <div class="p-2 rounded-xl bg-white border border-black/[0.06] text-[#0071e3] font-semibold truncate">${info.spec1}</div>
+                    <div class="p-2 rounded-xl bg-white border border-black/[0.06] text-[#1d1d1f] font-semibold truncate">${info.spec2}</div>
+                `;
+            }
             if (moveCam) {
                 if (partKey === 'head') setCameraPreset('head');
-                else if (partKey === 'torso' || partKey === 'brain') setCameraPreset('chest');
-                else if (partKey === 'legs') setCameraPreset('base');
+                else if (partKey === 'torso' || partKey === 'brain') setCameraPreset('torso');
+                else if (partKey === 'leftArm' || partKey === 'rightArm') setCameraPreset('side');
+                else if (partKey === 'legs') setCameraPreset('legs');
             }
         }
 
@@ -1275,15 +1312,15 @@
             const badge = document.getElementById('active-profile-badge');
 
             if (profile === 'university') {
-                uniBtn.className = 'p-2.5 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 border border-cyan-400 text-left transition';
-                homeBtn.className = 'p-2.5 rounded-xl bg-slate-900/80 border border-slate-700 hover:border-cyan-400/40 text-left transition';
-                badge.textContent = 'PROFILE: UNIVERSITY ENTRANCE';
+                if (uniBtn) uniBtn.className = 'p-2.5 rounded-2xl bg-[#0071e3] text-white font-semibold text-left transition cursor-pointer shadow-xs';
+                if (homeBtn) homeBtn.className = 'p-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-semibold text-left transition cursor-pointer';
+                if (badge) badge.textContent = 'UNIVERSITY';
                 selectOperatingMode('entrance');
                 speakRobotText('Switched to University Entrance Assistant profile. Welcome to IIT Campus!');
             } else {
-                homeBtn.className = 'p-2.5 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 border border-cyan-400 text-left transition';
-                uniBtn.className = 'p-2.5 rounded-xl bg-slate-900/80 border border-slate-700 hover:border-cyan-400/40 text-left transition';
-                badge.textContent = 'PROFILE: PERSONALIZED HOME ROBOT';
+                if (homeBtn) homeBtn.className = 'p-2.5 rounded-2xl bg-[#0071e3] text-white font-semibold text-left transition cursor-pointer shadow-xs';
+                if (uniBtn) uniBtn.className = 'p-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-semibold text-left transition cursor-pointer';
+                if (badge) badge.textContent = 'HOME ROBOT';
                 selectOperatingMode('companion');
                 speakRobotText('Switched to Personalized Home Robot profile. Welcome home! I have loaded your personal reminders and smart home controls.');
             }
@@ -1291,20 +1328,29 @@
 
         function setFaceExpression(exp) {
             state.expression = exp;
-            document.getElementById('current-mood-label').textContent = exp.toUpperCase();
+            const moodLabel = document.getElementById('current-mood-label');
+            if (moodLabel) moodLabel.textContent = exp.toUpperCase();
+
+            document.querySelectorAll('.exp-btn').forEach(btn => {
+                const isTarget = btn.getAttribute('data-exp-btn') === exp;
+                btn.className = isTarget
+                    ? 'exp-btn py-2 rounded-xl bg-[#0071e3] text-white font-semibold transition cursor-pointer'
+                    : 'exp-btn py-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.07] text-[#1d1d1f] font-medium transition cursor-pointer';
+            });
+
             playCyberBeep(exp === 'guardian' ? 300 : 660);
         }
 
         function selectOperatingMode(mode) {
             state.mode = mode;
 
-            // Highlight active mode button
+            // Highlight active Apple segmented mode button
             document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.className = 'mode-btn px-2.5 py-2 rounded-lg bg-slate-900/80 border border-slate-700 text-xs font-medium text-slate-300 text-left flex items-center gap-2 hover:border-cyan-400/40 transition';
+                btn.classList.remove('is-active');
             });
             const activeBtn = document.getElementById(`mode-btn-${mode}`);
             if (activeBtn) {
-                activeBtn.className = 'mode-btn px-2.5 py-2 rounded-lg bg-cyan-500/25 border border-cyan-400 text-xs font-medium text-white text-left flex items-center gap-2 transition';
+                activeBtn.classList.add('is-active');
             }
 
             // Update face expression automatically for context
@@ -1539,11 +1585,11 @@
             const label = document.getElementById('voice-label');
             if (state.voiceMuted) {
                 if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-                icon.className = 'fa-solid fa-volume-xmark text-rose-400';
-                label.textContent = 'Voice: MUTE';
+                if (icon) icon.className = 'fa-solid fa-volume-xmark text-[#ff375f] text-xs';
+                if (label) label.textContent = 'Voice: MUTE';
             } else {
-                icon.className = 'fa-solid fa-volume-high text-cyan-400';
-                label.textContent = 'Voice: ON';
+                if (icon) icon.className = 'fa-solid fa-volume-high text-[#0071e3] text-xs';
+                if (label) label.textContent = 'Voice: ON';
                 speakRobotText('CYNO BOT voice system online.');
             }
         }
@@ -1553,7 +1599,7 @@
             speakRobotText('Welcome to the university! I am CYNO BOT. How can I help you today?');
             const bubble = document.getElementById('robot-speech-bubble');
             if (bubble) {
-                bubble.textContent = '"Welcome to IIT Campus! I am CYNO BOT."';
+                bubble.textContent = '"Welcome to IIT Campus! I am CYNO BOT. How can I help you today?"';
             }
         }
 
@@ -1566,12 +1612,20 @@
 
         function appendChatLog(speaker, msg, isBot = true) {
             const log = document.getElementById('chat-log');
+            if (!log) return;
             const row = document.createElement('div');
-            row.className = 'flex gap-2';
-            row.innerHTML = `
-                <span class="font-mono font-bold ${isBot ? 'text-cyan-400' : 'text-emerald-400'} shrink-0">[${speaker}]:</span>
-                <span class="text-slate-200">${msg}</span>
-            `;
+            if (isBot) {
+                row.className = 'flex items-start gap-2 text-[#1d1d1f]';
+                row.innerHTML = `
+                    <span class="w-5 h-5 rounded-full bg-[#0071e3] text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5"><i class="fa-solid fa-robot"></i></span>
+                    <span class="bg-white px-3 py-2 rounded-2xl rounded-tl-xs border border-black/[0.06] shadow-2xs leading-relaxed">${msg}</span>
+                `;
+            } else {
+                row.className = 'flex items-start gap-2 justify-end text-white';
+                row.innerHTML = `
+                    <span class="bg-[#0071e3] text-white px-3 py-1.5 rounded-2xl rounded-tr-xs shadow-2xs">${msg}</span>
+                `;
+            }
             log.appendChild(row);
             log.scrollTop = log.scrollHeight;
         }
@@ -1607,6 +1661,7 @@
         function handleCustomQuestion(e) {
             e.preventDefault();
             const input = document.getElementById('custom-question-input');
+            if (!input) return;
             const val = input.value.trim();
             if (!val) return;
             input.value = '';
@@ -1618,9 +1673,14 @@
             for (let i = 1; i <= 6; i++) {
                 const card = document.getElementById(`flow-step-${i}`);
                 if (card) {
-                    card.className = i === step
-                        ? 'flow-card cursor-pointer hud-glass-bright rounded-2xl p-4 border-2 border-cyan-400 transition -translate-y-1'
-                        : 'flow-card cursor-pointer hud-glass rounded-2xl p-4 border border-slate-800 transition hover:-translate-y-1';
+                    const isActive = (i === step);
+                    card.classList.toggle('active-step', isActive);
+                    const iconBadge = card.querySelector('.step-icon');
+                    if (iconBadge) {
+                        iconBadge.className = isActive
+                            ? 'step-icon w-9 h-9 rounded-full bg-[#0071e3] text-white flex items-center justify-center shadow-xs transition'
+                            : 'step-icon w-9 h-9 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center transition';
+                    }
                 }
             }
 
@@ -1649,7 +1709,6 @@
         }
 
         function playFullGreetingSequence() {
-            window.location.hash = '#hero-studio';
             let current = 1;
             activateGreetingStep(current);
             const interval = setInterval(() => {
@@ -1824,10 +1883,10 @@
             camState.radius += (camState.targetRadius - camState.radius) * 0.08;
             camState.targetY += (camState.targetLookY - camState.targetY) * 0.08;
 
-            camera.position.x = camState.radius * Math.sin(camState.phi) * Math.sin(camState.theta);
-            camera.position.y = camState.targetY + camState.radius * Math.cos(camState.phi);
-            camera.position.z = camState.radius * Math.sin(camState.phi) * Math.cos(camState.theta);
-            camera.lookAt(0, camState.targetY, 0);
+            if (camera) camera.position.x = camState.radius * Math.sin(camState.phi) * Math.sin(camState.theta);
+            if (camera) camera.position.y = camState.targetY + camState.radius * Math.cos(camState.phi);
+            if (camera) camera.position.z = camState.radius * Math.sin(camState.phi) * Math.cos(camState.theta);
+            if (camera) camera.lookAt(0, camState.targetY, 0);
 
             // 5. Render Dynamic 2D Canvas Textures for Face & Chest Screens
             renderFaceScreenTexture(elapsed);
@@ -1874,7 +1933,7 @@
         let heroScrollProgress = 0;
         let heroTargetScrollProgress = 0;
         let heroExplodeAmount = 0;
-        const heroCamCurrentLookAt = new THREE.Vector3(0, 1.20, 0);
+        const heroCamCurrentLookAt = new THREE.Vector3(0, 1.72, 0);
 
         function initHeroThreeJS() {
             const container = document.getElementById('hero-robot-canvas-container');
@@ -1887,8 +1946,8 @@
             const isMobile = (width < 768) || (width / height < 1.0);
             const initCamZ = isMobile ? 5.8 : 4.8;
             heroCamera = new THREE.PerspectiveCamera(38, width / height, 0.05, 40);
-            heroCamera.position.set(0, 1.25, initCamZ);
-            heroCamera.lookAt(0, 1.22, 0);
+            heroCamera.position.set(0, 1.72, isMobile ? 3.25 : 2.85); heroCamera.lookAt(0, 1.72, 0);
+            heroCamera.lookAt(0, 1.72, 0);
 
             // Enabled logarithmicDepthBuffer for maximum depth precision without mesh blinking/Z-fighting
             heroRenderer = new THREE.WebGLRenderer({
@@ -2643,11 +2702,11 @@
 
                 // Glowing Cyan "AI" Emblem & Status Bar on Chest Display (Exact CAD Geometry)
                 const aiZ = 127.5;
-                cadAddBox(tKioskCyan, -36.0, 1175.0, aiZ, 10.0, 68.0, 4.0);
-                cadAddBox(tKioskCyan, -6.0, 1175.0, aiZ, 10.0, 68.0, 4.0);
-                cadAddBox(tKioskCyan, -21.0, 1204.0, aiZ, 40.0, 10.0, 4.0);
-                cadAddBox(tKioskCyan, -21.0, 1172.0, aiZ, 40.0, 10.0, 4.0);
-                cadAddBox(tKioskCyan, 28.0, 1175.0, aiZ, 12.0, 68.0, 4.0);
+                // Pure White CYNOCOR Wolf Logo Emblem on Chest Display
+                const wolfTex = new THREE.TextureLoader().load(_cynoWolfLogoDataUri);
+                const wolfMat = new THREE.MeshBasicMaterial({ map: wolfTex, transparent: true, opacity: 0.96, depthWrite: false });
+                const wolfMesh = new THREE.Mesh(new THREE.PlaneGeometry(162.0 * S, 162.0 * S), wolfMat);
+                wolfMesh.position.set(0, (1176.0 - TORSO_PIVOT_Y) * S, 126.8 * S); chestDisplayGroup.add(wolfMesh);
                 cadAddBox(tKioskCyan, 0.0, 1085.0, aiZ, 150.0, 6.0, 4.0);
 
                 chestDisplayGroup.add(buildCadMesh(tKioskDark, matDark, TORSO_PIVOT_Y));
@@ -2896,6 +2955,7 @@
 
                 heroMouse.targetX = THREE.MathUtils.clamp(normX, -1.2, 1.2);
                 heroMouse.targetY = THREE.MathUtils.clamp(normY, -1.0, 1.0);
+                window._heroLastMouseMove = performance.now();
             });
 
             // Mouse Drag to Orbit Robot in 3D
@@ -2940,7 +3000,7 @@
         /***********************************************************************
          * FULL-SCREEN SCROLL-DRIVEN 3D CAD EXPLOSION, INSPECTION & HERO DOCKING
          ***********************************************************************/
-        let isIntroActive = true;
+        let isIntroActive = false;
         let isIntroDocking = false;
         let introProgress = 0.0;
         let introTargetProgress = 0.0;
@@ -3095,13 +3155,13 @@
             } else {
                 // Settled inside website hero section - perfectly framed full robot view
                 targetExplode = 0;
-                camTargetPos.set(0, 1.20, isMobile ? 4.1 : 3.65);
-                camTargetLook.set(0, 1.15, 0);
+                const introZ = elapsed < 2.75 ? (isMobile ? 3.25 : 2.85) : (isMobile ? 2.75 : 2.28); camTargetPos.set(0, 1.72, introZ);
+                camTargetLook.set(0, 1.72, 0);
             }
 
             // Smooth Camera Interpolation
-            heroCamera.position.lerp(camTargetPos, 0.12);
-            heroCamCurrentLookAt.lerp(camTargetLook, 0.12);
+            heroCamera.position.lerp(camTargetPos, 0.055);
+            heroCamCurrentLookAt.lerp(camTargetLook, 0.055);
             heroCamera.lookAt(heroCamCurrentLookAt);
 
             // Smooth Exploded Parts Motion
@@ -3126,8 +3186,14 @@
             }
 
             // Natural Head & Torso Tracking Mouse Movement
-            heroMouse.x += (heroMouse.targetX - heroMouse.x) * 0.08;
-            heroMouse.y += (heroMouse.targetY - heroMouse.y) * 0.08;
+            const idleSecs = (performance.now() - (window._heroLastMouseMove || 0)) * 0.001;
+            const autoBlend = THREE.MathUtils.clamp((idleSecs - 1.0) / 1.2, 0.0, 1.0);
+            const autoLookX = Math.sin(elapsed * 1.15) * 0.65 + Math.sin(elapsed * 0.45) * 0.25;
+            const autoLookY = Math.sin(elapsed * 0.8 + 1.1) * 0.18 + Math.cos(elapsed * 1.5) * 0.08;
+            const desiredX = THREE.MathUtils.lerp(heroMouse.targetX, autoLookX, autoBlend);
+            const desiredY = THREE.MathUtils.lerp(heroMouse.targetY, autoLookY, autoBlend);
+            heroMouse.x += (desiredX - heroMouse.x) * 0.07;
+            heroMouse.y += (desiredY - heroMouse.y) * 0.07;
 
             heroHead.rotation.y = heroMouse.x * 0.45;
             heroHead.rotation.x = heroMouse.y * 0.45;
@@ -3152,7 +3218,7 @@
             }
 
             // Idle Breathing Motion
-            heroRobotRoot.position.y = Math.sin(elapsed * 2.2) * 0.025;
+            heroRobotRoot.position.y = Math.sin(elapsed * 2.2) * 0.014;
 
             // User Orbit Drag Interpolation
             heroRotationY += (heroTargetRotationY - heroRotationY) * 0.1;
@@ -3502,8 +3568,8 @@
             if (!chatLog) return;
             
             const userMsg = document.createElement('div');
-            userMsg.className = 'text-white/80 flex items-start gap-2 justify-end';
-            userMsg.innerHTML = `<span class="bg-white/[0.08] px-3 py-1.5 rounded-2xl rounded-tr-none text-right">"${query}"</span><i class="fa-solid fa-user mt-1 text-slate-400 text-xs"></i>`;
+            userMsg.className = 'flex items-start gap-2 justify-end';
+            userMsg.innerHTML = `<span class="bg-[#0071e3] text-white px-3.5 py-1.5 rounded-2xl rounded-tr-xs text-right shadow-2xs">${query}</span>`;
             chatLog.appendChild(userMsg);
             chatLog.scrollTop = chatLog.scrollHeight;
             
@@ -3522,32 +3588,25 @@
             }
 
             const thinkingEl = document.createElement('div');
-            thinkingEl.className = 'text-[#00f0ff] flex items-center gap-2 text-xs opacity-75';
-            thinkingEl.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin text-xs"></i><span>CYNO is processing via local Whisper & Ollama...</span>`;
+            thinkingEl.className = 'text-[#0071e3] flex items-center gap-2 text-xs font-medium';
+            thinkingEl.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin text-xs"></i><span>Processing on Apple M1 Neural Engine...</span>`;
             chatLog.appendChild(thinkingEl);
             chatLog.scrollTop = chatLog.scrollHeight;
 
             setTimeout(() => {
                 thinkingEl.remove();
                 const botMsg = document.createElement('div');
-                botMsg.className = 'text-[#00f0ff] flex items-start gap-2';
-                botMsg.innerHTML = `<i class="fa-solid fa-robot mt-1 text-xs"></i><span class="bg-[#00f0ff]/10 border border-[#00f0ff]/20 px-3 py-1.5 rounded-2xl rounded-tl-none">${responseText}</span>`;
+                botMsg.className = 'flex items-start gap-2 text-[#1d1d1f]';
+                botMsg.innerHTML = `
+                    <span class="w-5 h-5 rounded-full bg-[#0071e3] text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5"><i class="fa-solid fa-robot"></i></span>
+                    <span class="bg-white px-3.5 py-2 rounded-2xl rounded-tl-xs border border-black/[0.06] shadow-2xs leading-relaxed">${responseText}</span>
+                `;
                 chatLog.appendChild(botMsg);
                 chatLog.scrollTop = chatLog.scrollHeight;
 
                 if (typeof playCyberBeep === 'function') playCyberBeep(880, 'sine', 0.15, 0.08);
-
-                if (!state.voiceMuted && 'speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                    const utter = new SpeechSynthesisUtterance(responseText);
-                    utter.rate = 1.05;
-                    utter.pitch = 1.0;
-                    const voices = window.speechSynthesis.getVoices();
-                    const voice = voices.find(v => v.lang && v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha')));
-                    if (voice) utter.voice = voice;
-                    window.speechSynthesis.speak(utter);
-                }
-            }, 600);
+                speakRobotText(responseText);
+            }, 550);
         }
         window.simulateVoiceQuery = simulateVoiceQuery;
 
@@ -3563,28 +3622,24 @@
          * 12. APPLE-STYLE NAVBAR SCROLLSPY & DYNAMIC SCROLL TRANSITION
          ***********************************************************************/
         function setupNavbarScrollSpy() {
-            const sectionIds = ['cynobot', 'hero-studio', 'kiosk-simulator', 'greeting-flow', 'architecture', 'fabrication', 'plan-budget', 'team'];
+            const sectionIds = ['cynobot', 'pillars', 'specs', 'greeting-flow', 'kiosk-simulator', 'architecture', 'fabrication', 'team'];
             const links = Array.from(document.querySelectorAll('.nav-spy-link'));
-            const navPill = document.getElementById('main-nav-pill');
             if (!links.length) return;
 
             function onScroll() {
                 const scrollY = window.scrollY;
 
-                // Dynamic Header-to-Floating-Dock Transition:
-                // At scrollY <= 24: seamlessly docked as the top header of the hero keynote.
-                // At scrollY > 24: smoothly detaches and glides as a floating glass pill dock.
                 const navWrapper = document.getElementById('main-nav-wrapper');
                 if (navWrapper) {
                     if (scrollY > 24) {
-                        navWrapper.classList.add('nav-floating');
+                        navWrapper.classList.add('nav-floating', 'nav-visible'); navWrapper.classList.remove('nav-hidden-top');
                     } else {
-                        navWrapper.classList.remove('nav-floating');
+                        navWrapper.classList.remove('nav-floating', 'nav-visible'); navWrapper.classList.add('nav-hidden-top'); const d = document.getElementById('mobile-menu-drawer'); if (d) d.classList.add('hidden');
                     }
                 }
 
                 // Scrollspy active section detection
-                const checkY = scrollY + 160;
+                const checkY = scrollY + 180;
                 let currentId = 'cynobot';
 
                 for (const id of sectionIds) {
@@ -3602,16 +3657,9 @@
                 links.forEach(link => {
                     const target = link.getAttribute('data-nav-id');
                     if (target === currentId) {
-                        link.className = 'nav-spy-link px-2.5 xl:px-3 py-1 rounded-full text-white font-medium bg-white/[0.1] border border-white/[0.1] transition-all duration-200 flex items-center gap-1.5 shadow-xs';
-                        if (!link.querySelector('.nav-dot')) {
-                            const dot = document.createElement('span');
-                            dot.className = 'nav-dot w-1.5 h-1.5 rounded-full bg-[#29d8ff] shrink-0 animate-pulse';
-                            link.prepend(dot);
-                        }
+                        link.className = 'nav-spy-link is-active px-3.5 py-1.5 rounded-full transition-all duration-200';
                     } else {
-                        link.className = 'nav-spy-link px-2.5 xl:px-3 py-1 rounded-full text-[#86868b] hover:text-white hover:bg-white/[0.06] transition-all duration-200 flex items-center gap-1.5';
-                        const dot = link.querySelector('.nav-dot');
-                        if (dot) dot.remove();
+                        link.className = 'nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200';
                     }
                 });
             }
@@ -3625,6 +3673,13 @@
          ***********************************************************************/
         let appInitialized = false;
         let animationRunning = false;
+
+        function updateKioskClock() {
+            const clockEl = document.getElementById('kiosk-clock');
+            if (!clockEl) return;
+            const now = new Date();
+            clockEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
 
         function startApp() {
             if (appInitialized) return;
@@ -3644,6 +3699,9 @@
             if (document.getElementById('kiosk-dynamic-screen')) {
                 selectOperatingMode('entrance');
             }
+
+            updateKioskClock();
+            setInterval(updateKioskClock, 15000);
 
             if (document.getElementById('budget-rows')) {
                 setBudgetTier('low');

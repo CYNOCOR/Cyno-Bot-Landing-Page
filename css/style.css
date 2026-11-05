@@ -1,34 +1,47 @@
 /* ==========================================================================
-   CYNO BOT — PREMIUM LIGHT EDITORIAL DESIGN SYSTEM
-   Clean, modern, high-aesthetic light architecture
-   Inspired by modern Scandinavian robotics & Apple hardware design
+   CYNO BOT — APPLE FLAGSHIP DESIGN SYSTEM
+   Inspired by Apple.com (Vision Pro, Mac mini M4, iPad Pro)
+   Crafted for CYNOCOR • ATP Group G 40 • IIT Sri Lanka
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-    /* Pure Light Minimalist Palette */
-    --color-bg: #f8fafc;
-    --color-bg-alt: #f1f5f9;
-    --color-surface: #ffffff;
-    --color-surface-hover: #f8fafc;
-    --color-card: #ffffff;
-    
-    --color-border: #e2e8f0;
-    --color-border-hover: #cbd5e1;
-    --color-border-accent: rgba(2, 132, 199, 0.4);
+    /* Apple Light Surfaces */
+    --apple-bg-light: #fbfbfd;
+    --apple-bg-secondary: #f5f5f7;
+    --apple-surface-white: #ffffff;
+    --apple-border-light: rgba(0, 0, 0, 0.08);
+    --apple-border-strong: rgba(0, 0, 0, 0.14);
 
-    --color-text-main: #0f172a;
-    --color-text-muted: #475569;
-    --color-text-subtle: #64748b;
-    
-    --color-accent: #0284c7;        /* Refined Cobalt Blue */
-    --color-accent-blue: #2563eb;
-    --color-accent-emerald: #059669;
+    /* Apple Dark Pro Surfaces */
+    --apple-bg-dark: #000000;
+    --apple-bg-dark-alt: #0a0a0c;
+    --apple-surface-dark: #141417;
+    --apple-surface-dark-elevated: #1d1d21;
+    --apple-border-dark: rgba(255, 255, 255, 0.1);
+    --apple-border-dark-strong: rgba(255, 255, 255, 0.2);
 
-    /* Easing */
-    --ease-fauna: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    /* Apple Typography Colors */
+    --apple-text-primary: #1d1d1f;
+    --apple-text-secondary: #6e6e73;
+    --apple-text-tertiary: #86868b;
+    --apple-text-dark-primary: #f5f5f7;
+    --apple-text-dark-secondary: #a1a1a6;
+
+    /* Apple Brand Accents */
+    --apple-blue: #0071e3;
+    --apple-blue-hover: #0077ed;
+    --apple-pro-blue: #2997ff;
+    --apple-cyan: #00d2ff;
+    --apple-emerald: #30d158;
+    --apple-amber: #ff9f0a;
+    --apple-rose: #ff375f;
+
+    /* Apple Motion Curves */
+    --ease-apple: cubic-bezier(0.28, 0.11, 0.32, 1);
+    --ease-apple-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-apple-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *, *::before, *::after {
@@ -41,236 +54,695 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-bg);
-    color: var(--color-text-main);
+    text-rendering: optimizeLegibility;
+    background-color: var(--apple-bg-light);
+    color: var(--apple-text-primary);
 }
 
 body {
-    background-color: var(--color-bg);
-    color: var(--color-text-main);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    letter-spacing: -0.012em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--apple-bg-light);
+    color: var(--apple-text-primary);
+    letter-spacing: -0.015em;
+    line-height: 1.5;
     overflow-x: clip;
     min-height: 100vh;
-    line-height: 1.6;
 }
 
-/* Subtle Architectural Light Canvas */
-.fauna-canvas {
-    background-color: #f8fafc;
-    background-image: 
-        radial-gradient(circle at 50% 0%, rgba(2, 132, 199, 0.05) 0%, transparent 60%),
-        radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
-        linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 56px 56px, 56px 56px;
-    background-position: 0 0, 0 0, -1px -1px, -1px -1px;
-}
-
-/* Typography Scale */
+/* ==========================================================================
+   TYPOGRAPHY & HEADLINE TREATMENTS
+   ========================================================================== */
 .font-display {
-    font-family: 'Outfit', sans-serif;
-    letter-spacing: -0.03em;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    letter-spacing: -0.032em;
 }
 
 .font-mono-tech {
     font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.01em;
+    letter-spacing: -0.01em;
 }
 
-/* Pill Buttons */
-.fauna-btn-primary {
+.apple-eyebrow {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px 26px;
-    border-radius: 9999px;
-    background: #0f172a;
-    color: #ffffff;
-    font-size: 13px;
+    gap: 8px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: -0.01em;
-    border: 1px solid #0f172a;
-    transition: all 0.35s var(--ease-fauna);
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
-    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--apple-blue);
+}
+
+.apple-eyebrow-dark {
+    color: var(--apple-pro-blue);
+}
+
+.apple-hero-title {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.03;
+}
+
+.apple-section-title {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+}
+
+.apple-gradient-text-dark {
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #86868b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.apple-gradient-text-blue {
+    background: linear-gradient(135deg, #2997ff 0%, #00d2ff 55%, #64d2ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.apple-gradient-text-light {
+    background: linear-gradient(180deg, #1d1d1f 0%, #424245 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ==========================================================================
+   APPLE GLOBAL & SUB-NAVIGATION SYSTEM
+   ========================================================================== */
+.apple-global-ribbon {
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(245, 245, 247, 0.8);
+    font-size: 12px;
+    transition: background-color 0.35s var(--ease-apple);
+}
+
+.apple-local-nav {
+    background: rgba(251, 251, 253, 0.82);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.35s var(--ease-apple);
+}
+
+.apple-local-nav.nav-floating {
+    background: rgba(255, 255, 255, 0.90);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.apple-local-nav-dark,
+.spera-top-nav {
+    background: rgba(5, 5, 8, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.35s var(--ease-apple);
+}
+
+.spera-top-nav.nav-floating {
+    background: rgba(10, 10, 14, 0.88);
+    border-bottom-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Floating Glassmorphic Capsule Navbar (Hidden at Top, Revealed on Scroll) */
+.cyno-floating-header {
+    transition: opacity 0.42s var(--ease-apple-spring), transform 0.42s var(--ease-apple-spring);
+    will-change: transform, opacity;
+}
+
+.cyno-floating-header.nav-hidden-top {
+    opacity: 0;
+    transform: translateY(-110%);
+    pointer-events: none;
+}
+
+.cyno-floating-header.nav-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.cyno-nav-capsule {
+    background: linear-gradient(135deg, rgba(10, 14, 24, 0.84) 0%, rgba(6, 9, 17, 0.90) 100%);
+    backdrop-filter: saturate(200%) blur(24px);
+    -webkit-backdrop-filter: saturate(200%) blur(24px);
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 18px 42px -10px rgba(0, 0, 0, 0.58),
+        0 0 28px rgba(0, 210, 255, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    transition: all 0.35s var(--ease-apple-spring);
+}
+
+.nav-spy-link {
+    color: rgba(255, 255, 255, 0.72);
     text-decoration: none;
-    white-space: nowrap;
 }
 
-.fauna-btn-primary:hover {
-    background: #0284c7;
-    border-color: #0284c7;
+.nav-spy-link:hover {
     color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(2, 132, 199, 0.28);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.fauna-btn-primary:active {
-    transform: translateY(0) scale(0.98);
+.nav-spy-link.is-active {
+    background: linear-gradient(135deg, #0071e3 0%, #00b4ff 100%);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(0, 140, 255, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
-.fauna-btn-secondary {
+.cyno-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #0071e3 0%, #00a8ff 55%, #00d2ff 100%);
+    color: #ffffff;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 168, 255, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.28s var(--ease-apple-spring);
+}
+
+.cyno-nav-cta:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(0, 210, 255, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Mega Dropdown Flyout */
+.apple-flyout-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.32s var(--ease-apple-spring), transform 0.32s var(--ease-apple-spring), visibility 0.32s;
+}
+
+.apple-flyout-trigger:hover .apple-flyout-menu,
+.apple-flyout-trigger:focus-within .apple-flyout-menu,
+.apple-flyout-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   APPLE BUTTONS & INTERACTIVE CONTROLS
+   ========================================================================== */
+.apple-btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     padding: 12px 24px;
-    border-radius: 9999px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #0f172a;
-    font-size: 13px;
+    border-radius: 980px;
+    background: var(--apple-blue);
+    color: #ffffff;
+    font-size: 14px;
     font-weight: 500;
-    transition: all 0.35s var(--ease-fauna);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    letter-spacing: -0.01em;
+    border: 1px solid transparent;
+    transition: all 0.3s var(--ease-apple-spring);
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
 }
 
-.fauna-btn-secondary:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: #0284c7;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+.apple-btn-primary:hover {
+    background: var(--apple-blue-hover);
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 113, 227, 0.32);
 }
 
-/* Dedicated Clean Nav Studio Button */
-.nav-studio-pill {
+.apple-btn-primary:active {
+    transform: scale(0.98);
+}
+
+.apple-btn-secondary {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 7px 16px;
-    border-radius: 9999px;
-    background: #0f172a;
-    border: 1px solid #0f172a;
-    color: #ffffff;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
-    transition: all 0.3s var(--ease-fauna);
+    padding: 12px 24px;
+    border-radius: 980px;
+    background: rgba(29, 29, 31, 0.06);
+    color: var(--apple-text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s var(--ease-apple-spring);
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
 }
 
-.nav-studio-pill:hover {
-    background: #0284c7;
-    border-color: #0284c7;
+.apple-btn-secondary:hover {
+    background: rgba(29, 29, 31, 0.1);
+    border-color: rgba(0, 0, 0, 0.18);
+    transform: scale(1.02);
+}
+
+.apple-btn-glass-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 980px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     color: #ffffff;
-    box-shadow: 0 4px 18px rgba(2, 132, 199, 0.28);
-    transform: translateY(-1px);
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s var(--ease-apple-spring);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
-/* Link Hover Underline Effect */
-.fauna-link {
+.apple-btn-glass-dark:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.32);
+    transform: scale(1.02);
+}
+
+.apple-pill-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 980px;
+    background: var(--apple-blue);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.25s var(--ease-apple);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.apple-pill-cta:hover {
+    background: var(--apple-blue-hover);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.3);
+}
+
+.apple-link-chevron {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--apple-blue);
+    font-weight: 500;
+    text-decoration: none;
+    transition: gap 0.25s var(--ease-apple), color 0.25s ease;
+}
+
+.apple-link-chevron:hover {
+    gap: 8px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* ==========================================================================
+   APPLE BENTO CARDS & SURFACES
+   ========================================================================== */
+.apple-bento-card {
+    background: var(--apple-surface-white);
+    border: 1px solid var(--apple-border-light);
+    border-radius: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+    transition: transform 0.5s var(--ease-apple-spring), box-shadow 0.5s var(--ease-apple-spring), border-color 0.35s ease;
     position: relative;
-    display: inline-block;
-    transition: color 0.3s ease;
+    overflow: hidden;
 }
 
-.fauna-link::after {
-    content: "";
-    background-color: var(--color-accent);
-    position: absolute;
-    pointer-events: none;
-    height: 1.5px;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s var(--ease-fauna);
+.apple-bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.07);
+    border-color: rgba(0, 0, 0, 0.13);
 }
 
-.fauna-link:hover::after {
-    transform-origin: left;
-    transform: scaleX(1);
+.apple-bento-card-alt {
+    background: var(--apple-bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 28px;
+    transition: transform 0.5s var(--ease-apple-spring), box-shadow 0.5s var(--ease-apple-spring), background-color 0.35s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Clean White Cards & Surface Treatments */
-.fauna-card {
+.apple-bento-card-alt:hover {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 24px;
-    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
-    transition: all 0.45s var(--ease-fauna);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.06);
+}
+
+.apple-bento-card-dark {
+    background: var(--apple-surface-dark);
+    border: 1px solid var(--apple-border-dark);
+    border-radius: 28px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    transition: transform 0.5s var(--ease-apple-spring), border-color 0.4s ease, box-shadow 0.5s var(--ease-apple-spring);
+    position: relative;
+    overflow: hidden;
+}
+
+.apple-bento-card-dark:hover {
+    transform: translateY(-4px);
+    border-color: rgba(41, 151, 255, 0.4);
+    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.6), 0 0 40px rgba(41, 151, 255, 0.08);
+}
+
+/* Legacy compatibility classes used in app.js */
+.fauna-card {
+    background: var(--apple-surface-white);
+    border: 1px solid var(--apple-border-light);
+    border-radius: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+    transition: transform 0.5s var(--ease-apple-spring), box-shadow 0.5s var(--ease-apple-spring), border-color 0.35s ease;
     position: relative;
     overflow: hidden;
 }
 
 .fauna-card:hover {
-    border-color: #cbd5e1;
-    background: #ffffff;
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.07);
+    border-color: rgba(0, 0, 0, 0.13);
 }
 
-/* Sibling Hover Focus Effect */
-.fauna-sibling-container {
-    display: grid;
+/* ==========================================================================
+   SPERA LABS INSPIRED HERO SHOWCASE & AMBIENT DEPTH
+   ========================================================================== */
+.apple-hero-stage,
+.spera-hero-section {
+    background: radial-gradient(ellipse 75% 60% at 50% 42%, rgba(41, 151, 255, 0.14) 0%, rgba(0, 210, 255, 0.05) 45%, rgba(0, 0, 0, 1) 75%), #000000;
+    background-color: #000000;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
 }
 
-.fauna-sibling-item {
-    transition: transform 0.45s var(--ease-fauna), opacity 0.4s ease, border-color 0.4s ease;
+/* Spera Orbital Circle Ring */
+@keyframes speraCircleIntro {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.72);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.03);
+        box-shadow: 0 0 160px rgba(0, 210, 255, 0.22), inset 0 0 140px rgba(0, 210, 255, 0.14);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 120px rgba(0, 210, 255, 0.08), inset 0 0 120px rgba(0, 210, 255, 0.05);
+    }
 }
 
-.fauna-sibling-container:hover .fauna-sibling-item:not(:hover) {
-    opacity: 0.65;
-    transform: scale(0.99);
-}
-
-/* Technical Badges */
-.fauna-pill-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 13px;
+.spera-circle {
+    pointer-events: none;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 9999px;
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    color: #475569;
-    text-transform: uppercase;
-    font-weight: 500;
+    width: min(64vw, 760px);
+    height: min(64vw, 760px);
+    position: absolute;
+    left: 50%;
+    top: 4vh;
+    transform: translateX(-50%);
+    box-shadow: 0 0 120px rgba(0, 210, 255, 0.07), inset 0 0 120px rgba(0, 210, 255, 0.05);
+    animation: speraCircleIntro 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.fauna-pill-tag-cyan {
-    background: #e0f2fe;
-    border-color: #bae6fd;
-    color: #0369a1;
+/* Spera Concentric Cyber Fingerprint / Radar Pattern */
+.spera-fingerprint {
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.09;
+    border-radius: 9999px;
+    width: min(64vw, 760px);
+    height: min(64vw, 760px);
+    position: absolute;
+    left: 50%;
+    top: 4vh;
+    transform: translateX(-50%);
+    background-image:
+        repeating-radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 255, 255, 0.35) 0px,
+            rgba(255, 255, 255, 0.35) 1px,
+            transparent 1px,
+            transparent 22px
+        );
+    mask-image: radial-gradient(circle at 50% 50%, black 25%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 25%, transparent 72%);
 }
 
-.fauna-pill-tag-emerald {
-    background: #ecfdf5;
-    border-color: #a7f3d0;
-    color: #047857;
+/* Spera Hero Typography Wrapper */
+.spera-hero-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 86vw;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    user-select: none;
+    margin-top: 0;
 }
 
-/* Gentle Floating Product Keyframe */
-@keyframes faunaFloat {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(0.4deg); }
+/* 3-Second Keynote Intro Motion for "C Y N O B O T" */
+@keyframes cynoWordmarkIntro {
+    0% {
+        opacity: 0;
+        transform: scale(0.84) translateY(18px);
+        letter-spacing: 0.28em;
+        padding-left: 0.28em;
+        filter: blur(12px) drop-shadow(0 0 40px rgba(0, 210, 255, 0.65));
+    }
+    38% {
+        opacity: 1;
+        transform: scale(1.04) translateY(0px);
+        letter-spacing: 0.15em;
+        padding-left: 0.15em;
+        filter: blur(0px) drop-shadow(0 0 36px rgba(0, 210, 255, 0.45));
+    }
+    78% {
+        opacity: 1;
+        transform: scale(1.02) translateY(0px);
+        letter-spacing: 0.14em;
+        padding-left: 0.14em;
+        filter: blur(0px) drop-shadow(0 0 24px rgba(0, 210, 255, 0.28));
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+        letter-spacing: 0.13em;
+        padding-left: 0.13em;
+        filter: blur(0px) drop-shadow(0 0 0px rgba(0, 210, 255, 0));
+    }
 }
 
-.fauna-floating-product {
-    animation: faunaFloat 6.5s ease-in-out infinite;
+/* Monumental Spaced Wordmark ("C Y N O B O T" matching "S P E R A") */
+.spera-hero-text {
+    font-family: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(2.5rem, 10.2vw, 10.5rem);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: 0.13em;
+    padding-left: 0.13em;
+    text-align: center;
+    white-space: nowrap;
+    color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.92) 55%, rgba(161, 161, 166, 0.45) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: cynoWordmarkIntro 2.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity, filter, letter-spacing;
+}
+
+/* Spera Bottom Gradient Fade */
+.spera-hero-overlay {
+    pointer-events: none;
+    z-index: 12;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.72) 55%, #000000 100%);
+    position: absolute;
+    inset: 74% 0% 0% 0%;
+}
+
+/* Delayed Enlarge-on-Load Animation for the Upper-Body Robot Canvas (Appears after ~3s CYNOBOT Intro) */
+@keyframes speraRobotZoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.82) translateY(36px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.spera-robot-stage {
+    opacity: 0;
+    animation: speraRobotZoomIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2.75s forwards;
+    will-change: transform, opacity;
+}
+
+@media (max-width: 767px) {
+    .spera-hero-wrapper {
+        width: 92vw;
+        margin-top: -2vh;
+    }
+    .spera-hero-text {
+        font-size: clamp(2.1rem, 10.5vw, 3.8rem);
+        letter-spacing: 0.08em;
+        padding-left: 0.08em;
+    }
+    .spera-circle,
+    .spera-fingerprint {
+        width: 88vw;
+        height: 88vw;
+        top: 12vh;
+    }
+}
+
+.apple-dark-section {
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(41, 151, 255, 0.12) 0%, rgba(0, 0, 0, 0) 70%), #000000;
+    color: #f5f5f7;
+}
+
+@keyframes appleProductFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-10px) scale(1.008); }
+}
+
+.apple-floating-hardware {
+    animation: appleProductFloat 7s ease-in-out infinite;
     will-change: transform;
 }
 
-/* Custom Sliders */
+/* ==========================================================================
+   6-STEP GREETING PROTOCOL CARDS
+   ========================================================================== */
+.flow-step-card {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s var(--ease-apple-spring);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.flow-step-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 113, 227, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 113, 227, 0.10);
+}
+
+.flow-step-card.active-step {
+    border-color: var(--apple-blue) !important;
+    background: linear-gradient(180deg, #eef6ff 0%, #ffffff 100%) !important;
+    box-shadow: 0 16px 36px rgba(0, 113, 227, 0.16), 0 0 0 1.5px var(--apple-blue) !important;
+    transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   IPAD PRO KIOSK BEZEL & SEGMENTED CONTROLS
+   ========================================================================== */
+.apple-segmented-bar {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 980px;
+    background: #e8e8ed;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.apple-segment-btn {
+    padding: 8px 18px;
+    border-radius: 980px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #515154;
+    background: transparent;
+    border: none;
+    transition: all 0.3s var(--ease-apple-spring);
+    cursor: pointer;
+}
+
+.apple-segment-btn:hover {
+    color: #1d1d1f;
+}
+
+.apple-segment-btn.is-active {
+    background: #ffffff;
+    color: #1d1d1f;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.apple-ipad-bezel {
+    background: linear-gradient(145deg, #2c2c2e 0%, #1c1c1e 100%);
+    padding: 14px;
+    border-radius: 38px;
+    box-shadow:
+        0 30px 60px -12px rgba(0, 0, 0, 0.22),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+        0 2px 4px rgba(255, 255, 255, 0.2) inset;
+}
+
+.apple-ipad-screen {
+    background: #ffffff;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   3D STUDIO & CALLOUT PINS
+   ========================================================================== */
+.callout-pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.25s ease, transform 0.25s var(--ease-apple-spring), box-shadow 0.25s ease;
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    cursor: pointer;
+}
+
+.callout-pin:hover {
+    transform: translate(-50%, -54%) scale(1.04);
+}
+
+/* Custom Range Slider (Apple Style) */
 input[type=range].cyno-slider {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    background: #e2e8f0;
+    background: #e5e5ea;
     height: 6px;
     border-radius: 999px;
     outline: none;
@@ -279,93 +751,19 @@ input[type=range].cyno-slider {
 input[type=range].cyno-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #0284c7;
+    background: #ffffff;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
-    border: 2px solid #ffffff;
-    transition: transform 0.2s var(--ease-fauna);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--apple-blue);
+    transition: transform 0.2s var(--ease-apple-spring), background-color 0.2s ease;
 }
 
 input[type=range].cyno-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.25);
-    background: #0f172a;
-}
-
-/* Flow Step Card State */
-.flow-step-card {
-    transition: all 0.35s var(--ease-fauna);
-    border: 1px solid #e2e8f0;
-    background: #ffffff;
-}
-
-.flow-step-card.active-step {
-    border-color: #0284c7 !important;
-    background: #f0f9ff !important;
-    box-shadow: 0 10px 28px -4px rgba(2, 132, 199, 0.16) !important;
-    transform: translateY(-3px);
-}
-
-/* Mindmap Styling */
-.mindmap-node {
-    transition: transform 0.22s var(--ease-fauna), box-shadow 0.22s ease, opacity 0.22s ease, border-color 0.22s ease;
-    user-select: none;
-    cursor: pointer;
-    will-change: transform;
-}
-
-.mindmap-node:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.1);
-}
-
-.mindmap-node.selected {
-    border-color: #0284c7 !important;
-    box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.35), 0 12px 28px -6px rgba(15, 23, 42, 0.12) !important;
-    transform: translateY(-2px) scale(1.03) !important;
-}
-
-.mindmap-node.matched {
-    border-color: #0284c7 !important;
-    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.3), 0 0 16px rgba(2, 132, 199, 0.2) !important;
-    animation: mindmapNodePulse 1.8s infinite;
-}
-
-.mindmap-node.dimmed {
-    opacity: 0.25 !important;
-    filter: grayscale(0.8);
-    pointer-events: none;
-}
-
-@keyframes mindmapNodePulse {
-    0%, 100% { transform: scale(1.02); }
-    50% { transform: scale(1.05); }
-}
-
-.mindmap-connector-line {
-    stroke-dasharray: 4 3;
-    transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
-}
-
-.mindmap-connector-pulse {
-    stroke-dasharray: 4 3;
-    animation: mindmapDash 2.5s linear infinite;
-}
-
-@keyframes mindmapDash {
-    to { stroke-dashoffset: -28; }
-}
-
-#mindmap-workbench.is-fullscreen {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: 9999 !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
+    transform: scale(1.18);
+    background: var(--apple-blue);
 }
 
 #robot-canvas-container canvas,
@@ -376,39 +774,53 @@ input[type=range].cyno-slider::-webkit-slider-thumb:hover {
     outline: none;
 }
 
-/* Minimalist Light Scrollbar */
+/* ==========================================================================
+   SPECIFICATION TABS & FILTERING
+   ========================================================================== */
+.spec-category-card {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.35s var(--ease-apple);
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.spec-category-card.is-hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   SCROLLBARS & REDUCED MOTION ACCESSIBILITY
+   ========================================================================== */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: #f5f5f7;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #c7c7cc;
     border-radius: 999px;
+    border: 2px solid #f5f5f7;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #8e8e93;
 }
 
 .hud-scroll {
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+    scrollbar-color: #c7c7cc transparent;
 }
 
-.hud-scroll::-webkit-scrollbar {
-    width: 4px;
-}
-
-.hud-scroll::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 9999px;
-}
-
-.hud-scroll::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

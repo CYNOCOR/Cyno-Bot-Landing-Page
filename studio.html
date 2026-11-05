@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYNO BOT — Interactive 3D CAD Studio | CYNOCOR (Group G 40)</title>
+    <title>CYNO BOT — Interactive 3D CAD Studio | CYNOCOR</title>
     <link rel="icon" type="image/png" href="assets/images/cynocor-logo.png">
     
     <!-- Tailwind CSS -->
@@ -24,8 +24,8 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        heading: ['Outfit', 'sans-serif'],
-                        tech: ['"JetBrains Mono"', 'monospace'],
+                        display: ['Outfit', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
                     }
                 }
             }
@@ -34,282 +34,275 @@
 
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="fauna-canvas text-slate-900 antialiased min-h-screen flex flex-col justify-between selection:bg-slate-900 selection:text-white bg-[#f8fafc]">
+<body class="bg-[#f5f5f7] text-[#1d1d1f] antialiased min-h-screen flex flex-col justify-between selection:bg-[#0071e3] selection:text-white">
 
-    <!-- Top Technical Ribbon -->
-    <header class="w-full bg-white/95 border-b border-slate-200/90 backdrop-blur-xl z-50 sticky top-0 shadow-[0_1px_8px_rgba(15,23,42,0.03)]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
-            
-            <!-- Left: Logo & Studio Title -->
-            <div class="flex items-center gap-3">
+    <!-- ===================================================================== -->
+    <!-- STUDIO NAVIGATION BAR                                                 -->
+    <!-- ===================================================================== -->
+    <header class="sticky top-0 z-50 w-full">
+        <!-- Local Studio Sub-Toolbar -->
+        <div class="apple-local-nav">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
+                
                 <a href="index.html" class="flex items-center gap-2.5 group">
-                    <div class="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center p-1 group-hover:border-sky-500 transition">
-                        <img src="assets/images/cynocor-logo.png" alt="CYNOCOR" class="w-full h-full object-contain" />
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-heading font-bold text-sm tracking-tight text-slate-900 group-hover:text-sky-600 transition">CYNOCOR</span>
-                        <span class="font-tech text-[9px] text-sky-700 tracking-widest uppercase font-semibold">3D CAD Studio</span>
-                    </div>
+                    <img src="assets/images/cynocor-logo.png" alt="CYNOCOR" class="w-5 h-5 object-contain group-hover:scale-105 transition-transform" />
+                    <span class="font-display font-bold text-base sm:text-lg text-[#1d1d1f] tracking-tight">CYNO BOT 3D Studio</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[#0071e3] font-mono text-[10px] font-semibold">1.67m CAD</span>
                 </a>
 
-                <div class="hidden md:flex items-center gap-2 pl-3 border-l border-slate-200 font-tech text-[11px] text-slate-500">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="font-medium text-slate-700">WebGL 3D Connected</span>
-                    <span class="text-slate-300">&bull;</span>
-                    <span>1.67m Life-Size CAD</span>
+                <!-- Apple Segmented Camera Presets -->
+                <div class="hidden md:flex items-center gap-1 p-1 rounded-full bg-black/[0.05] border border-black/[0.06] text-xs">
+                    <button onclick="setCameraPreset('front')" class="cam-preset-btn px-3.5 py-1 rounded-full bg-white text-[#1d1d1f] shadow-2xs font-semibold transition cursor-pointer">Front</button>
+                    <button onclick="setCameraPreset('side')" class="cam-preset-btn px-3.5 py-1 rounded-full text-[#6e6e73] hover:text-[#1d1d1f] transition cursor-pointer">Side</button>
+                    <button onclick="setCameraPreset('iso')" class="cam-preset-btn px-3.5 py-1 rounded-full text-[#6e6e73] hover:text-[#1d1d1f] transition cursor-pointer">Isometric</button>
+                    <button onclick="setCameraPreset('head')" class="cam-preset-btn px-3.5 py-1 rounded-full text-[#6e6e73] hover:text-[#1d1d1f] transition cursor-pointer">Head</button>
+                    <button onclick="setCameraPreset('torso')" class="cam-preset-btn px-3.5 py-1 rounded-full text-[#6e6e73] hover:text-[#1d1d1f] transition cursor-pointer">Torso &amp; M1</button>
+                    <button onclick="setCameraPreset('legs')" class="cam-preset-btn px-3.5 py-1 rounded-full text-[#6e6e73] hover:text-[#1d1d1f] transition cursor-pointer">Legs &amp; Base</button>
                 </div>
-            </div>
 
-            <!-- Center: Camera Preset Pills -->
-            <div class="hidden lg:flex items-center gap-1.5 p-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-tech">
-                <button onclick="setCameraPreset('front')" class="px-3 py-1 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 transition">Front</button>
-                <button onclick="setCameraPreset('iso')" class="px-3 py-1 rounded-full bg-white text-slate-900 border border-slate-200 shadow-xs font-semibold transition">Isometric</button>
-                <button onclick="setCameraPreset('head')" class="px-3 py-1 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 transition">Head</button>
-                <button onclick="setCameraPreset('torso')" class="px-3 py-1 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 transition">Torso</button>
-                <button onclick="setCameraPreset('legs')" class="px-3 py-1 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 transition">Legs</button>
-            </div>
+                <!-- Right Action Buttons -->
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleVoiceMute()" class="px-3 py-1.5 rounded-full bg-black/[0.05] hover:bg-black/[0.09] text-xs font-medium text-[#1d1d1f] flex items-center gap-1.5 transition cursor-pointer">
+                        <i id="voice-icon" class="fa-solid fa-volume-high text-[#0071e3] text-xs"></i>
+                        <span id="voice-label" class="hidden sm:inline">Voice: ON</span>
+                    </button>
+                    <a href="index.html" class="apple-pill-cta">
+                        <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                        <span>Overview</span>
+                    </a>
+                </div>
 
-            <!-- Right: Return to Website CTA -->
-            <div class="flex items-center gap-3">
-                <a href="index.html" class="px-4 py-1.5 rounded-full bg-slate-900 hover:bg-sky-600 text-xs font-tech text-white flex items-center gap-2 transition shadow-xs">
-                    <i class="fa-solid fa-arrow-left text-xs"></i>
-                    <span>Back to Overview</span>
-                </a>
             </div>
-
         </div>
     </header>
 
-    <!-- Main CAD Studio Viewport -->
-    <main class="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 py-4 flex flex-col gap-4 relative">
+    <!-- ===================================================================== -->
+    <!-- MAIN 3D CAD WORKSPACE                                                 -->
+    <!-- ===================================================================== -->
+    <main class="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 py-5 flex flex-col gap-5">
         
-        <!-- Studio Workspace Card -->
-        <div class="w-full flex-1 rounded-3xl p-3 sm:p-5 bg-white border border-slate-200/90 shadow-xl relative overflow-hidden flex flex-col justify-between">
+        <div class="w-full flex-1 rounded-[32px] p-4 sm:p-6 bg-white border border-black/[0.08] shadow-[0_12px_40px_rgba(0,0,0,0.04)] flex flex-col justify-between">
             
-            <!-- Studio Sub-header Bar -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 relative z-10 border-b border-slate-100 pb-3">
-                <div class="flex items-center gap-3">
-                    <div class="fauna-pill-tag fauna-pill-tag-cyan">
-                        <i class="fa-solid fa-cube text-[10px]"></i>
-                        <span class="font-bold">Interactive CAD Inspector</span>
-                    </div>
-                    <span class="text-xs font-tech text-slate-500 hidden sm:inline">// 6 Detachable Sub-assemblies</span>
+            <!-- Top Studio Telemetry Strip -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-black/[0.06]">
+                <div>
+                    <span class="apple-eyebrow">Interactive Digital Twin</span>
+                    <h1 class="font-display font-bold text-xl sm:text-2xl text-[#1d1d1f] tracking-tight">
+                        6-Part Modular Architecture &amp; Internal Apple M1 Core
+                    </h1>
                 </div>
 
-                <!-- Live CAD Telemetry Badges -->
-                <div class="flex flex-wrap items-center gap-2 font-tech text-[10px]">
-                    <span class="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center gap-1.5 font-medium">
-                        <span class="w-1.5 h-1.5 rounded-full bg-sky-600"></span> Apple M1 Silicon
+                <div class="flex flex-wrap items-center gap-2 font-mono text-[11px]">
+                    <span class="px-3 py-1 rounded-full bg-[#f5f5f7] border border-black/[0.06] text-[#1d1d1f] font-medium">
+                        <i class="fa-brands fa-apple mr-1 text-[#0071e3]"></i>Mac mini M1
                     </span>
-                    <span class="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-medium">
+                    <span class="px-3 py-1 rounded-full bg-[#f5f5f7] border border-black/[0.06] text-[#1d1d1f] font-medium">
                         1,670mm Height
                     </span>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold">
-                        7W Idle Power
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-800 font-semibold">
-                        Zero Pinch Hazards
+                    <span class="px-3 py-1 rounded-full bg-[#30d158]/15 text-[#1d8338] font-semibold">
+                        7W Active Idle
                     </span>
                 </div>
             </div>
 
-            <!-- 3D Studio Core Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch relative z-10 flex-1 min-h-[560px]">
+            <!-- 3-Column Studio Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch flex-1 min-h-[580px]">
                 
-                <!-- LEFT HUD DECK: Exploded View & Viewport Controls -->
-                <div class="lg:col-span-3 flex flex-col gap-3 order-2 lg:order-1 lg:h-[580px] lg:overflow-y-auto hud-scroll pr-1">
+                <!-- LEFT COLUMN: Exploded View & Shader Controls -->
+                <div class="lg:col-span-3 flex flex-col gap-4 order-2 lg:order-1">
                     
                     <!-- Card 1: 6-Part Modular Exploded View -->
-                    <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 space-y-3 shadow-xs">
-                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <div class="p-5 rounded-3xl bg-[#f5f5f7] border border-black/[0.06] space-y-3.5">
+                        <div class="flex items-center justify-between border-b border-black/[0.07] pb-2.5">
                             <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-cubes-stacked text-sky-600 text-xs"></i>
-                                <h3 class="font-heading font-bold text-xs tracking-wide uppercase text-slate-900">Modular CAD</h3>
+                                <i class="fa-solid fa-cubes-stacked text-[#0071e3] text-xs"></i>
+                                <h2 class="font-display font-bold text-sm text-[#1d1d1f]">Exploded View</h2>
                             </div>
-                            <span id="explode-pct-badge" class="font-tech text-[10px] px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 border border-sky-200 font-bold">0% ASSEMBLED</span>
+                            <span id="explode-pct-badge" class="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[#0071e3] font-semibold">0% ASSEMBLED</span>
                         </div>
 
-                        <!-- Explode Slider -->
                         <div class="space-y-2">
-                            <div class="flex justify-between text-xs text-slate-700">
-                                <span class="font-tech text-[11px] font-medium">Exploded View</span>
-                                <button onclick="toggleExplodeView()" id="explode-btn" class="text-sky-700 hover:text-sky-900 hover:underline font-tech text-[11px] cursor-pointer font-semibold">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-[#6e6e73] font-medium">Separation Vector</span>
+                                <button onclick="toggleExplodeView()" id="explode-btn" class="text-[#0071e3] hover:underline font-mono text-[11px] font-semibold cursor-pointer">
                                     <i class="fa-solid fa-maximize mr-1"></i>Explode 100%
                                 </button>
                             </div>
                             <input id="explode-slider" type="range" min="0" max="100" value="0" class="cyno-slider" oninput="setExplodeAmount(this.value)">
-                            <div class="flex justify-between text-[9px] font-tech text-slate-400">
-                                <span>Assembled</span>
-                                <span>Core Bay</span>
-                                <span>Exploded</span>
+                            <div class="flex justify-between text-[10px] font-mono text-[#86868b]">
+                                <span>0% Locked</span>
+                                <span>50% Core</span>
+                                <span>100% Split</span>
                             </div>
                         </div>
 
-                        <p class="text-[11px] text-slate-500 leading-relaxed font-sans">
-                            Drag slider to expand all 6 detachable modules along calibrated 3D vectors to reveal internal Apple M1 brain, frame, and wiring.
+                        <p class="text-xs text-[#6e6e73] leading-relaxed">
+                            Slide to separate all 6 detachable assemblies and expose the internal Apple Mac mini M1, ESP32 boards, and dual cooling fans.
                         </p>
                     </div>
 
-                    <!-- Card 2: Viewport & Shader Modes -->
-                    <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 space-y-3 shadow-xs">
-                        <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
-                            <i class="fa-solid fa-sliders text-sky-600 text-xs"></i>
-                            <h3 class="font-heading font-bold text-xs tracking-wide uppercase text-slate-900">Display Toggles</h3>
+                    <!-- Card 2: Viewport Display Modes -->
+                    <div class="p-5 rounded-3xl bg-[#f5f5f7] border border-black/[0.06] space-y-3">
+                        <div class="flex items-center gap-2 border-b border-black/[0.07] pb-2.5">
+                            <i class="fa-solid fa-sliders text-[#0071e3] text-xs"></i>
+                            <h2 class="font-display font-bold text-sm text-[#1d1d1f]">Viewport Layers</h2>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-2 text-xs font-tech">
-                            <button id="xray-btn" onclick="toggleXRayMode()" class="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center gap-1.5 transition font-medium shadow-2xs">
-                                <i class="fa-solid fa-bone text-sky-600"></i>
-                                <span>X-Ray CAD</span>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button id="xray-btn" onclick="toggleXRayMode()" class="px-3 py-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-medium flex items-center justify-center gap-1.5 transition shadow-2xs cursor-pointer">
+                                <i class="fa-solid fa-bone text-[#0071e3]"></i>
+                                <span>X-Ray Shell</span>
                             </button>
-                            <button id="autorotate-btn" onclick="toggleAutoRotate()" class="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center gap-1.5 transition font-medium shadow-2xs">
-                                <i class="fa-solid fa-arrows-rotate text-sky-600"></i>
-                                <span>Auto-Rotate</span>
+                            <button id="autorotate-btn" onclick="toggleAutoRotate()" class="px-3 py-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-medium flex items-center justify-center gap-1.5 transition shadow-2xs cursor-pointer">
+                                <i class="fa-solid fa-arrows-rotate text-[#0071e3]"></i>
+                                <span>Auto-Orbit</span>
                             </button>
-                            <button id="labels-btn" onclick="toggleCalloutLabels()" class="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center gap-1.5 transition font-medium shadow-2xs">
-                                <i class="fa-solid fa-tag text-sky-600"></i>
-                                <span>3D Callouts</span>
+                            <button id="labels-btn" onclick="toggleCalloutLabels()" class="px-3 py-2.5 rounded-2xl bg-[#0071e3] text-white font-medium flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+                                <i class="fa-solid fa-tag"></i>
+                                <span>3D Pins: ON</span>
                             </button>
-                            <button id="radar-btn" onclick="toggleGreetingRadar()" class="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center gap-1.5 transition font-medium shadow-2xs">
-                                <i class="fa-solid fa-radar text-sky-600"></i>
-                                <span>Radar 1.5-3m</span>
+                            <button id="radar-btn" onclick="toggleGreetingRadar()" class="px-3 py-2.5 rounded-2xl bg-[#0071e3] text-white font-medium flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+                                <i class="fa-solid fa-satellite-dish"></i>
+                                <span>Radar: ON</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Card 3: Camera Presets for Quick Navigation -->
-                    <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 space-y-3 shadow-xs">
-                        <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
-                            <i class="fa-solid fa-video text-sky-600 text-xs"></i>
-                            <h3 class="font-heading font-bold text-xs tracking-wide uppercase text-slate-900">Camera Presets</h3>
+                    <!-- Card 3: Operating Profile Switcher -->
+                    <div class="p-5 rounded-3xl bg-[#f5f5f7] border border-black/[0.06] space-y-3">
+                        <div class="flex items-center justify-between border-b border-black/[0.07] pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-[#0071e3] text-xs"></i>
+                                <h2 class="font-display font-bold text-sm text-[#1d1d1f]">Chest Screen Profile</h2>
+                            </div>
+                            <span id="active-profile-badge" class="font-mono text-[9px] text-[#0071e3] font-semibold">UNIVERSITY</span>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-1.5 font-tech text-[11px]">
-                            <button onclick="setCameraPreset('front')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 transition font-medium shadow-2xs">Front</button>
-                            <button onclick="setCameraPreset('side')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 transition font-medium shadow-2xs">Side</button>
-                            <button onclick="setCameraPreset('iso')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 transition font-medium shadow-2xs">Iso</button>
-                            <button onclick="setCameraPreset('head')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 transition font-medium shadow-2xs">Head</button>
-                            <button onclick="setCameraPreset('torso')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 transition font-medium shadow-2xs">Torso</button>
-                            <button onclick="setCameraPreset('legs')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 transition font-medium shadow-2xs">Legs</button>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button id="prof-uni-btn" onclick="switchProfile('university')" class="p-2.5 rounded-2xl bg-[#0071e3] text-white font-semibold text-left transition cursor-pointer shadow-xs">
+                                <div class="text-[10px] opacity-80 font-mono">MODE 01</div>
+                                <div class="mt-0.5">Campus Entrance</div>
+                            </button>
+                            <button id="prof-home-btn" onclick="switchProfile('home')" class="p-2.5 rounded-2xl bg-white hover:bg-black/[0.03] border border-black/[0.08] text-[#1d1d1f] font-semibold text-left transition cursor-pointer">
+                                <div class="text-[10px] text-[#86868b] font-mono">MODE 02</div>
+                                <div class="mt-0.5">Home Companion</div>
+                            </button>
                         </div>
                     </div>
 
                 </div>
 
-                <!-- CENTER: 3D THREE.JS CANVAS STAGE -->
-                <div class="lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2 relative rounded-2xl bg-gradient-to-b from-slate-50 via-slate-100/60 to-slate-200/50 border border-slate-200 overflow-hidden min-h-[420px] lg:min-h-[580px]">
+                <!-- CENTER COLUMN: 3D THREE.JS INTERACTIVE VIEWPORT -->
+                <div class="lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2 relative rounded-[28px] bg-gradient-to-b from-[#0f1117] via-[#090c12] to-[#05070b] border border-black/20 shadow-2xl overflow-hidden min-h-[460px] lg:min-h-[600px]">
                     
-                    <!-- Top Canvas Overlay Hints -->
-                    <div class="absolute top-3 inset-x-4 flex items-center justify-between pointer-events-none z-20 font-tech text-[10px] text-slate-600">
-                        <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 border border-slate-200 shadow-sm">
-                            <i class="fa-solid fa-arrows-up-down-left-right text-sky-600"></i>
-                            <span>Drag: Rotate 360&deg; &bull; Scroll: Zoom CAD</span>
+                    <!-- Top Floating Viewport HUD -->
+                    <div class="absolute top-3.5 inset-x-4 flex items-center justify-between pointer-events-none z-20 font-mono text-[10px] text-white/80">
+                        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 backdrop-blur-md">
+                            <i class="fa-solid fa-arrows-up-down-left-right text-[#2997ff]"></i>
+                            <span>Drag: 360&deg; Orbit &bull; Scroll: Zoom</span>
                         </span>
-                        <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 border border-slate-200 shadow-sm hidden sm:flex">
-                            <i class="fa-solid fa-arrow-pointer text-sky-600"></i>
-                            <span>Click any robot part to inspect telemetry</span>
+                        <span class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 backdrop-blur-md">
+                            <i class="fa-solid fa-hand-pointer text-[#2997ff]"></i>
+                            <span>Click any module to inspect</span>
                         </span>
                     </div>
 
-                    <!-- 3D Canvas Container -->
+                    <!-- Three.js Canvas Mount -->
                     <div id="robot-canvas-container" class="w-full h-full cursor-grab active:cursor-grabbing relative select-none flex items-center justify-center">
-                        <!-- Canvas injected by initThreeJS() -->
+                        <!-- Injected by initThreeJS() in js/app.js -->
                     </div>
 
-                    <!-- 3D Callouts Container -->
+                    <!-- Floating 3D Callout Pins Container -->
                     <div id="callouts-container" class="absolute inset-0 pointer-events-none z-20"></div>
 
-                    <!-- Floor Stage Contact Shadow -->
-                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-3/4 h-12 bg-slate-400/20 blur-2xl rounded-full pointer-events-none"></div>
-
-                    <!-- Center Bottom Quick Trigger -->
-                    <div class="absolute bottom-3 inset-x-4 flex items-center justify-center gap-2 pointer-events-auto z-20">
-                        <button onclick="triggerWaveAnimation()" class="px-4 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-xs font-tech text-slate-800 flex items-center gap-2 shadow-md transition active:scale-95 cursor-pointer font-semibold">
-                            <i class="fa-solid fa-hand text-sky-600"></i>
-                            <span>Wave Hand</span>
+                    <!-- Bottom Interactive Action Dock -->
+                    <div class="absolute bottom-4 inset-x-4 flex flex-wrap items-center justify-center gap-2.5 pointer-events-auto z-20">
+                        <button onclick="triggerQuickGreeting('en')" class="px-4 py-2 rounded-full bg-white/95 hover:bg-white text-[#1d1d1f] text-xs font-semibold flex items-center gap-2 shadow-lg transition active:scale-95 cursor-pointer">
+                            <i class="fa-solid fa-hand text-[#0071e3]"></i>
+                            <span>Greet Visitor</span>
                         </button>
-                        <button onclick="playCyberBeep(640, 'triangle', 0.18, 0.1)" class="px-4 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-xs font-tech text-slate-800 flex items-center gap-2 shadow-md transition active:scale-95 cursor-pointer font-semibold">
-                            <i class="fa-solid fa-volume-high text-sky-600"></i>
-                            <span>Sound Chime</span>
+                        <button onclick="setCameraPreset('front')" class="px-4 py-2 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 backdrop-blur-md text-white text-xs font-medium flex items-center gap-2 transition active:scale-95 cursor-pointer">
+                            <i class="fa-solid fa-crosshairs text-[#2997ff]"></i>
+                            <span>Reset Camera</span>
                         </button>
                     </div>
 
                 </div>
 
-                <!-- RIGHT HUD DECK: Part Inspector & Telemetry -->
-                <div class="lg:col-span-3 flex flex-col gap-3 order-3 lg:h-[580px] lg:overflow-y-auto hud-scroll pr-1">
+                <!-- RIGHT COLUMN: Part Inspector & Face Expression Matrix -->
+                <div class="lg:col-span-3 flex flex-col gap-4 order-3">
                     
-                    <!-- Card 1: Active Part Inspector Details -->
-                    <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 space-y-3 shadow-xs">
-                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <!-- Card 1: Active Module Inspector -->
+                    <div class="p-5 rounded-3xl bg-[#f5f5f7] border border-black/[0.06] space-y-3.5">
+                        <div class="flex items-center justify-between border-b border-black/[0.07] pb-2.5">
                             <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-circle-info text-sky-600 text-xs"></i>
-                                <h3 class="font-heading font-bold text-xs tracking-wide uppercase text-slate-900">Part Inspector</h3>
+                                <i class="fa-solid fa-magnifying-glass-chart text-[#0071e3] text-xs"></i>
+                                <h2 class="font-display font-bold text-sm text-[#1d1d1f]">Module Inspector</h2>
                             </div>
-                            <span id="part-tag" class="font-tech text-[9px] px-2 py-0.5 rounded-full bg-sky-50 text-sky-800 border border-sky-200 font-bold uppercase truncate max-w-[140px]">
+                            <span id="part-tag" class="font-mono text-[9px] px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[#0071e3] font-semibold uppercase truncate max-w-[140px]">
                                 COMPLETE SYSTEM
                             </span>
                         </div>
 
                         <div>
-                            <h4 id="part-title" class="font-heading font-bold text-sm text-slate-900 leading-snug">CYNO BOT 1.67m Assistant</h4>
-                            <p id="part-desc" class="text-xs text-slate-600 mt-1.5 leading-relaxed font-sans">
-                                Select any modular assembly using the quick buttons below or click directly on the 3D robot model to inspect engineering specifications.
+                            <h3 id="part-title" class="font-display font-bold text-base text-[#1d1d1f] leading-snug">CYNO BOT 1.67m Autonomous Assistant</h3>
+                            <p id="part-desc" class="text-xs text-[#6e6e73] mt-1.5 leading-relaxed">
+                                Click any sub-assembly button below or click directly on the 3D humanoid model to inspect engineering specifications.
                             </p>
-                        </div>
-
-                        <!-- Sub-assembly Shortcut Grid -->
-                        <div class="grid grid-cols-2 gap-1.5 font-tech text-[10px]">
-                            <button onclick="inspectPart('head')" class="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 text-left transition truncate font-medium shadow-2xs">01. Head &amp; Eyes</button>
-                            <button onclick="inspectPart('torso')" class="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 text-left transition truncate font-medium shadow-2xs">02. Chest Kiosk</button>
-                            <button onclick="inspectPart('brain')" class="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 text-left transition truncate font-medium shadow-2xs">03. Apple M1 Core</button>
-                            <button onclick="inspectPart('leftArm')" class="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 text-left transition truncate font-medium shadow-2xs">04. Left Arm</button>
-                            <button onclick="inspectPart('rightArm')" class="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 text-left transition truncate font-medium shadow-2xs">05. Right Arm</button>
-                            <button onclick="inspectPart('legs')" class="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 text-left transition truncate font-medium shadow-2xs">06. Legs &amp; Base</button>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: OLED Face Expressions -->
-                    <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 space-y-3 shadow-xs">
-                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-face-smile text-sky-600 text-xs"></i>
-                                <h3 class="font-heading font-bold text-xs tracking-wide uppercase text-slate-900">Face Expression</h3>
+                            <div id="inspector-specs" class="mt-3 grid grid-cols-2 gap-2 font-mono text-[10px]">
+                                <div class="p-2 rounded-xl bg-white border border-black/[0.06] text-[#0071e3] font-semibold">Height: 1.67m</div>
+                                <div class="p-2 rounded-xl bg-white border border-black/[0.06] text-[#1d1d1f] font-semibold">6-Part Modular</div>
                             </div>
-                            <span class="font-tech text-[9px] text-slate-500 font-medium">OLED Eye Matrix</span>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-1.5 font-tech text-[10px]">
-                            <button onclick="setFaceExpression('happy')" class="py-1.5 rounded-lg bg-sky-50 text-sky-800 border border-sky-200 font-bold transition">Happy</button>
-                            <button onclick="setFaceExpression('listening')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-medium transition shadow-2xs">Listen</button>
-                            <button onclick="setFaceExpression('thinking')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-medium transition shadow-2xs">Think</button>
-                            <button onclick="setFaceExpression('wink')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-medium transition shadow-2xs">Wink</button>
-                            <button onclick="setFaceExpression('guardian')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-medium transition shadow-2xs">Alert</button>
-                            <button onclick="setFaceExpression('sleep')" class="py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-medium transition shadow-2xs">Sleep</button>
+                        <!-- 6 Sub-Assembly Quick Selector Grid -->
+                        <div class="grid grid-cols-2 gap-1.5 font-mono text-[11px] pt-1">
+                            <button onclick="inspectPart('head')" class="p-2 rounded-xl bg-white hover:bg-[#0071e3] hover:text-white border border-black/[0.07] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">01. Head &amp; Eyes</button>
+                            <button onclick="inspectPart('torso')" class="p-2 rounded-xl bg-white hover:bg-[#0071e3] hover:text-white border border-black/[0.07] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">02. Chest Kiosk</button>
+                            <button onclick="inspectPart('brain')" class="p-2 rounded-xl bg-white hover:bg-[#0071e3] hover:text-white border border-black/[0.07] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">03. Mac mini M1</button>
+                            <button onclick="inspectPart('leftArm')" class="p-2 rounded-xl bg-white hover:bg-[#0071e3] hover:text-white border border-black/[0.07] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">04. Left Arm</button>
+                            <button onclick="inspectPart('rightArm')" class="p-2 rounded-xl bg-white hover:bg-[#0071e3] hover:text-white border border-black/[0.07] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">05. Right Arm</button>
+                            <button onclick="inspectPart('legs')" class="p-2 rounded-xl bg-white hover:bg-[#0071e3] hover:text-white border border-black/[0.07] text-[#1d1d1f] text-left transition truncate font-medium cursor-pointer">06. Legs &amp; Base</button>
                         </div>
                     </div>
 
-                    <!-- Card 3: Real-Time Telemetry Readout -->
-                    <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 space-y-2.5 font-tech text-[10px] shadow-xs">
-                        <div class="flex items-center justify-between border-b border-slate-200 pb-2 text-slate-500 font-medium">
-                            <span>// TELEMETRY_STREAM</span>
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <!-- Card 2: OLED Eye Matrix Expression Controller -->
+                    <div class="p-5 rounded-3xl bg-[#f5f5f7] border border-black/[0.06] space-y-3">
+                        <div class="flex items-center justify-between border-b border-black/[0.07] pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-face-smile text-[#0071e3] text-xs"></i>
+                                <h2 class="font-display font-bold text-sm text-[#1d1d1f]">OLED Face Matrix</h2>
+                            </div>
+                            <span id="current-mood-label" class="font-mono text-[10px] text-[#0071e3] font-semibold uppercase">HAPPY</span>
                         </div>
-                        <div class="flex justify-between text-slate-600">
-                            <span>Processor:</span>
-                            <span class="text-slate-900 font-semibold">Apple M1 (8C CPU / 16C NPU)</span>
+
+                        <div class="grid grid-cols-3 gap-1.5 font-mono text-[11px]">
+                            <button onclick="setFaceExpression('happy')" data-exp-btn="happy" class="exp-btn py-2 rounded-xl bg-[#0071e3] text-white font-semibold transition cursor-pointer">Happy</button>
+                            <button onclick="setFaceExpression('listening')" data-exp-btn="listening" class="exp-btn py-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.07] text-[#1d1d1f] font-medium transition cursor-pointer">Listen</button>
+                            <button onclick="setFaceExpression('thinking')" data-exp-btn="thinking" class="exp-btn py-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.07] text-[#1d1d1f] font-medium transition cursor-pointer">Think</button>
+                            <button onclick="setFaceExpression('wink')" data-exp-btn="wink" class="exp-btn py-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.07] text-[#1d1d1f] font-medium transition cursor-pointer">Wink</button>
+                            <button onclick="setFaceExpression('guardian')" data-exp-btn="guardian" class="exp-btn py-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.07] text-[#1d1d1f] font-medium transition cursor-pointer">SOS Alert</button>
+                            <button onclick="setFaceExpression('sleep')" data-exp-btn="sleep" class="exp-btn py-2 rounded-xl bg-white hover:bg-black/[0.04] border border-black/[0.07] text-[#1d1d1f] font-medium transition cursor-pointer">7W Sleep</button>
                         </div>
-                        <div class="flex justify-between text-slate-600">
-                            <span>Idle Power:</span>
-                            <span class="text-emerald-600 font-bold">7.2W Active Idle</span>
+                    </div>
+
+                    <!-- Card 3: Live Hardware Telemetry -->
+                    <div class="p-5 rounded-3xl bg-[#f5f5f7] border border-black/[0.06] space-y-2.5 font-mono text-[11px]">
+                        <div class="flex items-center justify-between border-b border-black/[0.07] pb-2 text-[#86868b] font-semibold">
+                            <span>TELEMETRY BUS</span>
+                            <span class="w-2 h-2 rounded-full bg-[#30d158]"></span>
                         </div>
-                        <div class="flex justify-between text-slate-600">
-                            <span>Audio Latency:</span>
-                            <span class="text-slate-900 font-semibold">&lt; 3.0s Local STT</span>
+                        <div class="flex justify-between text-[#6e6e73]">
+                            <span>Neural Core</span>
+                            <span class="text-[#1d1d1f] font-semibold">Apple M1 (16C ANE)</span>
                         </div>
-                        <div class="flex justify-between text-slate-600">
-                            <span>Interface:</span>
-                            <span class="text-sky-700 font-semibold">10" Touch Kiosk + Stereo Mic</span>
+                        <div class="flex justify-between text-[#6e6e73]">
+                            <span>Idle Draw</span>
+                            <span class="text-[#1d8338] font-semibold">7.2W Nominal</span>
+                        </div>
+                        <div class="flex justify-between text-[#6e6e73]">
+                            <span>Speech Latency</span>
+                            <span class="text-[#1d1d1f] font-semibold">&le; 2.4s Offline</span>
                         </div>
                     </div>
 
@@ -321,25 +314,21 @@
 
     </main>
 
-    <!-- Studio Footer Bar -->
-    <footer class="w-full bg-white border-t border-slate-200 py-3 px-4 sm:px-6">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-tech text-slate-500">
-            <div class="flex items-center gap-2">
-                <span>CYNO BOT &bull; Group G 40 &bull; ATP Project 2026</span>
-                <span class="text-slate-300">&bull;</span>
-                <span>Informatics Institute of Technology (IIT)</span>
+    <!-- Studio Footer -->
+    <footer class="w-full bg-white border-t border-black/[0.08] py-4 px-4 sm:px-6 text-xs text-[#86868b]">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div>
+                CYNO BOT 3D Digital Twin Studio &bull; CYNOCOR (ATP Group G 40) &bull; Informatics Institute of Technology
             </div>
-            <div class="flex items-center gap-3 text-[11px]">
-                <a href="index.html" class="text-slate-800 hover:text-sky-600 font-semibold">Return to Product Overview &rarr;</a>
-            </div>
+            <a href="index.html" class="text-[#0071e3] hover:underline font-medium">
+                Return to Product Keynote &rarr;
+            </a>
         </div>
     </footer>
 
-    <!-- Three.js App Logic -->
+    <!-- Main 3D & Interactive Engine -->
     <script src="js/app.js"></script>
-
     <script>
-        // Ensure 3D Three.js initiates immediately on page load
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof startApp === 'function') {
                 startApp();
