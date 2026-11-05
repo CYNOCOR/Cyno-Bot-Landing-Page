@@ -494,7 +494,7 @@
             window.addEventListener('resize', onWindowResize);
         }
 
-        function buildCynoBotModel() {
+        function buildCynoBotModel() { buildHeroRobotModel(scene); robotRoot = heroRobotRoot; robotRoot.scale.set(1.22, 1.22, 1.22); return;
             robotRoot = new THREE.Group();
             scene.add(robotRoot);
 
@@ -1594,7 +1594,7 @@
             }
         }
 
-        function triggerQuickGreeting(lang = 'en') {
+        function triggerQuickGreeting(lang = 'en') { if (typeof heroWave !== 'undefined') { heroWave.active = true; heroWave.time = 0; }
             setFaceExpression('happy');
             speakRobotText('Welcome to the university! I am CYNO BOT. How can I help you today?');
             const bubble = document.getElementById('robot-speech-bubble');
@@ -1826,6 +1826,56 @@
             // Smoothly interpolate studio mouse head tracking coordinates
             studioMouse.x += (studioMouse.targetX - studioMouse.x) * 0.08;
             studioMouse.y += (studioMouse.targetY - studioMouse.y) * 0.08;
+            if (renderer && scene && camera && heroRobotRoot && !heroRenderer) {
+                heroExplodedParts.forEach(part => {
+                    part.obj.position.lerpVectors(part.basePos, part.basePos.clone().add(part.deltaPos), e);
+                });
+                if (heroTorsoOuterMat) {
+                    const targetOp = state.xrayMode ? 0.24 : (1.0 - e * 0.78);
+                    heroTorsoOuterMat.opacity = Math.max(0.18, targetOp);
+                    heroTorsoOuterMat.depthWrite = (!state.xrayMode && e < 0.08);
+                }
+                if (heroHead) {
+                    heroHead.rotation.y = studioMouse.x * 0.42;
+                    heroHead.rotation.x = studioMouse.y * 0.35;
+                    heroHead.rotation.z = -studioMouse.x * 0.05;
+                }
+                if (heroTorso) {
+                    heroTorso.rotation.y = studioMouse.x * 0.14;
+                    heroTorso.rotation.x = studioMouse.y * 0.10;
+                }
+                if (heroFaceEyesGroup) {
+                    heroFaceEyesGroup.position.x = studioMouse.x * 0.018;
+                    heroFaceEyesGroup.position.y = -studioMouse.y * 0.012;
+                }
+                if (heroEyeMaterials && heroEyeMaterials.length) {
+                    const expHex = state.expression === 'guardian' ? 0xff3b5c : state.expression === 'sleep' ? 0x64748b : state.expression === 'thinking' ? 0xf59e0b : state.expression === 'listening' ? 0x10b981 : 0x00f0ff;
+                    heroEyeMaterials.forEach(m => { m.color.setHex(expHex); if (m.emissive) m.emissive.setHex(expHex); });
+                }
+                if (heroLeftEyeRing && heroRightEyeRing) {
+                    const lScale = (state.isBlinking || state.expression === 'sleep') ? 0.12 : 1.0;
+                    const rScale = (state.isBlinking || state.expression === 'sleep' || state.expression === 'wink') ? 0.12 : 1.0;
+                    heroLeftEyeRing.scale.y += (lScale - heroLeftEyeRing.scale.y) * 0.35;
+                    heroRightEyeRing.scale.y += (rScale - heroRightEyeRing.scale.y) * 0.35;
+                }
+                if (heroSmileArc) {
+                    heroSmileArc.scale.y = (state.expression === 'listening') ? (1.0 + Math.abs(Math.sin(elapsed * 14)) * 0.75) : (state.expression === 'sleep' ? 0.3 : 1.0);
+                }
+                if (heroWave.active && heroRightArmPivot && heroRightForearmPivot) {
+                    heroWave.time += 0.024;
+                    const t = heroWave.time;
+                    if (t < heroWave.duration) {
+                        const easeRaise = Math.sin(Math.min(1, t * 2.4) * Math.PI / 2);
+                        heroRightArmPivot.rotation.set(easeRaise * 0.40, -easeRaise * 0.20, -easeRaise * 1.15);
+                        heroRightForearmPivot.rotation.set(0, Math.sin(t * 14) * 0.42, -easeRaise * 1.45);
+                    } else {
+                        heroRightArmPivot.rotation.z *= 0.85; heroRightArmPivot.rotation.x *= 0.85; heroRightArmPivot.rotation.y *= 0.85;
+                        heroRightForearmPivot.rotation.z *= 0.85; heroRightForearmPivot.rotation.y *= 0.85;
+                        if (Math.abs(heroRightArmPivot.rotation.z) < 0.02) { heroRightArmPivot.rotation.set(0,0,0); heroRightForearmPivot.rotation.set(0,0,0); heroWave.active = false; }
+                    }
+                }
+                heroRobotRoot.position.y = Math.sin(elapsed * 2.2) * 0.012;
+            }
 
             if (modularGroups.head) {
                 // Subtle idle breathing + exploded offset
@@ -2376,9 +2426,9 @@
             return mesh;
         }
 
-        function buildHeroRobotModel() {
+        function buildHeroRobotModel(targetScene) {
             heroRobotRoot = new THREE.Group();
-            heroScene.add(heroRobotRoot);
+            if (targetScene) targetScene.add(heroRobotRoot); else if (heroScene) heroScene.add(heroRobotRoot);
 
             heroEyeMaterials = [];
             heroGlowMaterials = [];
@@ -2662,7 +2712,7 @@
                 internalHwGroup.add(buildCadMesh(tHwPcb, matPcb, TORSO_PIVOT_Y));
                 internalHwGroup.add(buildCadMesh(tHwCyan, matCyan, TORSO_PIVOT_Y));
 
-                heroTorso.add(internalHwGroup);
+                heroTorso.add(internalHwGroup); internalHwGroup.userData.partKey = 'brain';
                 registerExplodedPart(internalHwGroup, 0, 0, 95.0 * S);
             }
 
@@ -2941,6 +2991,11 @@
             registerExplodedPart(heroHead, 0, 115.0 * S, 0);
 
             heroRobotRoot.add(heroTorso);
+            if (typeof shellMaterials !== 'undefined' && heroTorsoOuterMat) shellMaterials.push(heroTorsoOuterMat);
+            const _tagPart = (grp, k) => { if (grp) grp.traverse(c => { if (c.isMesh && !c.userData.partKey) c.userData.partKey = k; }); };
+            _tagPart(heroBase, 'legs'); _tagPart(heroLegs, 'legs'); _tagPart(heroPelvis, 'legs');
+            _tagPart(heroHead, 'head'); _tagPart(heroLeftArm, 'leftArm'); _tagPart(heroRightArmPivot, 'rightArm'); _tagPart(heroTorso, 'torso');
+            heroTorso.traverse(c => { if (c.parent && c.parent.userData && c.parent.userData.partKey === 'brain' && c.isMesh) c.userData.partKey = 'brain'; });
         }
 
         function setupHeroMouseInteractions(container) {

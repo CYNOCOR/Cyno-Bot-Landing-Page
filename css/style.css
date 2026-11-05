@@ -721,6 +721,33 @@ body {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
 }
 
+@media (max-width: 640px) {
+    .apple-segmented-bar {
+        border-radius: 22px;
+        padding: 4px;
+        gap: 3px;
+    }
+    .apple-segment-btn {
+        padding: 6px 12px;
+        font-size: 11.5px;
+    }
+    .apple-ipad-bezel {
+        padding: 9px;
+        border-radius: 26px;
+    }
+    .apple-ipad-screen {
+        border-radius: 18px;
+    }
+    .apple-bento-card,
+    .apple-bento-card-alt,
+    .apple-bento-card-dark {
+        border-radius: 22px;
+    }
+    .callout-pin {
+        transform: translate(-50%, -50%) scale(0.86);
+    }
+}
+
 /* ==========================================================================
    3D STUDIO & CALLOUT PINS
    ========================================================================== */
