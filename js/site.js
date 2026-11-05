@@ -7,6 +7,7 @@
     const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
     function boot() {
+        setupSplashBoot();
         if (typeof startApp === 'function') startApp();
 
         const year = $('#copyright-year');
@@ -19,11 +20,490 @@
         setupNavIndicator();
         setupMobileMenu();
         setupHeroClickToWave();
-        setupHeroScroll();
+        setupLoopPause();
+        setupSpeakConfirm();
         setupSpotlight();
         setupHeadingScramble();
         setupEdgeBlur();
         setupFooterAscii();
+    }
+
+    /* ---------- Zeptaz-inspired CYNO/OS Boot Splash Screen ---------- */
+    function setupSplashBoot() {
+        const splash = $('#cyno-splash');
+        const curtainCanvas = $('#splash-curtain');
+        const fieldWrap = $('#splash-field-wrap');
+        const fieldCanvas = $('#splash-field');
+        const hud = $('#splash-hud');
+        const logs = $('#splash-logs');
+        const pctEl = $('#splash-pct');
+        const barEl = $('#splash-bar');
+        const srStatus = $('#splash-sr-status');
+
+        const releaseHero = () => {
+            document.documentElement.classList.remove('is-booting');
+        };
+
+        if (!splash || !curtainCanvas || !fieldCanvas) {
+            releaseHero();
+            return;
+        }
+
+        const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#=/%~^()<>|;*+[]{}.:';
+        const N_CHARS = CHARS.length;
+        const INK = '#07090c';
+        const SIGNAL = '#2cc8f0';
+        const MONO_FONT = '"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
+        const DISPLAY_FONT = 'Archivo, "Helvetica Neue", Arial, sans-serif';
+
+        function hash2(x, y, seed = 0) {
+            let n = Math.imul(x | 0, 0x27d4eb2d) ^ Math.imul(y | 0, 0x165667b1) ^ Math.imul(seed | 0, 0x9e3779b1);
+            n = Math.imul((n = Math.imul(n ^ (n >>> 15), 0x85ebca6b)) ^ (n >>> 13), 0xc2b2ae35);
+            return ((n ^= n >>> 16) >>> 0) / 0x100000000;
+        }
+
+        /* 1. Curtain grid dissolve canvas (module 48064) */
+        const curtain = (function () {
+            const ctx = curtainCanvas.getContext('2d');
+            let cols = 0, rows = 0, cell = 30, dpr = 1;
+            let thresh = new Float32Array(0);
+            let charIdx = new Uint8Array(0);
+            let progress = 1;
+
+            function resize() {
+                const r = curtainCanvas.getBoundingClientRect();
+                if (!r.width || !r.height) return;
+                dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+                cell = r.width < 640 ? 22 : 30;
+                curtainCanvas.width = Math.round(r.width * dpr);
+                curtainCanvas.height = Math.round(r.height * dpr);
+                cols = Math.ceil(r.width / cell);
+                rows = Math.ceil(r.height / cell);
+                thresh = new Float32Array(cols * rows);
+                charIdx = new Uint8Array(cols * rows);
+                for (let e = 0; e < rows; e++) {
+                    for (let t = 0; t < cols; t++) {
+                        const diag = (e / rows) * 0.62 + (t / cols) * 0.38;
+                        thresh[e * cols + t] = Math.min(1, Math.max(0, 0.82 * diag + 0.18 * hash2(t, e, 11)));
+                        charIdx[e * cols + t] = Math.floor(hash2(t, e, 12) * N_CHARS);
+                    }
+                }
+            }
+
+            function draw() {
+                if (!cols) resize();
+                if (!cols || !ctx) return;
+                const f = cell * dpr;
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.clearRect(0, 0, curtainCanvas.width, curtainCanvas.height);
+                if (progress <= 0 || progress >= 2) return;
+                const firstHalf = progress <= 1;
+                const x = (firstHalf ? progress : progress - 1) * 1.24 - 0.12;
+                ctx.font = `500 ${Math.round(0.46 * f)}px ${MONO_FONT}`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                for (let e = 0; e < rows; e++) {
+                    for (let l = 0; l < cols; l++) {
+                        const idx = e * cols + l;
+                        const s = x - thresh[idx];
+                        const ox = Math.round(l * f);
+                        const oy = Math.round(e * f);
+                        const mw = Math.round((l + 1) * f) - ox;
+                        const mh = Math.round((e + 1) * f) - oy;
+                        if (firstHalf) {
+                            if (s >= 0.12) {
+                                ctx.fillStyle = INK;
+                                ctx.fillRect(ox, oy, mw, mh);
+                            }
+                        } else if (s < 0) {
+                            ctx.fillStyle = INK;
+                            ctx.fillRect(ox, oy, mw, mh);
+                        } else if (s < 0.12) {
+                            const n = s / 0.12;
+                            if (n < 0.5) {
+                                ctx.fillStyle = INK;
+                                ctx.fillRect(ox, oy, mw, mh);
+                            }
+                            if (n < 0.5 && hash2(l, e, 17) < 0.18) {
+                                ctx.fillStyle = SIGNAL;
+                                ctx.fillRect(ox, oy, mw, mh);
+                            } else if (hash2(l, e, 18) < 0.35) {
+                                ctx.fillStyle = 'rgba(238, 241, 244, 0.65)';
+                                ctx.fillText(CHARS[charIdx[idx]], ox + mw / 2, oy + mh / 2);
+                            }
+                        }
+                    }
+                }
+            }
+
+            resize();
+            draw();
+            return {
+                setProgress(p) {
+                    progress = Math.max(0, Math.min(2, p));
+                    draw();
+                },
+                resize() { resize(); draw(); }
+            };
+        })();
+
+        /* 2. ASCII wordmark matrix field canvas (module 13522 + 18556 + 42720) */
+        const field = (function () {
+            const ctx = fieldCanvas.getContext('2d', { alpha: true });
+            const STEPS = 8;
+            const BUCKET_ALPHA = [[0.06, 0.30], [0.28, 0.85], [0.45, 1.0], [0.72, 1.0]];
+            const BUCKET_RGB = ['238,241,244', '238,241,244', '44,200,240', '238,241,244'];
+
+            let atlas = null, dpr = 1, W = 0, H = 0, cellCss = 10, cellPx = 10, cols = 0, rows = 0;
+            let P = new Uint8Array(0), A = new Uint8Array(0);
+            let C = new Float32Array(0), R = new Float32Array(0), T = new Float32Array(0);
+            let rainAccent = new Uint8Array(0);
+            let coverage = null;
+            let time = 0, pulseVal = 0, maskProgress = reduceMotion ? 1 : 0, maskDim = 0.96;
+            let drops = [];
+            let stopped = false, rafId = 0, lastTs = 0;
+
+            function buildAtlas(px) {
+                const c = document.createElement('canvas');
+                c.width = N_CHARS * px;
+                c.height = 32 * px;
+                const g = c.getContext('2d');
+                g.font = `500 ${Math.round(0.82 * px)}px ${MONO_FONT}`;
+                g.textAlign = 'center';
+                g.textBaseline = 'middle';
+                for (let b = 0; b < 4; b++) {
+                    const [a0, a1] = BUCKET_ALPHA[b];
+                    for (let s = 0; s < STEPS; s++) {
+                        const alpha = a0 + ((a1 - a0) * s) / 7;
+                        g.fillStyle = `rgba(${BUCKET_RGB[b]},${alpha.toFixed(3)})`;
+                        const y = (8 * b + s) * px + px / 2 + 0.04 * px;
+                        for (let ch = 0; ch < N_CHARS; ch++) {
+                            g.fillText(CHARS[ch], ch * px + px / 2, y);
+                        }
+                    }
+                }
+                return c;
+            }
+
+            function buildCoverageMask(cCols, cRows) {
+                const mw = 3 * cCols, mh = 3 * cRows;
+                const m = document.createElement('canvas');
+                m.width = mw; m.height = mh;
+                const g = m.getContext('2d', { willReadFrequently: true });
+                g.fillStyle = '#fff';
+                g.textAlign = 'center';
+                g.textBaseline = 'middle';
+
+                if (W < 640) {
+                    g.font = `800 100px ${DISPLAY_FONT}`;
+                    if ('fontStretch' in g) g.fontStretch = 'expanded';
+                    const scale = (0.84 * mw) / Math.max(1, g.measureText('CYNO').width);
+                    const fs = 100 * scale;
+                    g.font = `800 ${fs}px ${DISPLAY_FONT}`;
+                    const lineGap = fs * 0.78;
+                    g.fillText('CYNO', mw / 2, mh * 0.5 - 0.54 * lineGap);
+                    g.fillText('BOT', mw / 2, mh * 0.5 + 0.54 * lineGap);
+                } else {
+                    g.font = `800 100px ${DISPLAY_FONT}`;
+                    if ('fontStretch' in g) g.fontStretch = 'expanded';
+                    const d = g.measureText('CYNOBOT');
+                    const fs = 100 * Math.min((0.78 * mw) / Math.max(1, d.width), (0.58 * mh) / 72);
+                    g.font = `800 ${fs}px ${DISPLAY_FONT}`;
+                    g.fillText('CYNOBOT', mw / 2, mh * 0.5);
+                }
+
+                const data = g.getImageData(0, 0, mw, mh).data;
+                const out = new Float32Array(cCols * cRows);
+                const norm = 1 / 2295;
+                for (let r = 0; r < cRows; r++) {
+                    for (let c = 0; c < cCols; c++) {
+                        let sum = 0;
+                        for (let dy = 0; dy < 3; dy++) {
+                            let p = ((3 * r + dy) * mw + 3 * c) * 4 + 3;
+                            for (let dx = 0; dx < 3; dx++, p += 4) sum += data[p];
+                        }
+                        out[r * cCols + c] = sum * norm;
+                    }
+                }
+                return out;
+            }
+
+            function resize() {
+                const r = fieldCanvas.getBoundingClientRect();
+                W = r.width; H = r.height;
+                if (!W || !H) return;
+                dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+                const targetCell = W < 640 ? 8 : 10;
+                cellPx = Math.max(6, Math.round(targetCell * dpr));
+                cellCss = cellPx / dpr;
+                fieldCanvas.width = Math.max(1, Math.round(W * dpr));
+                fieldCanvas.height = Math.max(1, Math.round(H * dpr));
+                cols = Math.ceil(fieldCanvas.width / cellPx);
+                rows = Math.ceil(fieldCanvas.height / cellPx);
+                const total = cols * rows;
+                P = new Uint8Array(total);
+                A = new Uint8Array(total);
+                C = new Float32Array(total);
+                R = new Float32Array(total);
+                T = new Float32Array(total);
+                rainAccent = new Uint8Array(total);
+                for (let e = 0; e < rows; e++) {
+                    for (let t = 0; t < cols; t++) {
+                        const idx = e * cols + t;
+                        A[idx] = Math.floor(hash2(t, e, 1) * N_CHARS);
+                        const rnd = hash2(t, e, 2);
+                        P[idx] = rnd < 0.12 ? 2 : +(rnd < 0.5);
+                        C[idx] = hash2(t, e, 3);
+                        R[idx] = hash2(t, e, 4);
+                    }
+                }
+                drops = [];
+                atlas = buildAtlas(cellPx);
+                coverage = buildCoverageMask(cols, rows);
+            }
+
+            function step(dt) {
+                time += dt;
+                pulseVal *= Math.exp(-4.5 * dt);
+                if (pulseVal < 0.01) pulseVal = 0;
+
+                const decay = Math.exp(-6.5 * dt);
+                for (let i = 0; i < T.length; i++) T[i] *= decay;
+
+                const targetDrops = Math.round(cols * 0.08);
+                while (drops.length < targetDrops) {
+                    drops.push({
+                        c: (Math.random() * cols) | 0,
+                        y: -Math.random() * rows * 0.6,
+                        v: 9 + 20 * Math.random(),
+                        cyan: Math.random() < 0.28
+                    });
+                }
+                for (let i = drops.length - 1; i >= 0; i--) {
+                    const d = drops[i];
+                    const y0 = Math.floor(d.y);
+                    d.y += d.v * dt;
+                    const y1 = Math.floor(d.y);
+                    for (let r = Math.max(y0 + 1, 0); r <= Math.min(y1, rows - 1); r++) {
+                        const idx = r * cols + d.c;
+                        T[idx] = 1;
+                        rainAccent[idx] = +!!d.cyan;
+                        if (Math.random() < 0.5) A[idx] = (Math.random() * N_CHARS) | 0;
+                    }
+                    if (d.y > rows + 2) drops.splice(i, 1);
+                }
+
+                const total = A.length;
+                const flips = Math.max(1, Math.round(0.0012 * total * (1 + 6 * pulseVal)));
+                for (let i = 0; i < flips; i++) {
+                    A[(Math.random() * total) | 0] = (Math.random() * N_CHARS) | 0;
+                }
+            }
+
+            function render() {
+                if (!atlas || !cols || !ctx) return;
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.clearRect(0, 0, fieldCanvas.width, fieldCanvas.height);
+
+                const vividBoost = 0.2;
+                const boost = 0.35 * pulseVal;
+                const hasMask = coverage !== null;
+                const mp = maskProgress;
+                const dimFactor = maskDim * (hasMask ? Math.min(1, 1.4 * mp) : 0);
+                const px = cellPx;
+
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        const idx = r * cols + c;
+                        const baseKind = P[idx];
+                        const wave = 0.5 + 0.5 * Math.sin((c + r) * 0.18 - 0.8 * time) * (0.7 + 0.3 * Math.sin(0.07 * c + 0.31 * time));
+                        let bucket = baseKind;
+                        let lum = (baseKind === 0 ? 0.15 + 0.35 * wave : baseKind === 1 ? 0.35 + 0.5 * wave : 0.5 + 0.4 * wave) + vividBoost + boost;
+
+                        const trail = T[idx];
+                        if (trail > 0.03) {
+                            if (rainAccent[idx]) {
+                                bucket = 2;
+                                lum = Math.max(lum, trail);
+                            } else if (trail > 0.55) {
+                                bucket = 3;
+                                lum = Math.max(lum, trail);
+                            } else {
+                                if (bucket === 0) bucket = 1;
+                                lum = Math.max(lum, 0.3 + 0.7 * trail);
+                            }
+                        }
+
+                        if (hasMask) {
+                            const cov = coverage[idx];
+                            if (cov > 0.5) {
+                                const delta = mp - C[idx];
+                                if (delta > 0) {
+                                    if (delta < 0.12 && mp < 1) {
+                                        bucket = 3;
+                                        lum = Math.sin(38 * time + 60 * R[idx]) > 0 ? 1 : 0.3;
+                                        if (((22 * time + 97 * R[idx]) | 0) % 3 === 0) {
+                                            A[idx] = (hash2(c, r, (22 * time) | 0) * N_CHARS) | 0;
+                                        }
+                                    } else {
+                                        bucket = R[idx] < 0.10 ? 2 : 3;
+                                        lum = 0.92 + 0.08 * wave;
+                                    }
+                                } else {
+                                    lum = (lum - vividBoost) * (1 - dimFactor);
+                                    if (dimFactor > 0.6) bucket = 0;
+                                }
+                            } else {
+                                lum = (lum - vividBoost) * (1 - dimFactor);
+                                if (dimFactor > 0.6) bucket = 0;
+                            }
+                        }
+
+                        if (lum <= 0) continue;
+                        let stepIdx = (lum * STEPS) | 0;
+                        if (stepIdx > STEPS - 1) stepIdx = STEPS - 1;
+                        const rowInAtlas = bucket * STEPS + stepIdx;
+                        ctx.drawImage(atlas, A[idx] * px, rowInAtlas * px, px, px, c * px, r * px, px, px);
+                    }
+                }
+            }
+
+            function loop(ts) {
+                if (stopped) return;
+                rafId = requestAnimationFrame(loop);
+                const dt = Math.min(0.05, lastTs ? (ts - lastTs) / 1000 : 0.016);
+                lastTs = ts;
+                if (!reduceMotion) step(dt);
+                render();
+            }
+
+            const fontsReady = document.fonts && document.fonts.load
+                ? Promise.race([
+                    Promise.all([
+                        document.fonts.load(`800 100px ${DISPLAY_FONT}`),
+                        document.fonts.load(`500 16px ${MONO_FONT}`)
+                    ]),
+                    new Promise(r => setTimeout(r, 900))
+                ]).catch(() => {})
+                : Promise.resolve();
+
+            fontsReady.then(() => {
+                if (stopped) return;
+                resize();
+                render();
+                rafId = requestAnimationFrame(loop);
+            });
+
+            return {
+                setMaskProgress(v) {
+                    maskProgress = Math.max(0, Math.min(1, v));
+                },
+                pulse() {
+                    pulseVal = 1;
+                },
+                resize() {
+                    if (!stopped) { resize(); render(); }
+                },
+                stop() {
+                    stopped = true;
+                    if (rafId) cancelAnimationFrame(rafId);
+                }
+            };
+        })();
+
+        const onResize = () => {
+            curtain.resize();
+            field.resize();
+        };
+        window.addEventListener('resize', onResize);
+
+        let finished = false;
+        const finishBoot = () => {
+            if (finished) return;
+            finished = true;
+            releaseHero();
+            field.stop();
+            window.removeEventListener('resize', onResize);
+            splash.classList.add('is-done');
+            if (srStatus) srStatus.textContent = 'Loaded';
+            if (typeof window.triggerHeroWave === 'function') {
+                setTimeout(() => window.triggerHeroWave(), 350);
+            }
+        };
+
+        // Safety fallback so the page never stays locked if GSAP is blocked or tab is backgrounded
+        const safetyTimer = setTimeout(finishBoot, 6500);
+
+        if (reduceMotion || typeof gsap === 'undefined') {
+            setTimeout(() => {
+                clearTimeout(safetyTimer);
+                finishBoot();
+            }, 450);
+            return;
+        }
+
+        // Fast repeat visits within the same tab session, full cinematic boot on fresh load
+        let seen = false;
+        try {
+            seen = sessionStorage.getItem('cyno:booted') === '1';
+            sessionStorage.setItem('cyno:booted', '1');
+        } catch (e) {}
+
+        const speed = seen ? 0.72 : 1.0;
+        const maskDur = 1.45 * speed;
+        const holdEnd = 0.45 * speed + maskDur + (seen ? 0.40 : 0.70);
+        const counterObj = { v: 0 };
+        const maskObj = { v: 0 };
+        const curtainObj = { p: 1 };
+
+        const logSpans = logs ? Array.from(logs.children) : [];
+        gsap.set(logSpans, { opacity: 0, y: 4 });
+        gsap.set(fieldWrap, { opacity: 0, scale: 1, transformOrigin: '50% 50%' });
+        gsap.set(hud, { opacity: 0 });
+
+        const tl = gsap.timeline({
+            onComplete: () => {
+                clearTimeout(safetyTimer);
+                finishBoot();
+            }
+        });
+
+        tl.to(fieldWrap, { opacity: 1, duration: 0.55 * speed, ease: 'power2.out' }, 0)
+          .to(hud, { opacity: 1, duration: 0.35, ease: 'power1.out' }, 0.08)
+          .fromTo(barEl, { scaleX: 0 }, { scaleX: 1, duration: holdEnd - 0.08, ease: 'power2.inOut', transformOrigin: 'left center' }, 0)
+          .to(counterObj, {
+              v: 100,
+              duration: holdEnd - 0.08,
+              ease: 'power2.inOut',
+              onUpdate: () => {
+                  if (pctEl) pctEl.textContent = String(Math.round(counterObj.v)).padStart(3, '0');
+              }
+          }, 0)
+          .to(maskObj, {
+              v: 1,
+              duration: maskDur,
+              ease: 'power1.inOut',
+              onUpdate: () => field.setMaskProgress(maskObj.v)
+          }, 0.42 * speed)
+          .to(logSpans, {
+              opacity: 1,
+              y: 0,
+              duration: 0.28,
+              ease: 'power2.out',
+              stagger: seen ? 0.22 : 0.42
+          }, 0.52 * speed)
+          .call(() => field.pulse(), [], 0.42 * speed + maskDur)
+          .to(hud, { opacity: 0, duration: 0.32, ease: 'power1.in' }, holdEnd)
+          .to(fieldWrap, { scale: 1.08, opacity: 0, duration: 0.65, ease: 'power2.in' }, holdEnd)
+          .set(splash, { backgroundColor: 'transparent', pointerEvents: 'none' }, holdEnd + 0.28)
+          .call(() => releaseHero(), [], holdEnd + 0.28)
+          .to(curtainObj, {
+              p: 2,
+              duration: seen ? 1.15 : 1.5,
+              ease: 'power1.inOut',
+              onUpdate: () => curtain.setProgress(curtainObj.p)
+          }, holdEnd + 0.28);
     }
 
     /* ---------- Scroll reveal ---------- */
@@ -66,7 +546,10 @@
                 if (!e.isIntersecting) return;
                 const now = $('.phase.is-now', roadmap);
                 const fill = $('.rail-fill', roadmap);
-                if (now && fill) fill.style.height = (now.offsetTop + now.offsetHeight - 8) + 'px';
+                if (now && fill) {
+                    const rail = roadmap.offsetHeight - 16;
+                    fill.style.transform = 'scaleY(' + Math.min(1, (now.offsetTop + now.offsetHeight - 8) / rail) + ')';
+                }
                 rio.disconnect();
             }, { threshold: 0.4 });
             rio.observe(roadmap);
@@ -98,11 +581,22 @@
         });
     }
 
-    /* ---------- Spec filter ---------- */
+    /* ---------- Spec filter & card reveal ---------- */
     function setupSpecFilter() {
         const bar = $('#spec-filter');
-        if (!bar) return;
         const blocks = $$('#specs-grid .spec-block');
+        blocks.forEach(block => {
+            block.addEventListener('click', () => {
+                block.classList.toggle('is-open');
+            });
+            block.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    block.classList.toggle('is-open');
+                }
+            });
+        });
+        if (!bar) return;
         bar.addEventListener('click', e => {
             const btn = e.target.closest('button[data-filter]');
             if (!btn) return;
@@ -114,6 +608,7 @@
             });
             blocks.forEach(block => {
                 const show = f === 'all' || block.dataset.specCat === f;
+                block.classList.toggle('is-open', f !== 'all' && show);
                 if (show) {
                     block.classList.remove('is-hidden');
                     block.classList.add('in', 'is-dim');
@@ -134,7 +629,7 @@
         const original = window.activateGreetingStep;
         window.activateGreetingStep = function (step) {
             original(step);
-            if (fill) fill.style.width = (step / 6 * 100) + '%';
+            if (fill) fill.style.transform = 'scaleX(' + (step / 6) + ')';
         };
 
         if (play && typeof window.playFullGreetingSequence === 'function') {
@@ -174,8 +669,8 @@
             last = active;
             if (!active) { bar.style.opacity = '0'; return; }
             bar.style.opacity = '1';
-            bar.style.width = (active.offsetWidth - 24) + 'px';
-            bar.style.transform = 'translateX(' + (active.offsetLeft + 12) + 'px)';
+            // transform only: base width is 100px, scaled to the link's text width
+            bar.style.transform = 'translateX(' + (active.offsetLeft + 12) + 'px) scaleX(' + ((active.offsetWidth - 24) / 100) + ')';
         };
         // app.js rewrites the link classes on scroll; follow those changes.
         new MutationObserver(place).observe(nav, { subtree: true, attributes: true, attributeFilter: ['class'] });
@@ -207,27 +702,35 @@
         });
     }
 
-    /* ---------- Hero parallax while scrolling away ---------- */
-    function setupHeroScroll() {
-        if (reduceMotion) return;
-        const hero = $('#cynobot');
-        const word = $('.hero-wordmark');
-        const stage = $('#hero-robot-canvas-container');
-        const bottom = $('.hero-bottom');
-        if (!hero || !word || !stage) return;
-        let ticking = false;
-        const update = () => {
-            ticking = false;
-            const h = hero.offsetHeight || 1;
-            const p = Math.min(1, Math.max(0, window.scrollY / h));
-            word.style.transform = 'translateY(calc(-62% + ' + (p * 18) + 'vh)) scale(' + (1 - p * 0.08) + ')';
-            word.style.opacity = String(1 - p * 1.2);
-            stage.style.transform = 'translateY(' + (p * -6) + 'vh) scale(' + (1 - p * 0.06) + ')';
-            if (bottom) bottom.style.opacity = String(1 - p * 2.2);
+    /* ---------- Pause looping decorations while they are off-screen ---------- */
+    function setupLoopPause() {
+        if (!('IntersectionObserver' in window)) return;
+        const loops = $$('.play-btn, .pipe-signal, .scroll-cue');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.removeAttribute('data-offscreen');
+                else e.target.setAttribute('data-offscreen', '');
+            });
+        });
+        loops.forEach(el => { el.setAttribute('data-offscreen', ''); io.observe(el); });
+    }
+
+    /* ---------- Confirm in place: the Speak button says what it is doing ---------- */
+    function setupSpeakConfirm() {
+        const label = $('#speak-label');
+        if (!label || typeof window.triggerQuickGreeting !== 'function') return;
+        const original = window.triggerQuickGreeting;
+        const swap = text => {
+            label.classList.add('is-swapping');
+            setTimeout(() => { label.textContent = text; label.classList.remove('is-swapping'); }, 150);
         };
-        window.addEventListener('scroll', () => {
-            if (!ticking) { ticking = true; requestAnimationFrame(update); }
-        }, { passive: true });
+        let timer = 0;
+        window.triggerQuickGreeting = function (lang) {
+            original(lang);
+            clearTimeout(timer);
+            swap('Speaking…');
+            timer = setTimeout(() => swap('Speak welcome'), 2200);
+        };
     }
 
     /* ---------- Pointer spotlight on architecture layers ---------- */

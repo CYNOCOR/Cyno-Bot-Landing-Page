@@ -3518,9 +3518,9 @@
                 links.forEach(link => {
                     const target = link.getAttribute('data-nav-id');
                     if (target === currentId) {
-                        link.className = 'nav-spy-link is-active px-3.5 py-1.5 rounded-full transition-all duration-200';
+                        link.className = 'nav-spy-link is-active';
                     } else {
-                        link.className = 'nav-spy-link px-3.5 py-1.5 rounded-full transition-all duration-200';
+                        link.className = 'nav-spy-link';
                     }
                 });
             }

@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="assets/images/cynocor-logo.png">
     <link rel="apple-touch-icon" href="assets/images/cynocor-logo.png">
 
-    <script>document.documentElement.classList.add('js');</script>
+    <script>document.documentElement.classList.add('js', 'is-booting');</script>
 
     <!-- Tailwind is still used by the kiosk screens that js/app.js renders -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,6 +40,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
+
+    <!-- ============================== BOOT SPLASH ============================== -->
+    <span id="splash-sr-status" class="sr-only" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Loading</span>
+    <div id="cyno-splash" class="cyno-splash" aria-hidden="true">
+        <canvas id="splash-curtain" class="splash-curtain" aria-hidden="true"></canvas>
+        <div id="splash-field-wrap" class="splash-field-wrap" data-field="true">
+            <canvas id="splash-field" class="splash-field" aria-hidden="true"></canvas>
+        </div>
+        <div id="splash-hud" class="splash-hud">
+            <div class="splash-title">CYNO/OS v1.0 — BOOT</div>
+            <div id="splash-logs" class="splash-logs">
+                <span>&gt; mounting m1 neural engine … ok</span>
+                <span>&gt; linking esp32 + sensors … ok</span>
+                <span>&gt; perception &amp; voice … online<i class="splash-led"></i></span>
+            </div>
+            <div class="splash-counter"><span id="splash-pct">000</span></div>
+            <div id="splash-bar" class="splash-bar"></div>
+        </div>
+    </div>
 
     <!-- ============================== NAV ============================== -->
     <header id="main-nav-wrapper" class="site-nav nav-hidden-top">
@@ -90,7 +109,6 @@
                 <img src="assets/images/cynocor-logo.png" alt="">
                 <span>CYNOCOR</span>
             </a>
-            <span class="meta">Group G 40 · IIT Sri Lanka</span>
         </div>
 
         <div class="hero-wordmark" aria-hidden="true">
@@ -112,10 +130,6 @@
                     <a href="studio.html" class="btn btn-line on-dark">Open the 3D Studio</a>
                 </div>
             </div>
-            <p class="hero-hint">
-                Move your pointer: it looks at you.<br>
-                <kbd>Click</kbd> to wave · <kbd>Drag</kbd> to turn
-            </p>
         </div>
     </section>
 
@@ -148,26 +162,26 @@
         <div class="wrap">
             <div class="section-head split">
                 <div>
-                    <span class="eyebrow" data-reveal>01 · Principles</span>
+                    <span class="eyebrow">01 · Principles</span>
                     <h2 class="h-section" style="margin-top:16px;--d:1" data-reveal>Built to stand in a busy foyer. <em>Safely, all day.</em></h2>
                 </div>
-                <p class="lede" data-reveal style="--d:2">A robot that shares space with people has three jobs: be useful, never hurt anyone, and be obvious to use from the first hello.</p>
+                <p class="lede">A robot that shares space with people has three jobs: be useful, never hurt anyone, and be obvious to use from the first hello.</p>
             </div>
 
             <div class="principles">
-                <article class="principle" data-reveal>
+                <article class="principle">
                     <span class="idx">01 / Capable</span>
                     <h3>Full-size presence</h3>
                     <p>At 1.67 m it meets visitors at eye level. Inside the torso, an Apple Mac mini (M1) runs the speech and language models, drawing about 7 W at idle.</p>
                     <div class="tags"><span class="tag">6 modules</span><span class="tag">Mac mini M1</span></div>
                 </article>
-                <article class="principle" data-reveal>
+                <article class="principle">
                     <span class="idx">02 / Safe</span>
                     <h3>No pinch points</h3>
                     <p>Thermoformed PVC panels over a welded 25 × 25 mm steel frame, bolted to a heavy anti-tip base. A hardware E-stop cuts power when needed.</p>
                     <div class="tags"><span class="tag">520 × 440 mm base</span><span class="tag">E-stop</span></div>
                 </article>
-                <article class="principle" data-reveal>
+                <article class="principle">
                     <span class="idx">03 / Intuitive</span>
                     <h3>Talk or tap</h3>
                     <p>Whisper turns speech into text and a local Ollama model answers, so questions stay on the device. Animated eyes and the chest screen show what it's doing.</p>
@@ -182,10 +196,10 @@
         <div class="wrap">
             <div class="section-head split">
                 <div>
-                    <span class="eyebrow" data-reveal>02 · Specifications</span>
+                    <span class="eyebrow">02 · Specifications</span>
                     <h2 class="h-section" style="margin-top:16px" data-reveal>Every part, <em>on one sheet.</em></h2>
                 </div>
-                <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start" data-reveal>
+                <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
                     <p class="lede">Each subsystem is designed for an 8-hour shift at a university reception desk.</p>
                     <div class="seg scroll-x" role="tablist" aria-label="Filter specifications" id="spec-filter">
                         <button role="tab" aria-selected="true" class="is-active" data-filter="all">All</button>
@@ -198,52 +212,171 @@
             </div>
 
             <div class="spec-sheet" id="specs-grid">
-                <section class="spec-block" data-spec-cat="compute" data-reveal>
-                    <header><h3>Compute</h3><span>A</span></header>
-                    <dl>
-                        <div class="spec-row"><dt>Host computer</dt><dd>Mac mini (M1)</dd></div>
-                        <div class="spec-row"><dt>Neural Engine</dt><dd>16-core, 11 TOPS</dd></div>
-                        <div class="spec-row"><dt>Speech to text</dt><dd>Whisper base</dd></div>
-                        <div class="spec-row"><dt>Language model</dt><dd>Ollama · Qwen 1.5B</dd></div>
-                        <div class="spec-row"><dt>Microcontrollers</dt><dd>2 × ESP32 over USB</dd></div>
-                    </dl>
-                    <div class="spec-foot"><span>Idle 7 W</span><span>Peak 39 W</span></div>
+                <section class="spec-block" data-spec-cat="compute" tabindex="0">
+                    <div class="spec-top">
+                        <span class="spec-badge">A</span>
+                        <span class="spec-cat-label">01 · Compute &amp; AI</span>
+                    </div>
+
+                    <div class="spec-graphic" aria-hidden="true">
+                        <svg viewBox="0 0 160 96" fill="none" stroke="currentColor" stroke-width="1.25">
+                            <polygon points="80,12 126,32 80,52 34,32" />
+                            <polyline points="34,44 80,64 126,44" stroke-dasharray="3 3" />
+                            <line x1="80" y1="64" x2="80" y2="78" stroke-dasharray="2 2" />
+                            <line x1="80" y1="70" x2="50" y2="82" stroke-dasharray="2 2" />
+                            <line x1="80" y1="70" x2="110" y2="82" stroke-dasharray="2 2" />
+                            <polygon points="50,76 66,83 50,90 34,83" />
+                            <polygon points="110,76 126,83 110,90 94,83" />
+                            <circle cx="80" cy="32" r="7" />
+                            <circle cx="80" cy="70" r="3" class="spec-node" />
+                        </svg>
+                    </div>
+
+                    <header>
+                        <h3>Compute</h3>
+                    </header>
+                    <p class="spec-summary">On-device Apple Silicon host paired with dual real-time ESP32 controllers.</p>
+
+                    <div class="spec-details">
+                        <div class="spec-details-inner">
+                            <dl>
+                                <div class="spec-row" style="--i:0"><dt>Host computer</dt><dd>Mac mini (M1)</dd></div>
+                                <div class="spec-row" style="--i:1"><dt>Neural Engine</dt><dd>16-core, 11 TOPS</dd></div>
+                                <div class="spec-row" style="--i:2"><dt>Speech to text</dt><dd>Whisper base</dd></div>
+                                <div class="spec-row" style="--i:3"><dt>Language model</dt><dd>Ollama · Qwen 1.5B</dd></div>
+                                <div class="spec-row" style="--i:4"><dt>Microcontrollers</dt><dd>2 × ESP32 over USB</dd></div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="spec-foot">
+                        <span>Idle 7 W · Peak 39 W</span>
+                        <span class="spec-prompt">[ SPECS <i class="plus">+</i> ]</span>
+                    </div>
                 </section>
 
-                <section class="spec-block" data-spec-cat="physical" data-reveal style="--d:1">
-                    <header><h3>Body</h3><span>B</span></header>
-                    <dl>
-                        <div class="spec-row"><dt>Standing height</dt><dd>1,670 mm</dd></div>
-                        <div class="spec-row"><dt>Frame</dt><dd>25 × 25 mm RHS steel</dd></div>
-                        <div class="spec-row"><dt>Outer panels</dt><dd>Thermoformed PVC</dd></div>
-                        <div class="spec-row"><dt>Joint bezels</dt><dd>PETG / PLA, 3D printed</dd></div>
-                        <div class="spec-row"><dt>Layout</dt><dd>6 detachable modules</dd></div>
-                    </dl>
-                    <div class="spec-foot"><span>Base 520 × 440 mm</span><span>Anti-tip</span></div>
+                <section class="spec-block" data-spec-cat="physical" tabindex="0">
+                    <div class="spec-top">
+                        <span class="spec-badge">B</span>
+                        <span class="spec-cat-label">02 · Chassis &amp; Shell</span>
+                    </div>
+
+                    <div class="spec-graphic" aria-hidden="true">
+                        <svg viewBox="0 0 160 96" fill="none" stroke="currentColor" stroke-width="1.25">
+                            <rect x="64" y="10" width="32" height="20" rx="4" />
+                            <rect x="54" y="36" width="52" height="36" rx="4" />
+                            <line x1="80" y1="30" x2="80" y2="36" />
+                            <line x1="42" y1="40" x2="54" y2="40" stroke-dasharray="2 2" />
+                            <line x1="106" y1="40" x2="118" y2="40" stroke-dasharray="2 2" />
+                            <polygon points="80,76 122,86 80,94 38,86" />
+                            <circle cx="80" cy="54" r="3" class="spec-node" />
+                        </svg>
+                    </div>
+
+                    <header>
+                        <h3>Body</h3>
+                    </header>
+                    <p class="spec-summary">1.67 m modular steel skeleton clad in thermoformed PVC and 3D-printed bezels.</p>
+
+                    <div class="spec-details">
+                        <div class="spec-details-inner">
+                            <dl>
+                                <div class="spec-row" style="--i:0"><dt>Standing height</dt><dd>1,670 mm</dd></div>
+                                <div class="spec-row" style="--i:1"><dt>Frame</dt><dd>25 × 25 mm RHS steel</dd></div>
+                                <div class="spec-row" style="--i:2"><dt>Outer panels</dt><dd>Thermoformed PVC</dd></div>
+                                <div class="spec-row" style="--i:3"><dt>Joint bezels</dt><dd>PETG / PLA, 3D printed</dd></div>
+                                <div class="spec-row" style="--i:4"><dt>Layout</dt><dd>6 detachable modules</dd></div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="spec-foot">
+                        <span>Base 520 × 440 mm · Anti-tip</span>
+                        <span class="spec-prompt">[ SPECS <i class="plus">+</i> ]</span>
+                    </div>
                 </section>
 
-                <section class="spec-block" data-spec-cat="sensing" data-reveal>
-                    <header><h3>Sensing</h3><span>C</span></header>
-                    <dl>
-                        <div class="spec-row"><dt>Camera</dt><dd>1080p, 60 fps</dd></div>
-                        <div class="spec-row"><dt>Presence detection</dt><dd>1.5 – 3.0 m zone</dd></div>
-                        <div class="spec-row"><dt>Hazard sensors</dt><dd>IR flame + MQ2 gas</dd></div>
-                        <div class="spec-row"><dt>Vision software</dt><dd>OpenCV + MediaPipe</dd></div>
-                        <div class="spec-row"><dt>Face tracking</dt><dd>468 landmarks</dd></div>
-                    </dl>
-                    <div class="spec-foot"><span>Dual microphone array</span><span>Beamforming</span></div>
+                <section class="spec-block" data-spec-cat="sensing" tabindex="0">
+                    <div class="spec-top">
+                        <span class="spec-badge">C</span>
+                        <span class="spec-cat-label">03 · Vision &amp; Safety</span>
+                    </div>
+
+                    <div class="spec-graphic" aria-hidden="true">
+                        <svg viewBox="0 0 160 96" fill="none" stroke="currentColor" stroke-width="1.25">
+                            <circle cx="80" cy="48" r="14" />
+                            <circle cx="80" cy="48" r="28" stroke-dasharray="3 3" />
+                            <path d="M40,26 A48,48 0 0,1 120,26" />
+                            <path d="M120,70 A48,48 0 0,1 40,70" />
+                            <line x1="80" y1="12" x2="80" y2="24" />
+                            <line x1="80" y1="72" x2="80" y2="84" />
+                            <circle cx="80" cy="48" r="3.5" class="spec-node" />
+                        </svg>
+                    </div>
+
+                    <header>
+                        <h3>Sensing</h3>
+                    </header>
+                    <p class="spec-summary">60 fps vision tracking, 1.5–3.0 m approach radar, and environmental hazard sensors.</p>
+
+                    <div class="spec-details">
+                        <div class="spec-details-inner">
+                            <dl>
+                                <div class="spec-row" style="--i:0"><dt>Camera</dt><dd>1080p, 60 fps</dd></div>
+                                <div class="spec-row" style="--i:1"><dt>Presence detection</dt><dd>1.5 – 3.0 m zone</dd></div>
+                                <div class="spec-row" style="--i:2"><dt>Hazard sensors</dt><dd>IR flame + MQ2 gas</dd></div>
+                                <div class="spec-row" style="--i:3"><dt>Vision software</dt><dd>OpenCV + MediaPipe</dd></div>
+                                <div class="spec-row" style="--i:4"><dt>Face tracking</dt><dd>468 landmarks</dd></div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="spec-foot">
+                        <span>Dual mic array · Beamforming</span>
+                        <span class="spec-prompt">[ SPECS <i class="plus">+</i> ]</span>
+                    </div>
                 </section>
 
-                <section class="spec-block" data-spec-cat="interaction" data-reveal style="--d:1">
-                    <header><h3>Display &amp; audio</h3><span>D</span></header>
-                    <dl>
-                        <div class="spec-row"><dt>Chest screen</dt><dd>10" IPS, capacitive</dd></div>
-                        <div class="spec-row"><dt>Eyes</dt><dd>2 animated OLEDs</dd></div>
-                        <div class="spec-row"><dt>Speakers</dt><dd>2 × 5 W stereo</dd></div>
-                        <div class="spec-row"><dt>Accent lighting</dt><dd>Cyan halo rings</dd></div>
-                        <div class="spec-row"><dt>Hands</dt><dd>Fixed, no pinch points</dd></div>
-                    </dl>
-                    <div class="spec-foot"><span>Reply target ≤ 2.4 s</span><span>Spoken replies</span></div>
+                <section class="spec-block" data-spec-cat="interaction" tabindex="0">
+                    <div class="spec-top">
+                        <span class="spec-badge">D</span>
+                        <span class="spec-cat-label">04 · Kiosk &amp; Expression</span>
+                    </div>
+
+                    <div class="spec-graphic" aria-hidden="true">
+                        <svg viewBox="0 0 160 96" fill="none" stroke="currentColor" stroke-width="1.25">
+                            <rect x="42" y="14" width="30" height="18" rx="9" />
+                            <rect x="88" y="14" width="30" height="18" rx="9" />
+                            <circle cx="57" cy="23" r="3" class="spec-node" />
+                            <circle cx="103" cy="23" r="3" class="spec-node" />
+                            <rect x="38" y="44" width="84" height="42" rx="5" />
+                            <line x1="50" y1="56" x2="86" y2="56" />
+                            <line x1="50" y1="66" x2="110" y2="66" stroke-dasharray="3 3" />
+                            <line x1="50" y1="74" x2="96" y2="74" stroke-dasharray="3 3" />
+                        </svg>
+                    </div>
+
+                    <header>
+                        <h3>Display &amp; audio</h3>
+                    </header>
+                    <p class="spec-summary">10" capacitive chest touchscreen, animated OLED eyes, and stereo voice output.</p>
+
+                    <div class="spec-details">
+                        <div class="spec-details-inner">
+                            <dl>
+                                <div class="spec-row" style="--i:0"><dt>Chest screen</dt><dd>10" IPS, capacitive</dd></div>
+                                <div class="spec-row" style="--i:1"><dt>Eyes</dt><dd>2 animated OLEDs</dd></div>
+                                <div class="spec-row" style="--i:2"><dt>Speakers</dt><dd>2 × 5 W stereo</dd></div>
+                                <div class="spec-row" style="--i:3"><dt>Accent lighting</dt><dd>Cyan halo rings</dd></div>
+                                <div class="spec-row" style="--i:4"><dt>Hands</dt><dd>Fixed, no pinch points</dd></div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="spec-foot">
+                        <span>Reply ≤ 2.4 s · Spoken replies</span>
+                        <span class="spec-prompt">[ SPECS <i class="plus">+</i> ]</span>
+                    </div>
                 </section>
             </div>
         </div>
@@ -254,10 +387,10 @@
         <div class="wrap">
             <div class="section-head split">
                 <div>
-                    <span class="eyebrow" data-reveal>03 · Greeting</span>
+                    <span class="eyebrow">03 · Greeting</span>
                     <h2 class="h-section" style="margin-top:16px" data-reveal>From “someone's here” <em>to “goodbye” in six steps.</em></h2>
                 </div>
-                <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start" data-reveal>
+                <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
                     <p class="lede">Pick a step, or play the whole sequence. Your browser will read each step aloud.</p>
                     <button onclick="playFullGreetingSequence()" class="btn btn-ink" id="flow-play">
                         <i class="fa-solid fa-play" style="font-size:11px"></i><span>Play all six</span>
@@ -300,14 +433,14 @@
         <div class="wrap">
             <div class="section-head split">
                 <div>
-                    <span class="eyebrow" data-reveal>04 · Chest screen</span>
+                    <span class="eyebrow">04 · Chest screen</span>
                     <h2 class="h-section" style="margin-top:16px" data-reveal>Touch it, <em>or just ask.</em></h2>
                 </div>
-                <p class="lede" data-reveal>The 10-inch screen in CYNO BOT's torso is where visitors at reception tap for help. Try it below.</p>
+                <p class="lede">The 10-inch screen in CYNO BOT's torso is where visitors at reception tap for help. Try it below.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-                <div class="lg:col-span-7 device" data-reveal>
+                <div class="lg:col-span-7 device">
                     <div class="device-screen" style="height:100%;display:flex;flex-direction:column;padding:18px 20px">
                         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:12px;color:var(--muted)">
                             <div style="display:flex;align-items:center;gap:10px">
@@ -321,12 +454,12 @@
                         <div id="kiosk-dynamic-screen" style="flex:1;min-height:260px;display:flex;flex-direction:column;justify-content:center;padding:18px 0"></div>
 
                         <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid var(--line)">
-                            <button onclick="triggerQuickGreeting('en')" class="btn btn-ink btn-sm"><i class="fa-solid fa-volume-high" style="font-size:11px"></i>Speak welcome</button>
+                            <button onclick="triggerQuickGreeting('en')" class="btn btn-ink btn-sm"><i class="fa-solid fa-volume-high" style="font-size:11px"></i><span class="swap-label" id="speak-label">Speak welcome</span></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 panel" style="padding:20px;display:flex;flex-direction:column;gap:14px;--d:1" data-reveal>
+                <div class="lg:col-span-5 panel" style="padding:20px;display:flex;flex-direction:column;gap:14px">
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
                         <div>
                             <h3 class="font-display" style="font-weight:650;font-size:1.2rem">Ask CYNO BOT</h3>
@@ -366,10 +499,10 @@
         <div class="wrap">
             <div class="section-head split">
                 <div>
-                    <span class="eyebrow" data-reveal>05 · Architecture</span>
+                    <span class="eyebrow">05 · Architecture</span>
                     <h2 class="h-section" style="margin-top:16px" data-reveal>Four layers. <em>One computer in the middle.</em></h2>
                 </div>
-                <p class="lede" data-reveal>Sensors feed a Mac mini (M1) that runs Whisper and a local Ollama model. Two ESP32 boards handle the hardware, and the results come back out as speech, eye animations and the chest screen.</p>
+                <p class="lede">Sensors feed a Mac mini (M1) that runs Whisper and a local Ollama model. Two ESP32 boards handle the hardware, and the results come back out as speech, eye animations and the chest screen.</p>
             </div>
 
             <div class="pipe-labels" aria-hidden="true"><span>in</span><span>think</span><span>control</span><span>out</span></div>
@@ -429,16 +562,16 @@
             <div style="margin-top:clamp(64px,8vw,112px)">
                 <div class="section-head split" style="margin-bottom:28px">
                     <div>
-                        <span class="eyebrow" data-reveal>Walkthrough film</span>
+                        <span class="eyebrow">Walkthrough film</span>
                         <h3 class="h-section" style="margin-top:14px;font-size:clamp(1.6rem,1rem + 2vw,2.4rem)" data-reveal>Inside the build, <em>9 minutes.</em></h3>
                     </div>
-                    <div data-reveal>
+                    <div>
                         <p class="lede">The wiring, the Mac mini integration and live sensor demos, filmed by the team.</p>
                         <a href="https://drive.google.com/file/d/16WDn-dwJVw0XK_wAv9IXwVFTcsCj31lx/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm" style="margin-top:16px">Open in Google Drive <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i></a>
                     </div>
                 </div>
 
-                <div class="film" data-reveal>
+                <div class="film">
                     <div class="film-bar"><span>system-architecture-walkthrough.mp4</span><span>09:07 · 1080p</span></div>
                     <div style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000">
                         <button id="arch-video-poster-wrapper" class="group" onclick="playArchVideo()" aria-label="Play the 9-minute walkthrough film" style="position:absolute;inset:0;z-index:10;border:0;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:none">
@@ -457,10 +590,10 @@
         <div class="wrap">
             <div class="section-head split">
                 <div>
-                    <span class="eyebrow" data-reveal>06 · Build</span>
+                    <span class="eyebrow">06 · Build</span>
                     <h2 class="h-section" style="margin-top:16px" data-reveal>Steel inside. <em>PVC outside.</em></h2>
                 </div>
-                <div data-reveal>
+                <div>
                     <p class="lede">A welded steel skeleton, thermoformed PVC panels and 3D-printed details. It comes apart into six modules without tools.</p>
                 </div>
             </div>
@@ -468,24 +601,24 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
                 <div class="lg:col-span-7">
                     <div class="build-list">
-                        <div class="build-item" data-reveal>
+                        <div class="build-item">
                             <span class="n">01</span><h4>RHS steel skeleton</h4>
                             <p>A welded 25 × 25 mm spine on a heavy anti-tip base keeps the centre of gravity low and holds the Mac mini in a shock-isolated bay.</p>
                         </div>
-                        <div class="build-item" data-reveal>
+                        <div class="build-item">
                             <span class="n">02</span><h4>Thermoformed PVC and 3D printing</h4>
                             <p>Heat-formed PVC sheets make smooth, impact-resistant panels. The camera visor and ear pods are printed in PETG and PLA.</p>
                         </div>
-                        <div class="build-item" data-reveal>
+                        <div class="build-item">
                             <span class="n">03</span><h4>Six detachable modules</h4>
                             <p>Head, torso, left arm, right arm, legs and base separate in under 3 minutes, so one car can carry it and repairs stay simple.</p>
                         </div>
                     </div>
-                    <a href="studio.html" class="btn btn-line" style="margin-top:28px" data-reveal>Explode the model in the 3D Studio <i class="fa-solid fa-arrow-right arrow" style="font-size:11px"></i></a>
+                    <a href="studio.html" class="btn btn-line" style="margin-top:28px">Explode the model in the 3D Studio <i class="fa-solid fa-arrow-right arrow" style="font-size:11px"></i></a>
                 </div>
 
                 <div class="lg:col-span-5">
-                    <div class="panel" style="padding:28px" data-reveal>
+                    <div class="panel" style="padding:28px">
                         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px">
                             <h3 class="font-display" style="font-weight:650;font-size:1.25rem">Roadmap</h3>
                             <span class="mono" style="font-size:12px;color:var(--faint)">Phase 1 now · 2–4 planned</span>
@@ -524,42 +657,42 @@
         <div class="wrap">
             <div class="section-head split">
                 <div>
-                    <span class="eyebrow" data-reveal>07 · Team</span>
+                    <span class="eyebrow">07 · Team</span>
                     <h2 class="h-section" style="margin-top:16px" data-reveal>Five students, <em>one robot.</em></h2>
                 </div>
-                <p class="lede" data-reveal>Cynocor is Group G 40 at the Informatics Institute of Technology (IIT), Sri Lanka, supervised by Mr. Bhanu Athuraliya, module leader.</p>
+                <p class="lede">Cynocor is Group G 40 at the Informatics Institute of Technology (IIT), Sri Lanka, supervised by Mr. Bhanu Athuraliya, module leader.</p>
             </div>
 
             <div class="team-grid">
                 <article class="member" data-reveal style="--d:0">
-                    <div class="photo"><img src="assets/images/team/chamupathi.jpg?v=2" alt="Chamupathi" loading="lazy"></div>
-                    <h3>Chamupathi</h3>
-                    <div class="role">Project lead · Architecture</div>
-                    <p>System integration, the 4-layer architecture and sprint planning.</p>
+                    <div class="photo"><img src="assets/images/team/chamupathi-doodle.jpg?v=3" alt="Chamupathi Dewdunu" loading="lazy"></div>
+                    <h3>Chamupathi Dewdunu</h3>
+                    <div class="role">Hardware Lead</div>
+                    <p>Responsible for hardware design, component selection, hardware development, and implementation of the robot's physical functionalities, ensuring reliable interaction between hardware components.</p>
                 </article>
                 <article class="member" data-reveal style="--d:1">
-                    <div class="photo"><img src="assets/images/team/chanul.jpg?v=2" alt="Chanul" loading="lazy"></div>
-                    <h3>Chanul</h3>
-                    <div class="role">AI · Voice</div>
-                    <p>Whisper speech pipeline, local Ollama LLM and the SQLite knowledge store.</p>
+                    <div class="photo"><img src="assets/images/team/chanul-doodle.jpg?v=3" alt="Chanul Dilhara" loading="lazy"></div>
+                    <h3>Chanul Dilhara</h3>
+                    <div class="role">Technical Lead</div>
+                    <p>Implementation of computer vision (person detection), sensor data management, chest touchscreen UI, and admin dashboard. Responsible for overall software architecture, system design, and integration of software components to ensure the system operates efficiently and reliably.</p>
                 </article>
                 <article class="member" data-reveal style="--d:2">
-                    <div class="photo"><img src="assets/images/team/ravindu.jpg?v=2" alt="Ravindu" loading="lazy"></div>
-                    <h3>Ravindu</h3>
-                    <div class="role">Vision · Kiosk</div>
-                    <p>OpenCV and MediaPipe gaze tracking, and the 10" touch screen UI.</p>
+                    <div class="photo"><img src="assets/images/team/ravindu-doodle.jpg?v=3" alt="Ravindu Umapathi" loading="lazy"></div>
+                    <h3>Ravindu Umapathi</h3>
+                    <div class="role">Production Lead</div>
+                    <p>Responsible for the overall product design, physical appearance, assembly coordination, and final product presentation, ensuring that the completed robot meets the project's design and functional requirements.</p>
                 </article>
                 <article class="member" data-reveal style="--d:3">
-                    <div class="photo"><img src="assets/images/team/ashendra.jpg?v=2" alt="Ashendra" loading="lazy"></div>
-                    <h3>Ashendra</h3>
-                    <div class="role">Mechanical · CAD</div>
-                    <p>Steel skeleton, thermoformed PVC panels and 3D-printed bezels.</p>
+                    <div class="photo"><img src="assets/images/team/amanya-doodle.jpg?v=3" alt="Amanya Rubasinghe" loading="lazy"></div>
+                    <h3>Amanya Rubasinghe</h3>
+                    <div class="role">Software Lead</div>
+                    <p>Responsible for developing and implementing software features, functional modes, and user interaction capabilities, ensuring that the robot performs its intended tasks effectively.</p>
                 </article>
                 <article class="member" data-reveal style="--d:4">
-                    <div class="photo"><img src="assets/images/team/amanya.jpg?v=2" alt="Amanya" loading="lazy"></div>
-                    <h3>Amanya</h3>
-                    <div class="role">Electronics · Control</div>
-                    <p>ESP32 firmware, OLED eye drivers and power safety.</p>
+                    <div class="photo"><img src="assets/images/team/ashendra-doodle.jpg?v=3" alt="Ashendra Liyanage" loading="lazy"></div>
+                    <h3>Ashendra Liyanage</h3>
+                    <div class="role">Software Lead</div>
+                    <p>Responsible for developing and implementing software features, functional modes, and user interaction capabilities, ensuring that the robot performs its intended tasks effectively.</p>
                 </article>
             </div>
         </div>
@@ -598,7 +731,6 @@
 
             <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--ink-line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px" class="mono">
                 <span>© <span id="copyright-year">2026</span> Cynocor · ATP Group G 40 · IIT Sri Lanka</span>
-                <span>Apple and Mac mini are trademarks of Apple Inc.</span>
                 <a href="#cynobot">Back to top ↑</a>
             </div>
         </div>
