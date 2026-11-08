@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cynobot.cynocor.com/sitemap.xml
