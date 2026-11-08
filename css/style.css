@@ -1,0 +1,173 @@
+/* =========================================================
+   CYNO BOT · cynobot.cynocor.com
+   Mirrors the CYNOCOR sky-glass theme (cynocor.com/css/style.css)
+   ========================================================= */
+
+:root {
+  --bg-base: #ebf3fc;
+  --bg-surface: rgba(255, 255, 255, 0.82);
+  --bg-solid: #ffffff;
+  --obsidian: #08080c;
+  --obsidian-2: #0e1525;
+  --ice-white: #fafcff;
+  --text-primary: #08080c;
+  --text-secondary: #526077;
+  --accent: #0062eb; /* fills: white text on it is 5.3:1 */
+  --accent-bright: #0058d6; /* hover: darker, not lighter, to keep contrast */
+  --accent-text: #0058d6; /* blue text on light backgrounds: 5.2:1 or better */
+  --accent-soft: #dcecfd;
+  --accent-glow: rgba(0, 112, 255, 0.22);
+  --eye: #3ba4ff;
+  --border: rgba(0, 90, 200, 0.1);
+  --border-strong: rgba(0, 90, 200, 0.18);
+  --font: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --shadow-card:
+    0 18px 44px rgba(15, 52, 105, 0.07), 0 2px 8px rgba(0, 112, 255, 0.04);
+  --shadow-card-hover:
+    0 24px 56px rgba(0, 112, 255, 0.16), 0 6px 18px rgba(15, 52, 105, 0.07);
+  --radius: 20px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 250ms;
+  --duration-slow: 400ms;
+  --duration-reveal: 700ms;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  background-image:
+    radial-gradient(
+      50% 40% at 15% 20%,
+      rgba(135, 196, 255, 0.35) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 45% at 85% 65%,
+      rgba(120, 186, 255, 0.3) 0%,
+      transparent 70%
+    ),
+    linear-gradient(180deg, #e4eef9 0%, #f4f9ff 40%, #e8f2fc 100%);
+  background-attachment: fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul,
+ol {
+  list-style: none;
+}
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.build-band :focus-visible,
+.tm-card :focus-visible {
+  outline-color: #ffffff;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 100;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ── Buttons ─────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 26px;
+  border-radius: 980px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition:
+    transform var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease),
+    background var(--duration-fast) var(--ease);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--ice-white);
+  box-shadow: 0 6px 20px rgba(0, 112, 255, 0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 112, 255, 0.36);
+  background: var(--accent-bright);
+}
+.btn-ghost {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-text);
+  color: var(--accent-text);
+}
