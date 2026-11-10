@@ -105,6 +105,87 @@
               </div>
             </dl>
           </div>
+
+          <div class="hero-visual">
+            <div class="bot-head" id="botHead">
+              <span class="bot-ear bot-ear--l" aria-hidden="true"></span>
+              <span class="bot-ear bot-ear--r" aria-hidden="true"></span>
+              <span class="bot-cam" aria-hidden="true"></span>
+              <div class="bot-screen">
+                <svg
+                  class="bot-face"
+                  id="botFace"
+                  data-mood="happy"
+                  viewBox="0 0 320 190"
+                  role="img"
+                  aria-labelledby="faceTitle"
+                >
+                  <title id="faceTitle">CYNO BOT's animated face</title>
+                  <defs>
+                    <filter
+                      id="glow"
+                      x="-50%"
+                      y="-50%"
+                      width="200%"
+                      height="200%"
+                    >
+                      <feGaussianBlur stdDeviation="4" result="b" />
+                      <feMerge>
+                        <feMergeNode in="b" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <g class="eyes" filter="url(#glow)">
+                    <g class="eye eye--l" transform="translate(105 82)">
+                      <g class="eye-blink">
+                        <circle class="eye-ring" r="27" />
+                        <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
+                        <path
+                          class="eye-heart"
+                          d="M0 22 C-30 2 -26 -22 -10 -22 C-3 -22 0 -16 0 -12 C0 -16 3 -22 10 -22 C26 -22 30 2 0 22Z"
+                        />
+                      </g>
+                    </g>
+                    <g class="eye eye--r" transform="translate(215 82)">
+                      <g class="eye-blink">
+                        <circle class="eye-ring" r="27" />
+                        <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
+                        <path
+                          class="eye-heart"
+                          d="M0 22 C-30 2 -26 -22 -10 -22 C-3 -22 0 -16 0 -12 C0 -16 3 -22 10 -22 C26 -22 30 2 0 22Z"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                  <g class="mouths" filter="url(#glow)">
+                    <path
+                      class="mouth mouth--smile"
+                      d="M140 142 Q160 160 180 142"
+                    />
+                    <path
+                      class="mouth mouth--grin"
+                      d="M134 138 Q160 172 186 138"
+                    />
+                    <circle class="mouth mouth--o" cx="160" cy="148" r="8" />
+                    <line
+                      class="mouth mouth--flat"
+                      x1="148"
+                      y1="148"
+                      x2="172"
+                      y2="148"
+                    />
+                    <g class="mouth mouth--dots">
+                      <circle cx="144" cy="148" r="4.5" />
+                      <circle cx="160" cy="148" r="4.5" />
+                      <circle cx="176" cy="148" r="4.5" />
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="bot-neck" aria-hidden="true"></div>
+          </div>
         </div>
       </section>
     </main>
