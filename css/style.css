@@ -758,6 +758,42 @@ h3 {
   box-shadow: var(--shadow-card);
 }
 
+/* Problem */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.problem-card {
+  padding: 28px 24px;
+  transition:
+    transform var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease);
+}
+
+.problem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--accent-text);
+}
+
+.problem-card h3 {
+  font-size: 1.125rem;
+  margin: 18px 0 8px;
+}
+
+.problem-card p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+
 /* Active card */
 .tm-card:is(:hover, :focus-within) {
   flex-basis: 288px;
@@ -837,6 +873,10 @@ h3 {
 @media (max-width: 1024px) {
   .nav-links {
     gap: 18px;
+  }
+
+  .problem-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -938,6 +978,10 @@ h3 {
   .hero-facts {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 18px;
+  }
+
+  .problem-grid {
+    grid-template-columns: 1fr;
   }
 
   .bot-head {
