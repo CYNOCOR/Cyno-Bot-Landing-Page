@@ -26,10 +26,10 @@
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- ── Header ─────────────────────────────────────── -->
     <header class="site-header" id="siteHeader">
       <div class="container header-inner">
         <a href="#top" class="brand" aria-label="CYNO BOT home">
@@ -66,7 +66,6 @@
     </header>
 
     <main id="main">
-      <!-- ── Hero ─────────────────────────────────────── -->
       <section class="hero" id="top" aria-label="Introduction">
         <div class="container hero-grid">
           <div class="hero-copy">
@@ -141,20 +140,12 @@
                       <g class="eye-blink">
                         <circle class="eye-ring" r="27" />
                         <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
-                        <path
-                          class="eye-heart"
-                          d="M0 22 C-30 2 -26 -22 -10 -22 C-3 -22 0 -16 0 -12 C0 -16 3 -22 10 -22 C26 -22 30 2 0 22Z"
-                        />
                       </g>
                     </g>
                     <g class="eye eye--r" transform="translate(215 82)">
                       <g class="eye-blink">
                         <circle class="eye-ring" r="27" />
                         <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
-                        <path
-                          class="eye-heart"
-                          d="M0 22 C-30 2 -26 -22 -10 -22 C-3 -22 0 -16 0 -12 C0 -16 3 -22 10 -22 C26 -22 30 2 0 22Z"
-                        />
                       </g>
                     </g>
                   </g>
@@ -185,6 +176,40 @@
               </div>
             </div>
             <div class="bot-neck" aria-hidden="true"></div>
+
+            <div class="mood-panel">
+              <div class="mood-status">
+                <p id="moodText">Happy: ready to greet visitors</p>
+              </div>
+              <p class="sr-only" id="moodLive" aria-live="polite"></p>
+              <div
+                class="mood-chips"
+                role="group"
+                aria-label="Change CYNO BOT's expression"
+              >
+                <button
+                  class="chip is-active"
+                  data-mood="happy"
+                  aria-pressed="true"
+                >
+                  Happy
+                </button>
+                <button class="chip" data-mood="curious" aria-pressed="false">
+                  Curious
+                </button>
+                <button class="chip" data-mood="thinking" aria-pressed="false">
+                  Thinking
+                </button>
+                <button class="chip" data-mood="sleepy" aria-pressed="false">
+                  Sleepy
+                </button>
+              </div>
+              <p class="mood-hint">
+                Move your cursor around. The eyes follow you, just like the
+                robot looks at a visitor. Click the buttons above to switch CYNO
+                BOT's expression.
+              </p>
+            </div>
           </div>
         </div>
       </section>
