@@ -794,6 +794,108 @@ h3 {
   color: var(--text-secondary);
 }
 
+/* Modes */
+.modes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.mode-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mode-media {
+  height: 220px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: radial-gradient(80% 90% at 50% 20%, #dcecfd 0%, #eef5fd 70%);
+  border-bottom: 1px solid var(--border);
+}
+
+.mode-media img {
+  height: 180px;
+  width: auto;
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(15, 52, 105, 0.18);
+}
+
+.mode-media--shot {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  background: #070a12;
+}
+
+.mode-media--shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.mode-body {
+  padding: 28px;
+}
+
+.mode-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  padding: 4px 10px;
+  border-radius: 980px;
+}
+
+.mode-body h3 {
+  font-size: 1.375rem;
+  margin: 14px 0 16px;
+}
+
+.ticks li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: 10px;
+}
+
+.ticks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.38em;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-soft)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.4' fill='none' stroke='%230070FF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center/14px no-repeat;
+}
+
+.game-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.game-chips span,
+.industries span {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 980px;
+  background: var(--bg-solid);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+}
+
 /* Active card */
 .tm-card:is(:hover, :focus-within) {
   flex-basis: 288px;
@@ -950,6 +1052,10 @@ h3 {
 
   .hero-facts {
     margin-inline: auto;
+  }
+
+  .modes-grid {
+    grid-template-columns: 1fr;
   }
 }
 
