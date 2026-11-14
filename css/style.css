@@ -896,6 +896,48 @@ h3 {
   color: var(--text-primary);
 }
 
+/* Features */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.feature {
+  padding: 26px 24px;
+  transition:
+    transform var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease);
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.feature svg {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feature h3 {
+  font-size: 1.0625rem;
+  margin: 16px 0 6px;
+}
+
+.feature p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+
 /* Active card */
 .tm-card:is(:hover, :focus-within) {
   flex-basis: 288px;
