@@ -938,6 +938,140 @@ h3 {
   color: var(--text-secondary);
 }
 
+/* Greeting flow */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  position: relative;
+  counter-reset: none;
+}
+
+.flow::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0 6px,
+    transparent 6px 12px
+  );
+  opacity: 0.4;
+}
+
+.flow-step {
+  position: relative;
+  text-align: center;
+  padding: 0 4px;
+}
+
+.flow-num {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--bg-solid);
+  border: 2px solid var(--accent);
+  color: var(--accent-text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 6px var(--bg-base);
+}
+
+.flow-step h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.flow-step p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.convo {
+  margin: 56px auto 0;
+  max-width: 760px;
+  padding: 28px;
+}
+
+.convo-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.convo-head .eyebrow {
+  margin-bottom: 4px;
+}
+
+.convo-head h3 {
+  font-size: 1.25rem;
+}
+
+.convo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bubble {
+  max-width: 78%;
+  padding: 11px 16px;
+  border-radius: 18px;
+  font-size: 0.9375rem;
+}
+
+.bubble--bot {
+  align-self: flex-start;
+  background: var(--obsidian-2);
+  color: var(--ice-white);
+  border-bottom-left-radius: 6px;
+}
+
+.bubble--you {
+  align-self: flex-end;
+  background: var(--accent);
+  color: var(--ice-white);
+  border-bottom-right-radius: 6px;
+}
+
+.convo-shot {
+  align-self: center;
+  width: min(100%, 520px);
+  margin: 6px 0;
+}
+
+.convo-shot img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(15, 52, 105, 0.2);
+}
+
+.convo-shot figcaption {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.bubble--note {
+  align-self: center;
+  max-width: 100%;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px dashed var(--border-strong);
+}
+
 /* Active card */
 .tm-card:is(:hover, :focus-within) {
   flex-basis: 288px;
