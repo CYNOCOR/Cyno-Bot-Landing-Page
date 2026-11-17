@@ -1235,6 +1235,19 @@ h3 {
   .problem-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .roadmap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .flow {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 36px;
+  }
+
+  .flow::before {
+    display: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1351,6 +1364,10 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .flow {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .bot-head {
     border-radius: 32px;
     padding: 16px;
@@ -1370,6 +1387,18 @@ h3 {
 
   .bot-ear--r {
     right: -10px;
+  }
+
+  .convo {
+    padding: 20px;
+  }
+
+  .bubble {
+    max-width: 90%;
+  }
+
+  .vision-quote {
+    padding: 32px 24px;
   }
 }
 
