@@ -141,6 +141,96 @@
     );
   }
 
+  /* Demo request form (FormSubmit, like cynocor.com) */
+  const form = document.getElementById("ctaForm");
+  if (form) {
+    const status = document.getElementById("formStatus");
+    const submit = form.querySelector(".cta-submit");
+    const to = form.dataset.email;
+    const checks = [
+      ["f-name", (el) => (el.value.trim() ? "" : "Please enter your name.")],
+      [
+        "f-email",
+        (el) =>
+          !el.value.trim()
+            ? "Please enter your email."
+            : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())
+              ? ""
+              : "Please enter a valid email, like name@example.com.",
+      ],
+      [
+        "f-consent",
+        (el) =>
+          el.checked
+            ? ""
+            : "Please agree to the privacy notice so we can reply.",
+      ],
+    ];
+    const validate = () => {
+      let first = null;
+      checks.forEach(([id, test]) => {
+        const el = document.getElementById(id);
+        const msg = test(el);
+        document.getElementById(id + "-err").textContent = msg;
+        if (msg) {
+          el.setAttribute("aria-invalid", "true");
+          first = first || el;
+        } else el.removeAttribute("aria-invalid");
+      });
+      return first;
+    };
+    checks.forEach(([id]) =>
+      document.getElementById(id).addEventListener("change", () => {
+        if (document.getElementById(id).hasAttribute("aria-invalid")) validate();
+      }),
+    );
+
+    let lastSent = 0;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.className = "form-status";
+      const bad = validate();
+      if (bad) {
+        status.textContent = "Please fix the highlighted fields.";
+        status.classList.add("is-bad");
+        bad.focus();
+        return;
+      }
+      if (form.elements._honey.value) return; // bot filled the hidden field
+      if (Date.now() - lastSent < 5000) {
+        status.textContent = "Please wait a moment before sending again.";
+        return;
+      }
+      lastSent = Date.now();
+      const label = submit.textContent;
+      submit.disabled = true;
+      submit.textContent = "Sending…";
+      status.textContent = "Sending your request…";
+      try {
+        const res = await fetch(
+          "https://formsubmit.co/ajax/" + encodeURIComponent(to),
+          {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: new FormData(form),
+          },
+        );
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        form.reset();
+        status.textContent =
+          "Thanks! Your request is in. We’ll reply by email within two working days.";
+        status.classList.add("is-ok");
+      } catch (err) {
+        status.textContent =
+          "Sorry, that didn’t send. Please email us at " + to + " instead.";
+        status.classList.add("is-bad");
+      } finally {
+        submit.disabled = false;
+        submit.textContent = label;
+      }
+    });
+  }
+
   /* Footer year */
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
