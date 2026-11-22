@@ -37,6 +37,19 @@
 </head>
 
 <body>
+  <!-- ── Splash screen ──────────────────────────────── -->
+  <div class="splash" id="splash" aria-hidden="true">
+    <div class="splash-rings"><span></span><span></span><i></i></div>
+    <div class="splash-bgword">CYNOBOT</div>
+    <canvas class="splash-canvas"></canvas>
+    <div class="splash-scan"></div>
+    <div class="splash-copy">
+      <img class="splash-word" src="assets/cynobot-wordmark.png" alt="" width="862" height="237">
+      <p class="splash-tag"><span>greets.</span> <span>guides.</span> <span class="splash-tag-accent">entertains.</span></p>
+      <div class="splash-bar"><span></span></div>
+    </div>
+  </div>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" id="siteHeader">
@@ -1018,6 +1031,7 @@
     </div>
   </footer>
 
+  <script src="js/splash.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

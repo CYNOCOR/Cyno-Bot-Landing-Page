@@ -143,7 +143,8 @@
 
   function frame(now) {
     if (!ctx || splash.classList.contains("is-gone")) return;
-    const t = reduce ? 10 : (now - start) / 1000;
+    const elapsed = Math.max(0, now - start);
+    const t = reduce ? 10 : elapsed / 1000;
     const build = Math.min(1, t / BUILD);
     const ease = 1 - Math.pow(1 - build, 2.2);
 
@@ -210,7 +211,7 @@
       ctx.stroke();
     }
 
-    if (bar) bar.style.transform = `scaleX(${Math.min(1, (now - start) / MIN_SHOW).toFixed(3)})`;
+    if (bar) bar.style.transform = `scaleX(${Math.min(1, elapsed / MIN_SHOW).toFixed(3)})`;
     if (!reduce) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
