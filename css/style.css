@@ -1574,24 +1574,16 @@ img.tm-photo[data-focus="upper"] { object-position: center 20%; }
 .field legend { margin-bottom: 8px; }
 .req { color: #C2261F; }
 .opt { font-weight: 400; color: var(--text-secondary); }
-.field input[type="text"], .field input[type="email"], .field textarea {
-  width: 100%; font: inherit; font-size: 1rem; color: var(--text-primary);
+.field input[type="text"], .field input[type="email"], .field input[type="tel"], .field select, .field textarea {
+  width: 100%; font: inherit; font-size: 0.875rem; color: var(--text-primary);
   padding: 12px 14px; border-radius: 12px; border: 1px solid #A9B7CB; background: var(--bg-solid);
   transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
 }
 .field textarea { resize: vertical; min-height: 92px; }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
 .field [aria-invalid="true"] { border-color: #C2261F; }
 .err { font-size: 0.8125rem; color: #B42318; min-height: 0; }
 .err:empty { display: none; }
-.seg { display: flex; flex-wrap: wrap; gap: 8px; }
-.seg label {
-  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
-  padding: 9px 14px; border-radius: 980px; border: 1px solid var(--border-strong); background: var(--bg-solid);
-  font-size: 0.875rem; font-weight: 500;
-}
-.seg label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-text); }
-.seg input { accent-color: var(--accent); }
 .field--check { grid-template-columns: auto 1fr; align-items: start; column-gap: 10px; }
 .field--check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); }
 .field--check label { font-weight: 400; font-size: 0.875rem; color: var(--text-secondary); }

@@ -1,716 +1,753 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CYNO BOT | The Robot Receptionist for Campuses, by CYNOCOR</title>
-    <meta
-      name="description"
-      content="CYNO BOT is a standing, human-sized assistant robot that greets visitors at the university entrance, answers questions, shows directions and plays quick games. ATP Group 40 project by CYNOCOR, 2026."
-    />
-    <link rel="canonical" href="https://cynobot.cynocor.com/" />
-    <meta name="theme-color" content="#EBF3FC" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="CYNOCOR" />
-    <meta property="og:title" content="CYNO BOT | University Entrance Assistant Robot" />
-    <meta property="og:description" content="A friendly standing robot that greets, guides and entertains visitors. ATP Group 40 · CYNOCOR · 2026." />
-    <meta property="og:url" content="https://cynobot.cynocor.com/" />
-    <meta property="og:image" content="https://cynobot.cynocor.com/assets/og-cynobot.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="CYNO BOT logo with the headline: the robot receptionist that greets, guides and entertains your visitors" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CYNO BOT | The Robot Receptionist for Campuses" />
-    <meta name="twitter:description" content="A friendly standing robot that greets, guides and entertains visitors. Request a demo." />
-    <meta name="twitter:image" content="https://cynobot.cynocor.com/assets/og-cynobot.png" />
 
-    <link rel="icon" href="assets/ICON.png" type="image/png" />
-    <link rel="apple-touch-icon" href="assets/ICON.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CYNO BOT | The Robot Receptionist for Campuses, by CYNOCOR</title>
+  <meta name="description"
+    content="CYNO BOT is a standing, human-sized assistant robot that greets visitors at the university entrance, answers questions, shows directions and plays quick games. ATP Group 40 project by CYNOCOR, 2026." />
+  <link rel="canonical" href="https://cynobot.cynocor.com/" />
+  <meta name="theme-color" content="#EBF3FC" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CYNOCOR" />
+  <meta property="og:title" content="CYNO BOT | University Entrance Assistant Robot" />
+  <meta property="og:description"
+    content="A friendly standing robot that greets, guides and entertains visitors. ATP Group 40 · CYNOCOR · 2026." />
+  <meta property="og:url" content="https://cynobot.cynocor.com/" />
+  <meta property="og:image" content="https://cynobot.cynocor.com/assets/og-cynobot.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"
+    content="CYNO BOT logo with the headline: the robot receptionist that greets, guides and entertains your visitors" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CYNO BOT | The Robot Receptionist for Campuses" />
+  <meta name="twitter:description"
+    content="A friendly standing robot that greets, guides and entertains visitors. Request a demo." />
+  <meta name="twitter:image" content="https://cynobot.cynocor.com/assets/og-cynobot.png" />
 
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+  <link rel="icon" href="assets/ICON.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/ICON.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-    <header class="site-header" id="siteHeader">
-      <div class="container header-inner">
-        <a href="#top" class="brand" aria-label="CYNO BOT home">
-          <img
-            class="brand-word"
-            src="assets/cynobot-wordmark.png"
-            alt="cynobot"
-            width="862"
-            height="237"
-          />
-          <span class="brand-divider" aria-hidden="true"></span>
-          <img
-            class="brand-by"
-            src="assets/logo.png"
-            alt="by CYNOCOR"
-            width="96"
-            height="30"
-          />
-        </a>
-        <nav class="nav-links" id="navLinks" aria-label="Page sections">
-          <a href="#problem">Problem</a>
-          <a href="#modes">Modes</a>
-          <a href="#features">Features</a>
-          <a href="#greeting">How it greets</a>
-          <a href="#vision">Vision</a>
-          <a href="#team">Team</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <div class="header-right">
-          <a href="#contact" class="nav-cta">Request a demo</a>
-          <button
-            class="menu-toggle"
-            id="menuToggle"
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="navLinks"
-          >
-            <span></span><span></span>
-          </button>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="CYNO BOT home">
+        <img class="brand-word" src="assets/cynobot-wordmark.png" alt="cynobot" width="862" height="237" />
+        <span class="brand-divider" aria-hidden="true"></span>
+        <img class="brand-by" src="assets/logo.png" alt="by CYNOCOR" width="96" height="30" />
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Page sections">
+        <a href="#problem">Problem</a>
+        <a href="#modes">Modes</a>
+        <a href="#features">Features</a>
+        <a href="#greeting">How it greets</a>
+        <a href="#vision">Vision</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-right">
+        <a href="#contact" class="nav-cta">Request a demo</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"
+          aria-controls="navLinks">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-label="Introduction">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="hero-title">
+            <img class="hero-logo" src="assets/cynobot-wordmark.png" alt="CYNO BOT" width="862" height="237" />
+          </h1>
+          <p class="hero-sub">University and industry assistant robot</p>
+          <p class="hero-headline">
+            The robot receptionist that greets, guides and entertains your
+            visitors.
+          </p>
+          <p class="hero-lede">
+            A standing, human-sized robot that talks, listens, sees and helps.
+            It greets visitors at the university entrance, answers their
+            questions, shows the way, and keeps them company with quick games
+            while they wait.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Request a demo</a>
+            <a href="#greeting" class="btn btn-ghost">See how it greets</a>
+          </div>
+          <dl class="hero-facts">
+            <div>
+              <dt>1.67 m</dt>
+              <dd>Standing height</dd>
+            </div>
+            <div>
+              <dt>9</dt>
+              <dd>Months to prototype</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-visual">
+          <div class="bot-head" id="botHead">
+            <span class="bot-ear bot-ear--l" aria-hidden="true"></span>
+            <span class="bot-ear bot-ear--r" aria-hidden="true"></span>
+            <span class="bot-cam" aria-hidden="true"></span>
+            <div class="bot-screen">
+              <svg class="bot-face" id="botFace" data-mood="happy" viewBox="0 0 320 190" role="img"
+                aria-labelledby="faceTitle">
+                <title id="faceTitle">CYNO BOT's animated face</title>
+                <defs>
+                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="b" />
+                    <feMerge>
+                      <feMergeNode in="b" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                <g class="eyes" filter="url(#glow)">
+                  <g class="eye eye--l" transform="translate(105 82)">
+                    <g class="eye-blink">
+                      <circle class="eye-ring" r="27" />
+                      <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
+                    </g>
+                  </g>
+                  <g class="eye eye--r" transform="translate(215 82)">
+                    <g class="eye-blink">
+                      <circle class="eye-ring" r="27" />
+                      <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
+                    </g>
+                  </g>
+                </g>
+                <g class="mouths" filter="url(#glow)">
+                  <path class="mouth mouth--smile" d="M140 142 Q160 160 180 142" />
+                  <path class="mouth mouth--grin" d="M134 138 Q160 172 186 138" />
+                  <circle class="mouth mouth--o" cx="160" cy="148" r="8" />
+                  <line class="mouth mouth--flat" x1="148" y1="148" x2="172" y2="148" />
+                  <g class="mouth mouth--dots">
+                    <circle cx="144" cy="148" r="4.5" />
+                    <circle cx="160" cy="148" r="4.5" />
+                    <circle cx="176" cy="148" r="4.5" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="bot-neck" aria-hidden="true"></div>
+
+          <div class="mood-panel">
+            <div class="mood-status">
+              <p id="moodText">Happy: ready to greet visitors</p>
+            </div>
+            <p class="sr-only" id="moodLive" aria-live="polite"></p>
+            <div class="mood-chips" role="group" aria-label="Change CYNO BOT's expression">
+              <button class="chip is-active" data-mood="happy" aria-pressed="true">
+                Happy
+              </button>
+              <button class="chip" data-mood="curious" aria-pressed="false">
+                Curious
+              </button>
+              <button class="chip" data-mood="thinking" aria-pressed="false">
+                Thinking
+              </button>
+              <button class="chip" data-mood="sleepy" aria-pressed="false">
+                Sleepy
+              </button>
+            </div>
+            <p class="mood-hint">
+              Move your cursor around. The eyes follow you, just like the
+              robot looks at a visitor. Click the buttons above to switch CYNO
+              BOT's expression.
+            </p>
+          </div>
         </div>
       </div>
-    </header>
+    </section>
+    <section class="section" id="problem" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">The problem</span>
+          <h2 id="problem-title">
+            Entrances answer the same questions every day
+          </h2>
+          <p>
+            Where is the building? When is the event? How does this procedure
+            work? Staff are busy, first-time visitors get lost, and people
+            waiting have nothing to do.
+          </p>
+        </div>
+        <div class="problem-grid">
+          <article class="problem-card reveal">
+            <span class="num">01</span>
+            <h3>Repetitive enquiries</h3>
+            <p>
+              The same questions at the front desk take up staff time all day.
+            </p>
+          </article>
+          <article class="problem-card reveal">
+            <span class="num">02</span>
+            <h3>Costly, rigid robots</h3>
+            <p>
+              Service robots are mostly imported, expensive and hard to
+              connect to local information.
+            </p>
+          </article>
+          <article class="problem-card reveal">
+            <span class="num">03</span>
+            <h3>Little engagement</h3>
+            <p>Most kiosks give visitors no reason to stop and interact.</p>
+          </article>
+          <article class="problem-card reveal">
+            <span class="num">04</span>
+            <h3>No safety awareness</h3>
+            <p>
+              Reception points rarely watch for poor air quality or fire.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <main id="main">
-      <section class="hero" id="top" aria-label="Introduction">
-        <div class="container hero-grid">
-          <div class="hero-copy">
-            <h1 class="hero-title">
-              <img
-                class="hero-logo"
-                src="assets/cynobot-wordmark.png"
-                alt="CYNO BOT"
-                width="862"
-                height="237"
-              />
-            </h1>
-            <p class="hero-sub">University and industry assistant robot</p>
-            <p class="hero-headline">
-              The robot receptionist that greets, guides and entertains your
-              visitors.
-            </p>
-            <p class="hero-lede">
-              A standing, human-sized robot that talks, listens, sees and helps.
-              It greets visitors at the university entrance, answers their
-              questions, shows the way, and keeps them company with quick games
-              while they wait.
-            </p>
-            <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">Request a demo</a>
-              <a href="#greeting" class="btn btn-ghost">See how it greets</a>
+    <section class="section section--tint" id="modes" aria-labelledby="modes-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">The solution</span>
+          <h2 id="modes-title">One robot, two jobs</h2>
+          <p>
+            The hardware and software stay the same. CYNO BOT switches between
+            helping visitors and entertaining them.
+          </p>
+        </div>
+        <div class="modes-grid">
+          <article class="mode-card reveal">
+            <div class="mode-media mode-media--shot">
+              <img src="assets/screen-find-us.jpg"
+                alt="CYNO BOT's chest screen showing the IIT campus addresses, a street map of the Main Campus and a QR code to scan"
+                width="800" height="500" loading="lazy" decoding="async" />
             </div>
-            <dl class="hero-facts">
-              <div>
-                <dt>1.67 m</dt>
-                <dd>Standing height</dd>
-              </div>
-              <div>
-                <dt>9</dt>
-                <dd>Months to prototype</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div class="hero-visual">
-            <div class="bot-head" id="botHead">
-              <span class="bot-ear bot-ear--l" aria-hidden="true"></span>
-              <span class="bot-ear bot-ear--r" aria-hidden="true"></span>
-              <span class="bot-cam" aria-hidden="true"></span>
-              <div class="bot-screen">
-                <svg
-                  class="bot-face"
-                  id="botFace"
-                  data-mood="happy"
-                  viewBox="0 0 320 190"
-                  role="img"
-                  aria-labelledby="faceTitle"
-                >
-                  <title id="faceTitle">CYNO BOT's animated face</title>
-                  <defs>
-                    <filter
-                      id="glow"
-                      x="-50%"
-                      y="-50%"
-                      width="200%"
-                      height="200%"
-                    >
-                      <feGaussianBlur stdDeviation="4" result="b" />
-                      <feMerge>
-                        <feMergeNode in="b" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  <g class="eyes" filter="url(#glow)">
-                    <g class="eye eye--l" transform="translate(105 82)">
-                      <g class="eye-blink">
-                        <circle class="eye-ring" r="27" />
-                        <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
-                      </g>
-                    </g>
-                    <g class="eye eye--r" transform="translate(215 82)">
-                      <g class="eye-blink">
-                        <circle class="eye-ring" r="27" />
-                        <line class="eye-line" x1="-26" y1="0" x2="26" y2="0" />
-                      </g>
-                    </g>
-                  </g>
-                  <g class="mouths" filter="url(#glow)">
-                    <path
-                      class="mouth mouth--smile"
-                      d="M140 142 Q160 160 180 142"
-                    />
-                    <path
-                      class="mouth mouth--grin"
-                      d="M134 138 Q160 172 186 138"
-                    />
-                    <circle class="mouth mouth--o" cx="160" cy="148" r="8" />
-                    <line
-                      class="mouth mouth--flat"
-                      x1="148"
-                      y1="148"
-                      x2="172"
-                      y2="148"
-                    />
-                    <g class="mouth mouth--dots">
-                      <circle cx="144" cy="148" r="4.5" />
-                      <circle cx="160" cy="148" r="4.5" />
-                      <circle cx="176" cy="148" r="4.5" />
-                    </g>
-                  </g>
-                </svg>
-              </div>
+            <div class="mode-body">
+              <span class="mode-tag">Mode A</span>
+              <h3>University Entrance Assistant</h3>
+              <ul class="ticks">
+                <li>
+                  Greets students, staff and visitors with a spoken welcome
+                </li>
+                <li>
+                  Answers questions on faculties, offices, timetables, events
+                  and admissions
+                </li>
+                <li>
+                  Shows campus maps, directions and QR codes on the chest
+                  screen
+                </li>
+                <li>Alerts staff when a visitor needs a human</li>
+              </ul>
             </div>
-            <div class="bot-neck" aria-hidden="true"></div>
+          </article>
 
-            <div class="mood-panel">
-              <div class="mood-status">
-                <p id="moodText">Happy: ready to greet visitors</p>
-              </div>
-              <p class="sr-only" id="moodLive" aria-live="polite"></p>
-              <div
-                class="mood-chips"
-                role="group"
-                aria-label="Change CYNO BOT's expression"
-              >
-                <button
-                  class="chip is-active"
-                  data-mood="happy"
-                  aria-pressed="true"
-                >
-                  Happy
-                </button>
-                <button class="chip" data-mood="curious" aria-pressed="false">
-                  Curious
-                </button>
-                <button class="chip" data-mood="thinking" aria-pressed="false">
-                  Thinking
-                </button>
-                <button class="chip" data-mood="sleepy" aria-pressed="false">
-                  Sleepy
-                </button>
-              </div>
-              <p class="mood-hint">
-                Move your cursor around. The eyes follow you, just like the
-                robot looks at a visitor. Click the buttons above to switch CYNO
-                BOT's expression.
-              </p>
+          <article class="mode-card reveal">
+            <div class="mode-media mode-media--shot">
+              <img src="assets/screen-memory-match.jpg"
+                alt="Memory Match running on CYNO BOT's chest screen, with three matched pairs and a countdown timer"
+                width="800" height="500" loading="lazy" decoding="async" />
             </div>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="problem" aria-labelledby="problem-title">
-        <div class="container">
-          <div class="section-head reveal">
-            <span class="eyebrow">The problem</span>
-            <h2 id="problem-title">
-              Entrances answer the same questions every day
-            </h2>
-            <p>
-              Where is the building? When is the event? How does this procedure
-              work? Staff are busy, first-time visitors get lost, and people
-              waiting have nothing to do.
-            </p>
-          </div>
-          <div class="problem-grid">
-            <article class="problem-card reveal">
-              <span class="num">01</span>
-              <h3>Repetitive enquiries</h3>
-              <p>
-                The same questions at the front desk take up staff time all day.
-              </p>
-            </article>
-            <article class="problem-card reveal">
-              <span class="num">02</span>
-              <h3>Costly, rigid robots</h3>
-              <p>
-                Service robots are mostly imported, expensive and hard to
-                connect to local information.
-              </p>
-            </article>
-            <article class="problem-card reveal">
-              <span class="num">03</span>
-              <h3>Little engagement</h3>
-              <p>Most kiosks give visitors no reason to stop and interact.</p>
-            </article>
-            <article class="problem-card reveal">
-              <span class="num">04</span>
-              <h3>No safety awareness</h3>
-              <p>
-                Reception points rarely watch for poor air quality or fire.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section
-        class="section section--tint"
-        id="modes"
-        aria-labelledby="modes-title"
-      >
-        <div class="container">
-          <div class="section-head reveal">
-            <span class="eyebrow">The solution</span>
-            <h2 id="modes-title">One robot, two jobs</h2>
-            <p>
-              The hardware and software stay the same. CYNO BOT switches between
-              helping visitors and entertaining them.
-            </p>
-          </div>
-          <div class="modes-grid">
-            <article class="mode-card reveal">
-              <div class="mode-media mode-media--shot">
-                <img
-                  src="assets/screen-find-us.jpg"
-                  alt="CYNO BOT's chest screen showing the IIT campus addresses, a street map of the Main Campus and a QR code to scan"
-                  width="800"
-                  height="500"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="mode-body">
-                <span class="mode-tag">Mode A</span>
-                <h3>University Entrance Assistant</h3>
-                <ul class="ticks">
-                  <li>
-                    Greets students, staff and visitors with a spoken welcome
-                  </li>
-                  <li>
-                    Answers questions on faculties, offices, timetables, events
-                    and admissions
-                  </li>
-                  <li>
-                    Shows campus maps, directions and QR codes on the chest
-                    screen
-                  </li>
-                  <li>Alerts staff when a visitor needs a human</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="mode-card reveal">
-              <div class="mode-media mode-media--shot">
-                <img
-                  src="assets/screen-memory-match.jpg"
-                  alt="Memory Match running on CYNO BOT's chest screen, with three matched pairs and a countdown timer"
-                  width="800"
-                  height="500"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="mode-body">
-                <span class="mode-tag">Mode B</span>
-                <h3>Interactive Games</h3>
-                <ul class="ticks">
-                  <li>Quick touch and voice games while visitors wait</li>
-                  <li>
-                    Start by touch or just say &ldquo;Let&rsquo;s play a
-                    game&rdquo;
-                  </li>
-                  <li>Pauses to answer a question, then carries on</li>
-                  <li>
-                    About two minutes per game, with a daily best score and no
-                    names stored
-                  </li>
-                </ul>
-                <div class="game-chips" aria-label="Games">
-                  <span>Brain Riddles</span>
-                  <span>Memory Match</span>
-                  <span>Picture Puzzle</span>
-                  <span>Find Your Degree</span>
-                  <span>Word Chain</span>
-                  <span>Cyno Run</span>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features" aria-labelledby="features-title">
-        <div class="container">
-          <div class="section-head reveal">
-            <span class="eyebrow">Key features</span>
-            <h2 id="features-title">Everything it can do</h2>
-            <p>
-              Visitor help, games, education and safety on one platform. It only
-              loads what the current mode needs, so it stays responsive.
-            </p>
-          </div>
-          <div class="feature-grid">
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="9" y="3" width="6" height="11" rx="3" />
-                <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
-              </svg>
-              <h3>Voice AI</h3>
-              <p>
-                Wake word, noise cancellation, English speech recognition and
-                natural replies.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M8.5 14.5a4.5 4.5 0 0 0 7 0" />
-                <circle cx="9" cy="10" r=".6" />
-                <circle cx="15" cy="10" r=".6" />
-              </svg>
-              <h3>Personality</h3>
-              <p>
-                Animated eyes that blink and look at the speaker, with happy,
-                curious and sleepy moods.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"
-                />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-              <h3>Camera &amp; vision</h3>
-              <p>
-                Person detection and presence tracking. Face recognition is
-                opt-in, with a privacy mode.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="2" y="7" width="20" height="11" rx="5" />
-                <path d="M7 11v3M5.5 12.5h3" />
-                <circle cx="16" cy="11.5" r=".7" />
-                <circle cx="18" cy="13.5" r=".7" />
-              </svg>
-              <h3>Games</h3>
-              <p>
-                Riddles, memory match, picture puzzle, word chain and a runner
-                game.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="9" cy="8" r="4" />
-                <path d="M2 21a7 7 0 0 1 14 0M16 11l2 2 4-4" />
-              </svg>
-              <h3>Visitor help</h3>
-              <p>
-                Optional name and purpose with consent, and staff alerts when
-                help is needed.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"
-                />
-                <path d="M4 19V5M9 8h6" />
-              </svg>
-              <h3>Study &amp; education</h3>
-              <p>
-                AI tutor, quizzes, flashcards, Pomodoro timer and English
-                speaking practice.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6Z"
-                />
-                <path d="M12 8v5M12 16h.01" />
-              </svg>
-              <h3>Guardian safety</h3>
-              <p>
-                Air quality and flame detection, an alarm and SOS alerts to
-                staff.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"
-                />
-              </svg>
-              <h3>Social chat</h3>
-              <p>
-                Safe, friendly small talk and jokes. It always says it is a
-                robot.
-              </p>
-            </article>
-            <article class="feature reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="13" rx="2" />
-                <path d="M9 21h6M12 17v4" />
-              </svg>
-              <h3>Chest display</h3>
-              <p>Touchscreen for maps, schedules, games and QR codes.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section
-        class="section section--tint"
-        id="greeting"
-        aria-labelledby="greeting-title"
-      >
-        <div class="container">
-          <div class="section-head reveal">
-            <span class="eyebrow">How it greets</span>
-            <h2 id="greeting-title">
-              From &ldquo;hello&rdquo; to &ldquo;goodbye&rdquo; in six steps
-            </h2>
-            <p>
-              Every visitor gets the same friendly sequence, driven by the
-              camera, distance sensor, face display and voice.
-            </p>
-          </div>
-
-          <ol class="flow">
-            <li class="flow-step reveal">
-              <span class="flow-num">1</span>
-              <h3>Detect</h3>
-              <p>Camera and distance sensor notice a person 1.5 to 3 m away.</p>
-            </li>
-            <li class="flow-step reveal">
-              <span class="flow-num">2</span>
-              <h3>Attend</h3>
-              <p>The eyes turn toward them with a friendly expression.</p>
-            </li>
-            <li class="flow-step reveal">
-              <span class="flow-num">3</span>
-              <h3>Greet</h3>
-              <p>The face smiles, the screen says welcome, and it speaks.</p>
-            </li>
-            <li class="flow-step reveal">
-              <span class="flow-num">4</span>
-              <h3>Offer help</h3>
-              <p>The chest screen shows the main options.</p>
-            </li>
-            <li class="flow-step reveal">
-              <span class="flow-num">5</span>
-              <h3>Converse</h3>
-              <p>It listens and answers by voice, with visuals on screen.</p>
-            </li>
-            <li class="flow-step reveal">
-              <span class="flow-num">6</span>
-              <h3>Close</h3>
-              <p>It says goodbye and returns to idle.</p>
-            </li>
-          </ol>
-
-          <div class="convo reveal">
-            <div class="convo-head">
-              <div>
-                <span class="eyebrow">Sample conversation</span>
-                <h3>At the campus entrance</h3>
+            <div class="mode-body">
+              <span class="mode-tag">Mode B</span>
+              <h3>Interactive Games</h3>
+              <ul class="ticks">
+                <li>Quick touch and voice games while visitors wait</li>
+                <li>
+                  Start by touch or just say &ldquo;Let&rsquo;s play a
+                  game&rdquo;
+                </li>
+                <li>Pauses to answer a question, then carries on</li>
+                <li>
+                  About two minutes per game, with a daily best score and no
+                  names stored
+                </li>
+              </ul>
+              <div class="game-chips" aria-label="Games">
+                <span>Brain Riddles</span>
+                <span>Memory Match</span>
+                <span>Picture Puzzle</span>
+                <span>Find Your Degree</span>
+                <span>Word Chain</span>
+                <span>Cyno Run</span>
               </div>
             </div>
-            <div class="convo-body">
-              <p class="bubble bubble--bot">
-                Welcome to the university! How can I help you today?
-              </p>
-              <p class="bubble bubble--you">
-                Where is the School of Computing?
-              </p>
-              <p class="bubble bubble--bot">
-                The School of Computing is at 10 Trelawney Place, Colombo 4.
-                I&rsquo;ve put the map and a QR code on my screen for you.
-              </p>
-              <figure class="convo-shot">
-                <img
-                  src="assets/screen-campus-card.jpg"
-                  alt="CYNO BOT's chest screen showing the IIT campus addresses, including the School of Computing, a street map and a QR code"
-                  width="580"
-                  height="286"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption>The chest screen at that moment</figcaption>
-              </figure>
-              <p class="bubble bubble--bot">Have a lovely day!</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Key features</span>
+          <h2 id="features-title">Everything it can do</h2>
+          <p>
+            Visitor help, games, education and safety on one platform. It only
+            loads what the current mode needs, so it stays responsive.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="3" width="6" height="11" rx="3" />
+              <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+            </svg>
+            <h3>Voice AI</h3>
+            <p>
+              Wake word, noise cancellation, English speech recognition and
+              natural replies.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M8.5 14.5a4.5 4.5 0 0 0 7 0" />
+              <circle cx="9" cy="10" r=".6" />
+              <circle cx="15" cy="10" r=".6" />
+            </svg>
+            <h3>Personality</h3>
+            <p>
+              Animated eyes that blink and look at the speaker, with happy,
+              curious and sleepy moods.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <h3>Camera &amp; vision</h3>
+            <p>
+              Person detection and presence tracking. Face recognition is
+              opt-in, with a privacy mode.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2" y="7" width="20" height="11" rx="5" />
+              <path d="M7 11v3M5.5 12.5h3" />
+              <circle cx="16" cy="11.5" r=".7" />
+              <circle cx="18" cy="13.5" r=".7" />
+            </svg>
+            <h3>Games</h3>
+            <p>
+              Riddles, memory match, picture puzzle, word chain and a runner
+              game.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="9" cy="8" r="4" />
+              <path d="M2 21a7 7 0 0 1 14 0M16 11l2 2 4-4" />
+            </svg>
+            <h3>Visitor help</h3>
+            <p>
+              Optional name and purpose with consent, and staff alerts when
+              help is needed.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z" />
+              <path d="M4 19V5M9 8h6" />
+            </svg>
+            <h3>Study &amp; education</h3>
+            <p>
+              AI tutor, quizzes, flashcards, Pomodoro timer and English
+              speaking practice.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6Z" />
+              <path d="M12 8v5M12 16h.01" />
+            </svg>
+            <h3>Guardian safety</h3>
+            <p>
+              Air quality and flame detection, an alarm and SOS alerts to
+              staff.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z" />
+            </svg>
+            <h3>Social chat</h3>
+            <p>
+              Safe, friendly small talk and jokes. It always says it is a
+              robot.
+            </p>
+          </article>
+          <article class="feature reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="13" rx="2" />
+              <path d="M9 21h6M12 17v4" />
+            </svg>
+            <h3>Chest display</h3>
+            <p>Touchscreen for maps, schedules, games and QR codes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tint" id="greeting" aria-labelledby="greeting-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">How it greets</span>
+          <h2 id="greeting-title">
+            From &ldquo;hello&rdquo; to &ldquo;goodbye&rdquo; in six steps
+          </h2>
+          <p>
+            Every visitor gets the same friendly sequence, driven by the
+            camera, distance sensor, face display and voice.
+          </p>
+        </div>
+
+        <ol class="flow">
+          <li class="flow-step reveal">
+            <span class="flow-num">1</span>
+            <h3>Detect</h3>
+            <p>Camera and distance sensor notice a person 1.5 to 3 m away.</p>
+          </li>
+          <li class="flow-step reveal">
+            <span class="flow-num">2</span>
+            <h3>Attend</h3>
+            <p>The eyes turn toward them with a friendly expression.</p>
+          </li>
+          <li class="flow-step reveal">
+            <span class="flow-num">3</span>
+            <h3>Greet</h3>
+            <p>The face smiles, the screen says welcome, and it speaks.</p>
+          </li>
+          <li class="flow-step reveal">
+            <span class="flow-num">4</span>
+            <h3>Offer help</h3>
+            <p>The chest screen shows the main options.</p>
+          </li>
+          <li class="flow-step reveal">
+            <span class="flow-num">5</span>
+            <h3>Converse</h3>
+            <p>It listens and answers by voice, with visuals on screen.</p>
+          </li>
+          <li class="flow-step reveal">
+            <span class="flow-num">6</span>
+            <h3>Close</h3>
+            <p>It says goodbye and returns to idle.</p>
+          </li>
+        </ol>
+
+        <div class="convo reveal">
+          <div class="convo-head">
+            <div>
+              <span class="eyebrow">Sample conversation</span>
+              <h3>At the campus entrance</h3>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="section" id="vision" aria-labelledby="vision-title">
-        <div class="container">
-          <div class="section-head reveal">
-            <span class="eyebrow">Vision &amp; future</span>
-            <h2 id="vision-title">Where CYNO BOT goes next</h2>
-            <p>
-              This prototype is the first robotics product under the CYNOCOR
-              brand, and the base for what comes after it.
+          <div class="convo-body">
+            <p class="bubble bubble--bot">
+              Welcome to the university! How can I help you today?
             </p>
+            <p class="bubble bubble--you">
+              Where is the School of Computing?
+            </p>
+            <p class="bubble bubble--bot">
+              The School of Computing is at 10 Trelawney Place, Colombo 4.
+              I&rsquo;ve put the map and a QR code on my screen for you.
+            </p>
+            <figure class="convo-shot">
+              <img src="assets/screen-campus-card.jpg"
+                alt="CYNO BOT's chest screen showing the IIT campus addresses, including the School of Computing, a street map and a QR code"
+                width="580" height="286" loading="lazy" decoding="async" />
+              <figcaption>The chest screen at that moment</figcaption>
+            </figure>
+            <p class="bubble bubble--bot">Have a lovely day!</p>
           </div>
-
-          <ol class="roadmap">
-            <li class="road-item reveal">
-              <span class="road-tag">Next</span>
-              <h3>Mac mini M1 brain</h3>
-              <p>A smaller, quieter unit in place of the laptop.</p>
-            </li>
-            <li class="road-item reveal">
-              <span class="road-tag">Next</span>
-              <h3>University systems</h3>
-              <p>Live timetables and events from campus systems.</p>
-            </li>
-            <li class="road-item reveal">
-              <span class="road-tag">Later</span>
-              <h3>Desk-sized version</h3>
-              <p>A compact model for offices and help desks.</p>
-            </li>
-            <li class="road-item reveal">
-              <span class="road-tag">Later</span>
-              <h3>Wheeled base</h3>
-              <p>Moves safely around a campus area.</p>
-            </li>
-            <li class="road-item reveal">
-              <span class="road-tag">Later</span>
-              <h3>Moving head &amp; arms</h3>
-              <p>Optional motion in a future version.</p>
-            </li>
-          </ol>
-
-          <figure class="vision-quote reveal">
-            <blockquote>
-              <p>
-                &ldquo;CYNO BOT is not just a single robotic unit; it is the
-                foundation of an intelligent, highly adaptable platform. Our goal
-                is to grow this prototype into specialised versions for every
-                major industry.&rdquo;
-              </p>
-            </blockquote>
-            <figcaption>
-              <div class="industries" aria-label="Target industries">
-                <span>Healthcare</span>
-                <span>Tourism</span>
-                <span>Banking</span>
-                <span>Education</span>
-                <span>Corporate</span>
-              </div>
-              <span class="quote-by">Team CYNOCOR</span>
-            </figcaption>
-          </figure>
         </div>
-      </section>
-      <section class="section section--tint team-section" id="team" aria-labelledby="team-title">
+      </div>
+    </section>
+
+    <section class="section" id="vision" aria-labelledby="vision-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Vision &amp; future</span>
+          <h2 id="vision-title">Where CYNO BOT goes next</h2>
+          <p>
+            This prototype is the first robotics product under the CYNOCOR
+            brand, and the base for what comes after it.
+          </p>
+        </div>
+
+        <ol class="roadmap">
+          <li class="road-item reveal">
+            <span class="road-tag">Next</span>
+            <h3>Mac mini M1 brain</h3>
+            <p>A smaller, quieter unit in place of the laptop.</p>
+          </li>
+          <li class="road-item reveal">
+            <span class="road-tag">Next</span>
+            <h3>University systems</h3>
+            <p>Live timetables and events from campus systems.</p>
+          </li>
+          <li class="road-item reveal">
+            <span class="road-tag">Later</span>
+            <h3>Desk-sized version</h3>
+            <p>A compact model for offices and help desks.</p>
+          </li>
+          <li class="road-item reveal">
+            <span class="road-tag">Later</span>
+            <h3>Wheeled base</h3>
+            <p>Moves safely around a campus area.</p>
+          </li>
+          <li class="road-item reveal">
+            <span class="road-tag">Later</span>
+            <h3>Moving head &amp; arms</h3>
+            <p>Optional motion in a future version.</p>
+          </li>
+        </ol>
+
+        <figure class="vision-quote reveal">
+          <blockquote>
+            <p>
+              &ldquo;CYNO BOT is not just a single robotic unit; it is the
+              foundation of an intelligent, highly adaptable platform. Our goal
+              is to grow this prototype into specialised versions for every
+              major industry.&rdquo;
+            </p>
+          </blockquote>
+          <figcaption>
+            <div class="industries" aria-label="Target industries">
+              <span>Healthcare</span>
+              <span>Tourism</span>
+              <span>Banking</span>
+              <span>Education</span>
+              <span>Corporate</span>
+            </div>
+            <span class="quote-by">Team CYNOCOR</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="section section--tint team-section" id="team" aria-labelledby="team-title">
       <div class="container">
         <div class="section-head reveal">
           <span class="eyebrow">ATP Group 40</span>
           <h2 id="team-title">The team behind CYNO BOT</h2>
-          <p id="team-hint">Five students, five areas of ownership. Hover a card, or tab to it, to see who builds what.</p>
+          <p id="team-hint">Five students, five areas of ownership. Hover a card, or tab to it, to see who builds what.
+          </p>
         </div>
         <ul class="team-cards reveal" aria-describedby="team-hint">
           <li class="tm-card" tabindex="0">
-            <img class="tm-photo" src="assets/team/chanul.jpg" alt="Chanul Dilhara" width="640" height="640" loading="lazy" decoding="async">
+            <img class="tm-photo" src="assets/team/chanul.jpg" alt="Chanul Dilhara" width="640" height="640"
+              loading="lazy" decoding="async">
             <div class="tm-body">
               <h3>Chanul Dilhara</h3>
               <span class="tm-role">Technical Lead</span>
               <div class="tm-info">
-                <p>Owns the overall software architecture, system design and integration. Builds the computer vision (person detection), sensor data handling, chest touchscreen UI and admin dashboard.</p>
+                <p>Owns the overall software architecture, system design and integration. Builds the computer vision
+                  (person detection), sensor data handling, chest touchscreen UI and admin dashboard.</p>
                 <div class="tm-social">
-                  <a href="mailto:rmcdilhara123@gmail.com" aria-label="Email Chanul"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg></a>
-                  <a href="https://www.facebook.com/chanul.dilhara" target="_blank" rel="noopener noreferrer" aria-label="Chanul on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.instagram.com/chanul_dilhara_/" target="_blank" rel="noopener noreferrer" aria-label="Chanul on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.linkedin.com/in/chanul-dilhara-0a35a6379/" target="_blank" rel="noopener noreferrer" aria-label="Chanul on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg></a>
+                  <a href="mailto:rmcdilhara123@gmail.com" aria-label="Email Chanul"><svg viewBox="0 0 24 24"
+                      fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                      <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                      <path d="m3 8 9 6 9-6" />
+                    </svg></a>
+                  <a href="https://www.facebook.com/chanul.dilhara" target="_blank" rel="noopener noreferrer"
+                    aria-label="Chanul on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24">
+                      <path
+                        d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.instagram.com/chanul_dilhara_/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Chanul on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.linkedin.com/in/chanul-dilhara-0a35a6379/" target="_blank"
+                    rel="noopener noreferrer" aria-label="Chanul on LinkedIn (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                      <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                      <path
+                        d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                        fill="currentColor" />
+                    </svg></a>
                 </div>
               </div>
             </div>
           </li>
           <li class="tm-card" tabindex="0">
-            <img class="tm-photo" src="assets/team/chamupathi.jpg" alt="Chamupathi Dewdunu" width="640" height="640" loading="lazy" decoding="async">
+            <img class="tm-photo" src="assets/team/chamupathi.jpg" alt="Chamupathi Dewdunu" width="640" height="640"
+              loading="lazy" decoding="async">
             <div class="tm-body">
               <h3>Chamupathi Dewdunu</h3>
               <span class="tm-role">Hardware Lead</span>
               <div class="tm-info">
-                <p>Leads hardware design, component selection and development, and makes sure every physical part of the robot works reliably together.</p>
+                <p>Leads hardware design, component selection and development, and makes sure every physical part of the
+                  robot works reliably together.</p>
                 <div class="tm-social">
-                  <a href="mailto:chamupathidewdunu@gmail.com" aria-label="Email Chamupathi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg></a>
-                  <a href="https://www.facebook.com/share/14nPkGvaNuu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Chamupathi on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.instagram.com/chamupathi_dewdunu/" target="_blank" rel="noopener noreferrer" aria-label="Chamupathi on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.linkedin.com/in/chamupathi-dewdunu/" target="_blank" rel="noopener noreferrer" aria-label="Chamupathi on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg></a>
+                  <a href="mailto:chamupathidewdunu@gmail.com" aria-label="Email Chamupathi"><svg viewBox="0 0 24 24"
+                      fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                      <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                      <path d="m3 8 9 6 9-6" />
+                    </svg></a>
+                  <a href="https://www.facebook.com/share/14nPkGvaNuu/?mibextid=wwXIfr" target="_blank"
+                    rel="noopener noreferrer" aria-label="Chamupathi on Facebook (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path
+                        d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.instagram.com/chamupathi_dewdunu/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Chamupathi on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.linkedin.com/in/chamupathi-dewdunu/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Chamupathi on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24">
+                      <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                      <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                      <path
+                        d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                        fill="currentColor" />
+                    </svg></a>
                 </div>
               </div>
             </div>
           </li>
           <li class="tm-card" tabindex="0">
-            <img class="tm-photo" src="assets/team/ravindu.jpg" alt="Ravindu Umapathi" width="640" height="640" loading="lazy" decoding="async">
+            <img class="tm-photo" src="assets/team/ravindu.jpg" alt="Ravindu Umapathi" width="640" height="640"
+              loading="lazy" decoding="async">
             <div class="tm-body">
               <h3>Ravindu Umapathi</h3>
               <span class="tm-role">Production Lead</span>
               <div class="tm-info">
-                <p>Leads product design, physical appearance, assembly and final presentation, so the finished robot meets its design and functional goals.</p>
+                <p>Leads product design, physical appearance, assembly and final presentation, so the finished robot
+                  meets its design and functional goals.</p>
                 <div class="tm-social">
-                  <a href="mailto:ravinduumapathi411@gmail.com" aria-label="Email Ravindu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg></a>
-                  <a href="https://www.facebook.com/share/1JmqyWnsUU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Ravindu on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.instagram.com/ravindu_umapathi?igsh=YXVyaHNuNW5ha3hq" target="_blank" rel="noopener noreferrer" aria-label="Ravindu on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.linkedin.com/in/ravindu-umapathi-mathara-arachchi-783aba2aa/" target="_blank" rel="noopener noreferrer" aria-label="Ravindu on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg></a>
+                  <a href="mailto:ravinduumapathi411@gmail.com" aria-label="Email Ravindu"><svg viewBox="0 0 24 24"
+                      fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                      <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                      <path d="m3 8 9 6 9-6" />
+                    </svg></a>
+                  <a href="https://www.facebook.com/share/1JmqyWnsUU/?mibextid=wwXIfr" target="_blank"
+                    rel="noopener noreferrer" aria-label="Ravindu on Facebook (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path
+                        d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.instagram.com/ravindu_umapathi?igsh=YXVyaHNuNW5ha3hq" target="_blank"
+                    rel="noopener noreferrer" aria-label="Ravindu on Instagram (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path
+                        d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.linkedin.com/in/ravindu-umapathi-mathara-arachchi-783aba2aa/" target="_blank"
+                    rel="noopener noreferrer" aria-label="Ravindu on LinkedIn (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                      <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                      <path
+                        d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                        fill="currentColor" />
+                    </svg></a>
                 </div>
               </div>
             </div>
           </li>
           <li class="tm-card" tabindex="0">
-            <img class="tm-photo" src="assets/team/amanya.jpg" alt="Amanya Rubasinghe" width="640" height="640" loading="lazy" decoding="async">
+            <img class="tm-photo" src="assets/team/amanya.jpg" alt="Amanya Rubasinghe" width="640" height="640"
+              loading="lazy" decoding="async">
             <div class="tm-body">
               <h3>Amanya Rubasinghe</h3>
               <span class="tm-role">Software Lead</span>
               <div class="tm-info">
-                <p>Develops the software features, functional modes and user interactions that let the robot do its job well.</p>
+                <p>Develops the software features, functional modes and user interactions that let the robot do its job
+                  well.</p>
                 <div class="tm-social">
-                  <a href="mailto:amanyarubasinghe15@gmail.com" aria-label="Email Amanya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg></a>
-                  <a href="https://www.facebook.com/share/194T1x9VCX/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Amanya on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.instagram.com/amanya_rubasinghe?igsh=Nmx0am8zMjI5NWM0" target="_blank" rel="noopener noreferrer" aria-label="Amanya on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.linkedin.com/in/amanyarubasinghe/" target="_blank" rel="noopener noreferrer" aria-label="Amanya on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg></a>
+                  <a href="mailto:amanyarubasinghe15@gmail.com" aria-label="Email Amanya"><svg viewBox="0 0 24 24"
+                      fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                      <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                      <path d="m3 8 9 6 9-6" />
+                    </svg></a>
+                  <a href="https://www.facebook.com/share/194T1x9VCX/?mibextid=wwXIfr" target="_blank"
+                    rel="noopener noreferrer" aria-label="Amanya on Facebook (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path
+                        d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.instagram.com/amanya_rubasinghe?igsh=Nmx0am8zMjI5NWM0" target="_blank"
+                    rel="noopener noreferrer" aria-label="Amanya on Instagram (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path
+                        d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.linkedin.com/in/amanyarubasinghe/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Amanya on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24">
+                      <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                      <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                      <path
+                        d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                        fill="currentColor" />
+                    </svg></a>
                 </div>
               </div>
             </div>
           </li>
           <li class="tm-card" tabindex="0">
-            <img class="tm-photo" src="assets/team/ashendra.jpg" alt="Ashendra Liyanage" width="640" height="640" loading="lazy" decoding="async" data-focus="upper">
+            <img class="tm-photo" src="assets/team/ashendra.jpg" alt="Ashendra Liyanage" width="640" height="640"
+              loading="lazy" decoding="async" data-focus="upper">
             <div class="tm-body">
               <h3>Ashendra Liyanage</h3>
               <span class="tm-role">Software Lead</span>
               <div class="tm-info">
-                <p>Develops the software features, functional modes and user interactions that let the robot do its job well.</p>
+                <p>Develops the software features, functional modes and user interactions that let the robot do its job
+                  well.</p>
                 <div class="tm-social">
-                  <a href="https://www.linkedin.com/in/ashendra-neththaru-022578371?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_ios" target="_blank" rel="noopener noreferrer" aria-label="Ashendra on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.facebook.com/share/1K7E45nyR1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Ashendra on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg></a>
-                  <a href="https://www.instagram.com/ashendra.__?rpxt=b2drNnZnYWR0MDFv&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Ashendra on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg></a>
+                  <a href="https://www.linkedin.com/in/ashendra-neththaru-022578371?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_ios"
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label="Ashendra on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24">
+                      <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                      <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                      <path
+                        d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.facebook.com/share/1K7E45nyR1/?mibextid=wwXIfr" target="_blank"
+                    rel="noopener noreferrer" aria-label="Ashendra on Facebook (opens in a new tab)"><svg
+                      viewBox="0 0 24 24">
+                      <path
+                        d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                        fill="currentColor" />
+                    </svg></a>
+                  <a href="https://www.instagram.com/ashendra.__?rpxt=b2drNnZnYWR0MDFv&amp;utm_source=qr"
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label="Ashendra on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                        fill="currentColor" />
+                    </svg></a>
                 </div>
               </div>
             </div>
@@ -724,115 +761,205 @@
         <div class="contact-copy reveal">
           <span class="eyebrow">Request a demo</span>
           <h2 id="contact-title">Bring CYNO BOT to your entrance</h2>
-          <p>Run a university, school or front desk that answers the same questions every day? Tell us a little about it and we&rsquo;ll set up a live demo, or add you to the list for the first deployments.</p>
+          <p>Run a university, school or front desk that answers the same questions every day? Tell us a little about it
+            and we&rsquo;ll set up a live demo, or add you to the list for the first deployments.</p>
           <ul class="contact-list">
             <li><span>Email</span><a href="mailto:cynocorofficial@gmail.com">cynocorofficial@gmail.com</a></li>
-            <li><span>Phone</span><a href="tel:+94742321760">+94 74 232 1760</a></li>
-            <li><span>Based in</span>Colombo, Sri Lanka</li>
+            <li><span>Phone</span><span><a href="tel:+94742321760">+94 74 232 1760</a> / <a href="tel:+94779987440">+94
+                  77 998 7440</a></span></li>
+            <li><span>Based in</span>Sri Lanka</li>
           </ul>
           <ul class="social-links" aria-label="CYNOCOR on social media">
-            <li><a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"/></svg></a></li>
-            <li><a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a></li>
-            <li><a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M6.94 8.5H4.12V20h2.82V8.5Z"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"/></svg></a></li>
-            <li><a href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20know%20more%20about%20CYNO%20BOT." target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on WhatsApp (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.76 14.01c-.24.68-1.42 1.3-1.97 1.38-.5.08-1.14.11-1.84-.11-.43-.14-.98-.32-1.69-.63-2.98-1.29-4.92-4.3-5.07-4.5-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.18 1.04-2.48.27-.3.6-.37.8-.37h.58c.18 0 .43-.07.67.51.24.59.82 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.26 1.63 2.04 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.07.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.34.08.13.08.73-.16 1.41Z"/></svg></a></li>
-            <li><a href="https://www.tiktok.com/@cynocor.official" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on TikTok (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.23 8.23 0 0 0 4.76 1.5v-3.4a4.85 4.85 0 0 1-1-.22Z"/></svg></a></li>
-            <li><a href="https://www.youtube.com/@CynocorOfficial" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on YouTube (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg></a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank"
+                rel="noopener noreferrer" aria-label="CYNOCOR on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24"
+                  aria-hidden="true" fill="currentColor">
+                  <path
+                    d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z" />
+                </svg></a></li>
+            <li><a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener noreferrer"
+                aria-label="CYNOCOR on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                  fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.2" cy="6.8" r="1" />
+                </svg></a></li>
+            <li><a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener noreferrer"
+                aria-label="CYNOCOR on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                  fill="currentColor">
+                  <path d="M6.94 8.5H4.12V20h2.82V8.5Z" />
+                  <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" />
+                  <path
+                    d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" />
+                </svg></a></li>
+            <li><a
+                href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20know%20more%20about%20CYNO%20BOT."
+                target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on WhatsApp (opens in a new tab)"><svg
+                  viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                  <path
+                    d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.76 14.01c-.24.68-1.42 1.3-1.97 1.38-.5.08-1.14.11-1.84-.11-.43-.14-.98-.32-1.69-.63-2.98-1.29-4.92-4.3-5.07-4.5-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.18 1.04-2.48.27-.3.6-.37.8-.37h.58c.18 0 .43-.07.67.51.24.59.82 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.26 1.63 2.04 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.07.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.34.08.13.08.73-.16 1.41Z" />
+                </svg></a></li>
+            <li><a href="https://www.tiktok.com/@cynocor.official" target="_blank" rel="noopener noreferrer"
+                aria-label="CYNOCOR on TikTok (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                  fill="currentColor">
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.23 8.23 0 0 0 4.76 1.5v-3.4a4.85 4.85 0 0 1-1-.22Z" />
+                </svg></a></li>
+            <li><a href="https://www.youtube.com/@CynocorOfficial" target="_blank" rel="noopener noreferrer"
+                aria-label="CYNOCOR on YouTube (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                  fill="currentColor">
+                  <path
+                    d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z" />
+                </svg></a></li>
           </ul>
         </div>
 
         <form class="cta-form reveal" id="ctaForm" data-email="cynocorofficial@gmail.com" novalidate>
-          <input type="hidden" name="_subject" value="CYNO BOT demo request">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty</label><input type="text" id="f-hp" name="_honey" tabindex="-1" autocomplete="off"></div>
+          <form class="cta-form reveal" id="ctaForm" data-email="cynocorofficial@gmail.com" data-whatsapp="94742321760"
+            novalidate>
+            <input type="hidden" name="_subject" value="CYNO BOT demo request">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty</label><input type="text" id="f-hp"
+                name="_honey" tabindex="-1" autocomplete="off"></div>
 
-          <fieldset class="field">
-            <legend>I&rsquo;d like to</legend>
-            <div class="seg">
-              <label><input type="radio" name="request" value="Book a live demo" checked> Book a demo</label>
-              <label><input type="radio" name="request" value="Join the waitlist"> Join the waitlist</label>
+            <div class="field">
+              <label for="f-method">Preferred Contact Method</label>
+              <select id="f-method" name="contact_method">
+                <option value="whatsapp">WhatsApp (Fastest response)</option>
+                <option value="email">Email</option>
+              </select>
             </div>
-          </fieldset>
-          <div class="field">
-            <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="f-name" name="name" autocomplete="name" required aria-describedby="f-name-err">
-            <p class="err" id="f-name-err"></p>
-          </div>
-          <div class="field">
-            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input type="email" id="f-email" name="email" autocomplete="email" required aria-describedby="f-email-err">
-            <p class="err" id="f-email-err"></p>
-          </div>
-          <div class="field">
-            <label for="f-org">Organisation <span class="opt">(optional)</span></label>
-            <input type="text" id="f-org" name="organisation" autocomplete="organization">
-          </div>
-          <div class="field">
-            <label for="f-msg">Message <span class="opt">(optional)</span></label>
-            <textarea id="f-msg" name="message" rows="3" placeholder="Where would CYNO BOT stand, and what should it help with?"></textarea>
-          </div>
-          <div class="field field--check">
-            <input type="checkbox" id="f-consent" name="consent" value="Agreed to the privacy notice" required aria-describedby="f-consent-err">
-            <label for="f-consent">I agree that CYNOCOR may use these details to reply to me, as set out in the <a href="privacy.html">privacy notice</a>. <span class="req" aria-hidden="true">*</span></label>
-            <p class="err" id="f-consent-err"></p>
-          </div>
-          <button type="submit" class="btn btn-primary cta-submit">Send request</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        </form>
+            <div class="field">
+              <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="f-name" name="name" autocomplete="name" required aria-describedby="f-name-err">
+              <p class="err" id="f-name-err"></p>
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="f-email" name="email" autocomplete="email" required
+                aria-describedby="f-email-err">
+              <label for="f-phone">Phone / WhatsApp <span class="req" id="f-phone-req"
+                  aria-hidden="true">*</span></label>
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="e.g. 077 123 4567"
+                aria-describedby="f-phone-err">
+              <p class="err" id="f-phone-err"></p>
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span class="opt" id="f-email-opt">(optional)</span></label>
+              <input type="email" id="f-email" name="email" autocomplete="email" aria-describedby="f-email-err">
+              <p class="err" id="f-email-err"></p>
+            </div>
+            <div class="field">
+              <label for="f-org">Organisation <span class="opt">(optional)</span></label>
+              <input type="text" id="f-org" name="organisation" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="f-msg">Message <span class="opt">(optional)</span></label>
+              <textarea id="f-msg" name="message" rows="3"
+                placeholder="Where would CYNO BOT stand, and what should it help with?"></textarea>
+            </div>
+            <div class="field field--check">
+              <input type="checkbox" id="f-consent" name="consent" value="Agreed to the privacy notice" required
+                aria-describedby="f-consent-err">
+              <label for="f-consent">I agree that CYNOCOR may use these details to reply to me, as set out in the <a
+                  href="privacy.html">privacy notice</a>. <span class="req" aria-hidden="true">*</span></label>
+              <p class="err" id="f-consent-err"></p>
+            </div>
+            <button type="submit" class="btn btn-primary cta-submit">Send request</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
       </div>
     </section>
-    </main>
+  </main>
 
-    <footer class="site-footer">
-      <div class="container footer-top">
-        <div class="footer-brand">
-          <img class="footer-word" src="assets/cynobot-wordmark-light.png" alt="cynobot" width="862" height="237" loading="lazy" decoding="async">
-          <p>The robot receptionist that greets, guides and entertains your visitors.</p>
-          <ul class="social-links" aria-label="CYNOCOR on social media">
-            <li><a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"/></svg></a></li>
-            <li><a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a></li>
-            <li><a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M6.94 8.5H4.12V20h2.82V8.5Z"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"/></svg></a></li>
-            <li><a href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20know%20more%20about%20CYNO%20BOT." target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on WhatsApp (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.76 14.01c-.24.68-1.42 1.3-1.97 1.38-.5.08-1.14.11-1.84-.11-.43-.14-.98-.32-1.69-.63-2.98-1.29-4.92-4.3-5.07-4.5-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.18 1.04-2.48.27-.3.6-.37.8-.37h.58c.18 0 .43-.07.67.51.24.59.82 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.26 1.63 2.04 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.07.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.34.08.13.08.73-.16 1.41Z"/></svg></a></li>
-            <li><a href="https://www.tiktok.com/@cynocor.official" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on TikTok (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.23 8.23 0 0 0 4.76 1.5v-3.4a4.85 4.85 0 0 1-1-.22Z"/></svg></a></li>
-            <li><a href="https://www.youtube.com/@CynocorOfficial" target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on YouTube (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg></a></li>
-          </ul>
-        </div>
-        <nav class="footer-col" aria-label="Footer: on this page">
-          <h2>Explore</h2>
-          <ul>
-            <li><a href="#problem">The problem</a></li>
-            <li><a href="#modes">Two modes</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#greeting">How it greets</a></li>
-            <li><a href="#team">Team</a></li>
-          </ul>
-        </nav>
-        <div class="footer-col">
-          <h2>Contact</h2>
-          <ul>
-            <li><a href="#contact">Request a demo</a></li>
-            <li><a href="mailto:cynocorofficial@gmail.com">cynocorofficial@gmail.com</a></li>
-            <li><a href="tel:+94742321760">+94 74 232 1760</a></li>
-            <li>Colombo, Sri Lanka</li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h2>Company</h2>
-          <ul>
-            <li><a href="https://cynocor.com/">cynocor.com</a></li>
-            <li><a href="https://cynocor.com/projects.html">Projects</a></li>
-            <li><a href="privacy.html">Privacy notice</a></li>
-          </ul>
-        </div>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <img class="footer-word" src="assets/cynobot-wordmark-light.png" alt="cynobot" width="862" height="237"
+          loading="lazy" decoding="async">
+        <p>The robot receptionist that greets, guides and entertains your visitors.</p>
+        <ul class="social-links" aria-label="CYNOCOR on social media">
+          <li><a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener noreferrer"
+              aria-label="CYNOCOR on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                fill="currentColor">
+                <path
+                  d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z" />
+              </svg></a></li>
+          <li><a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener noreferrer"
+              aria-label="CYNOCOR on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.2" cy="6.8" r="1" />
+              </svg></a></li>
+          <li><a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener noreferrer"
+              aria-label="CYNOCOR on LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                fill="currentColor">
+                <path d="M6.94 8.5H4.12V20h2.82V8.5Z" />
+                <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" />
+                <path
+                  d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" />
+              </svg></a></li>
+          <li><a
+              href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20know%20more%20about%20CYNO%20BOT."
+              target="_blank" rel="noopener noreferrer" aria-label="CYNOCOR on WhatsApp (opens in a new tab)"><svg
+                viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <path
+                  d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.76 14.01c-.24.68-1.42 1.3-1.97 1.38-.5.08-1.14.11-1.84-.11-.43-.14-.98-.32-1.69-.63-2.98-1.29-4.92-4.3-5.07-4.5-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.18 1.04-2.48.27-.3.6-.37.8-.37h.58c.18 0 .43-.07.67.51.24.59.82 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.26 1.63 2.04 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.07.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.34.08.13.08.73-.16 1.41Z" />
+              </svg></a></li>
+          <li><a href="https://www.tiktok.com/@cynocor.official" target="_blank" rel="noopener noreferrer"
+              aria-label="CYNOCOR on TikTok (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                fill="currentColor">
+                <path
+                  d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.23 8.23 0 0 0 4.76 1.5v-3.4a4.85 4.85 0 0 1-1-.22Z" />
+              </svg></a></li>
+          <li><a href="https://www.youtube.com/@CynocorOfficial" target="_blank" rel="noopener noreferrer"
+              aria-label="CYNOCOR on YouTube (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"
+                fill="currentColor">
+                <path
+                  d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z" />
+              </svg></a></li>
+        </ul>
       </div>
-      <div class="footer-bar">
-        <div class="container footer-base">
-          <span class="footer-by">&copy; <span id="year">2026</span> <img src="assets/cynocor-white.png" alt="CYNOCOR" width="88" height="20" loading="lazy" decoding="async"> &middot; The Apex Animal of Advanced Systems</span>
-          <a href="#top" class="to-top">Back to top <span aria-hidden="true">&#8593;</span></a>
-        </div>
+      <nav class="footer-col" aria-label="Footer: on this page">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#modes">Two modes</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#greeting">How it greets</a></li>
+          <li><a href="#team">Team</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="#contact">Request a demo</a></li>
+          <li><a href="mailto:cynocorofficial@gmail.com">cynocorofficial@gmail.com</a></li>
+          <li><a href="tel:+94742321760">+94 74 232 1760</a></li>
+          <li><a href="tel:+94779987440">+94 77 998 7440</a></li>
+          <li>Colombo, Sri Lanka</li>
+        </ul>
       </div>
-    </footer>
+      <div class="footer-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="https://cynocor.com/">cynocor.com</a></li>
+          <li><a href="https://cynocor.com/projects.html">Projects</a></li>
+          <li><a href="privacy.html">Privacy notice</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <div class="container footer-base">
+        <span class="footer-by">&copy; <span id="year">2026</span> <img src="assets/cynocor-white.png" alt="CYNOCOR"
+            width="88" height="20" loading="lazy" decoding="async"> &middot; The Apex Animal of Advanced Systems</span>
+        <a href="#top" class="to-top">Back to top <span aria-hidden="true">&#8593;</span></a>
+      </div>
+    </div>
+  </footer>
 
-    <script src="js/main.js" defer></script>
-  </body>
+  <script src="js/main.js" defer></script>
+</body>
+
 </html>

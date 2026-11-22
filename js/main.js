@@ -141,22 +141,48 @@
     );
   }
 
-  /* Demo request form (FormSubmit, like cynocor.com) */
+  /* Demo request form (WhatsApp or FormSubmit Email) */
   const form = document.getElementById("ctaForm");
   if (form) {
     const status = document.getElementById("formStatus");
     const submit = form.querySelector(".cta-submit");
     const to = form.dataset.email;
+    const waNumber = form.dataset.whatsapp || "94742321760";
+    const methodEl = document.getElementById("f-method");
+    const phoneReq = document.getElementById("f-phone-req");
+    const emailOpt = document.getElementById("f-email-opt");
+
+    const syncMethodUI = () => {
+      const isWa = methodEl && methodEl.value === "whatsapp";
+      if (phoneReq) phoneReq.textContent = isWa ? "*" : "(optional)";
+      if (phoneReq) phoneReq.className = isWa ? "req" : "opt";
+      if (emailOpt) emailOpt.textContent = isWa ? "(optional)" : "*";
+      if (emailOpt) emailOpt.className = isWa ? "opt" : "req";
+    };
+    if (methodEl) {
+      methodEl.addEventListener("change", syncMethodUI);
+      syncMethodUI();
+    }
+
     const checks = [
       ["f-name", (el) => (el.value.trim() ? "" : "Please enter your name.")],
       [
-        "f-email",
+        "f-phone",
         (el) =>
-          !el.value.trim()
-            ? "Please enter your email."
-            : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())
-              ? ""
-              : "Please enter a valid email, like name@example.com.",
+          methodEl && methodEl.value === "whatsapp" && !el.value.trim()
+            ? "Please enter your phone or WhatsApp number."
+            : "",
+      ],
+      [
+        "f-email",
+        (el) => {
+          const val = el.value.trim();
+          const isEmail = !methodEl || methodEl.value === "email";
+          if (isEmail && !val) return "Please enter your email.";
+          if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
+            return "Please enter a valid email, like name@example.com.";
+          return "";
+        },
       ],
       [
         "f-consent",
@@ -202,32 +228,44 @@
         return;
       }
       lastSent = Date.now();
-      const label = submit.textContent;
-      submit.disabled = true;
-      submit.textContent = "Sending…";
-      status.textContent = "Sending your request…";
-      try {
-        const res = await fetch(
-          "https://formsubmit.co/ajax/" + encodeURIComponent(to),
-          {
-            method: "POST",
-            headers: { Accept: "application/json" },
-            body: new FormData(form),
-          },
-        );
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        form.reset();
-        status.textContent =
-          "Thanks! Your request is in. We’ll reply by email within two working days.";
+      const name = document.getElementById("f-name").value.trim();
+      const phone = document.getElementById("f-phone").value.trim();
+      const email = document.getElementById("f-email").value.trim();
+      const org = document.getElementById("f-org")
+        ? document.getElementById("f-org").value.trim()
+        : "";
+      const msg = document.getElementById("f-msg")
+        ? document.getElementById("f-msg").value.trim()
+        : "";
+      const lines = ["Hello CYNO BOT team,", `Name: ${name}`];
+      if (phone) lines.push(`Phone / WhatsApp: ${phone}`);
+      if (email) lines.push(`Email: ${email}`);
+      if (org) lines.push(`Organisation: ${org}`);
+      if (msg) lines.push(`Message: ${msg}`);
+      const bodyText = lines.join("\n");
+
+      if (methodEl && methodEl.value === "whatsapp") {
+        const waUrl =
+          "https://wa.me/" +
+          waNumber +
+          "?text=" +
+          encodeURIComponent(bodyText);
+        window.open(waUrl, "_blank", "noopener");
+        status.textContent = "Opening WhatsApp with your request…";
         status.classList.add("is-ok");
-      } catch (err) {
-        status.textContent =
-          "Sorry, that didn’t send. Please email us at " + to + " instead.";
-        status.classList.add("is-bad");
-      } finally {
-        submit.disabled = false;
-        submit.textContent = label;
+        return;
       }
+
+      const mailtoUrl =
+        "mailto:" +
+        to +
+        "?subject=" +
+        encodeURIComponent("CYNO BOT demo request - " + name) +
+        "&body=" +
+        encodeURIComponent(bodyText);
+      window.location.href = mailtoUrl;
+      status.textContent = "Opening your email app…";
+      status.classList.add("is-ok");
     });
   }
 
