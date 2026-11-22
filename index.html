@@ -885,31 +885,38 @@
           </ul>
         </div>
 
-        <form class="cta-form reveal" id="ctaForm" data-email="cynocorofficial@gmail.com" novalidate>
-          <form class="cta-form reveal" id="ctaForm" data-email="cynocorofficial@gmail.com" data-whatsapp="94742321760"
-            novalidate>
-            <input type="hidden" name="_subject" value="CYNO BOT demo request">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty</label><input type="text" id="f-hp"
-                name="_honey" tabindex="-1" autocomplete="off"></div>
+        <form class="cta-form reveal" id="ctaForm" data-email="cynocorofficial@gmail.com" data-whatsapp="94742321760"
+          novalidate>
+          <input type="hidden" name="_subject" value="CYNO BOT demo request">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty</label><input type="text" id="f-hp"
+              name="_honey" tabindex="-1" autocomplete="off"></div>
 
-            <div class="field">
-              <label for="f-method">Preferred Contact Method</label>
-              <select id="f-method" name="contact_method">
-                <option value="whatsapp">WhatsApp (Fastest response)</option>
-                <option value="email">Email</option>
-              </select>
-            </div>
+          <div class="field">
+            <label for="f-method">Preferred contact method</label>
+            <select id="f-method" name="contact_method">
+              <option value="whatsapp">WhatsApp (Fastest response)</option>
+              <option value="email">Email</option>
+            </select>
+          </div>
+
+          <div class="field-row">
             <div class="field">
               <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
-              <input type="text" id="f-name" name="name" autocomplete="name" required aria-describedby="f-name-err">
+              <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Your name" required
+                aria-describedby="f-name-err">
               <p class="err" id="f-name-err"></p>
             </div>
             <div class="field">
-              <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-              <input type="email" id="f-email" name="email" autocomplete="email" required
-                aria-describedby="f-email-err">
+              <label for="f-org">Organisation <span class="opt">(optional)</span></label>
+              <input type="text" id="f-org" name="organisation" autocomplete="organization"
+                placeholder="University or company">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
               <label for="f-phone">Phone / WhatsApp <span class="req" id="f-phone-req"
                   aria-hidden="true">*</span></label>
               <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="e.g. 077 123 4567"
@@ -918,28 +925,29 @@
             </div>
             <div class="field">
               <label for="f-email">Email <span class="opt" id="f-email-opt">(optional)</span></label>
-              <input type="email" id="f-email" name="email" autocomplete="email" aria-describedby="f-email-err">
+              <input type="email" id="f-email" name="email" autocomplete="email" placeholder="name@example.com"
+                aria-describedby="f-email-err">
               <p class="err" id="f-email-err"></p>
             </div>
-            <div class="field">
-              <label for="f-org">Organisation <span class="opt">(optional)</span></label>
-              <input type="text" id="f-org" name="organisation" autocomplete="organization">
-            </div>
-            <div class="field">
-              <label for="f-msg">Message <span class="opt">(optional)</span></label>
-              <textarea id="f-msg" name="message" rows="3"
-                placeholder="Where would CYNO BOT stand, and what should it help with?"></textarea>
-            </div>
-            <div class="field field--check">
-              <input type="checkbox" id="f-consent" name="consent" value="Agreed to the privacy notice" required
-                aria-describedby="f-consent-err">
-              <label for="f-consent">I agree that CYNOCOR may use these details to reply to me, as set out in the <a
-                  href="privacy.html">privacy notice</a>. <span class="req" aria-hidden="true">*</span></label>
-              <p class="err" id="f-consent-err"></p>
-            </div>
-            <button type="submit" class="btn btn-primary cta-submit">Send request</button>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          </form>
+          </div>
+
+          <div class="field">
+            <label for="f-msg">Message <span class="opt">(optional)</span></label>
+            <textarea id="f-msg" name="message" rows="3"
+              placeholder="Where would CYNO BOT stand, and what should it help with?"></textarea>
+          </div>
+
+          <div class="field field--check">
+            <input type="checkbox" id="f-consent" name="consent" value="Agreed to the privacy notice" required
+              aria-describedby="f-consent-err">
+            <label for="f-consent">I agree that CYNOCOR may use these details to reply to me, as set out in the <a
+                href="privacy.html">privacy notice</a>. <span class="req" aria-hidden="true">*</span></label>
+            <p class="err" id="f-consent-err"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary cta-submit">Send request</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
   </main>
