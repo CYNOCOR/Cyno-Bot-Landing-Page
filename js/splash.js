@@ -135,10 +135,10 @@
   resize();
   window.addEventListener("resize", resize, { passive: true });
 
-  const BUILD = 2.2;          // seconds to trace the robot
+  const BUILD = 2.4;          // seconds to trace the robot
   const LIGHT = BUILD + 0.2;  // eyes switch on
-  const BLINK = 3.0;         // single blink
-  const MIN_SHOW = reduce ? 600 : 3800;
+  const BLINK = 3.2;         // single blink
+  const MIN_SHOW = reduce ? 600 : 4000; // + 1s fade = 5s in total
   const start = performance.now();
 
   function frame(now) {
@@ -229,5 +229,5 @@
   const ready = () => setTimeout(leave, Math.max(0, MIN_SHOW - (performance.now() - start)));
   if (document.readyState === "complete") ready();
   else window.addEventListener("load", ready, { once: true });
-  setTimeout(leave, 6000); // never hold the page longer than this
+  setTimeout(leave, 6500); // never hold the page longer than this
 })();

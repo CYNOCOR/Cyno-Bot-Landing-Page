@@ -1664,7 +1664,7 @@ img.tm-photo[data-focus="upper"] { object-position: center 20%; }
     linear-gradient(155deg, #DCE3EE 0%, #EDF2F8 52%, #D7DFEC 100%);
   transition: opacity 1s var(--ease), transform 1s var(--ease), filter 1s var(--ease), visibility 1s;
   /* safety net: if the script never runs, the splash still leaves */
-  animation: splash-auto-out 700ms var(--ease) 6s forwards;
+  animation: splash-auto-out 700ms var(--ease) 6.5s forwards;
 }
 .splash.is-done { opacity: 0; transform: scale(1.035); filter: blur(8px); visibility: hidden; pointer-events: none; }
 .splash.is-gone { display: none; }
@@ -1703,15 +1703,15 @@ img.tm-photo[data-focus="upper"] { object-position: center 20%; }
   position: absolute; left: 0; right: 0; bottom: max(7vh, 40px);
   display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0 16px;
 }
-.splash-word { width: clamp(150px, 18vw, 210px); height: auto; opacity: 0; animation: splash-word-in 1000ms var(--ease) 1.9s forwards; }
+.splash-word { width: clamp(150px, 18vw, 210px); height: auto; opacity: 0; animation: splash-word-in 1000ms var(--ease) 2.05s forwards; }
 .splash-tag {
   font-family: var(--font-display); font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 500;
   letter-spacing: -0.01em; color: #0B0F19;
 }
 .splash-tag span { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(10px); animation: splash-word-in 900ms var(--ease) forwards; }
-.splash-tag span:nth-child(1) { animation-delay: 2.3s; }
-.splash-tag span:nth-child(2) { animation-delay: 2.55s; }
-.splash-tag span:nth-child(3) { animation-delay: 2.8s; }
+.splash-tag span:nth-child(1) { animation-delay: 2.45s; }
+.splash-tag span:nth-child(2) { animation-delay: 2.7s; }
+.splash-tag span:nth-child(3) { animation-delay: 2.95s; }
 .splash-tag-accent { color: var(--accent-text); font-weight: 700; }
 .splash-bar { width: 140px; height: 2px; margin-top: 6px; border-radius: 2px; overflow: hidden; background: rgba(0, 90, 200, 0.14); }
 .splash-bar span { display: block; height: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
